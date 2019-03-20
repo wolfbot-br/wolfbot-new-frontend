@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col, Card, CardBody, CardText, CardTitle, CardHeader, CardFooter } from 'reactstrap'
+import { Row, Col, Card, CardBody, CardTitle, CardFooter } from 'reactstrap'
 
 const Totalizadores = () => {
   return (

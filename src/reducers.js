@@ -1,13 +1,13 @@
-import { combineReducers } from 'redux'
-import { reducer as formReducer } from 'redux-form'
+import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 
-import DashboardReducer from './_reducers/dashboardReducer'
-import AuthReducer from './_reducers/authReducer'
-import ConfiguracaoReducer from './_reducers/ConfiguracaoReducer'
-import CarteiraReducer from './_reducers/CarteiraReducer'
-import HistoricoReducer from './_reducers/HistoricoReducer'
-import PerfilReducer from './_reducers/PerfilReducer'
-import BacktestReducer from './_reducers/backtestReducer'
+import DashboardReducer from './views/Dashboard/DashboardReducer';
+import AuthReducer from './views/pages/AuthReducer';
+import ConfiguracaoReducer from './views/Configuracao/ConfiguracaoReducer';
+import CarteiraReducer from './views/Carteira/CarteiraReducer';
+import HistoricoReducer from './views/Historico/HistoricoReducer';
+import PerfilReducer from './views/Perfil/PerfilReducer';
+import BacktestReducer from './views/Backtest/BacktestReducer';
 
 const rootReducer = combineReducers({
     dashboard: DashboardReducer,
@@ -17,6 +17,6 @@ const rootReducer = combineReducers({
     auth: AuthReducer,
     historico: HistoricoReducer,
     profile: PerfilReducer,
-    backtest: BacktestReducer
-})
-export default rootReducer
+    backtest: BacktestReducer,
+});
+export default rootReducer;
