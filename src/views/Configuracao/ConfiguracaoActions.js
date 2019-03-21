@@ -5,18 +5,21 @@ import functions from '../helpers/functions'
 
 const USER_BOT = functions.loadLocalStorage('user_bot')
 
-export function getExchanges () {
-  const request = axios.get(`${ambiente.URL.api}/exchanges/loadExchanges`,
-    { headers: { authorization: USER_BOT.Token } })
-
-  return {
-    type: 'EXCHANGES_FETCHED',
-    payload: request
-
-  }
+export function getExchanges() {
+  const data = [
+    {
+      "value": "Bittrex",
+      "label": "Bittrex"
+    },
+    {
+      "value": "Bitifinex",
+      "label": "Bitifinex"
+    },
+  ]
+  return { data }
 }
 
-export function SelectedOption (selectOption, acao) {
+export function SelectedOption(selectOption, acao) {
   return {
     type: acao,
     payload: {
@@ -26,7 +29,7 @@ export function SelectedOption (selectOption, acao) {
   }
 }
 
-export function salvarConfiguracao (values) {
+export function salvarConfiguracao(values) {
   const url = `${ambiente.URL.api}/configuracao/salvar`
 
   return dispatch => {
@@ -45,7 +48,7 @@ export function salvarConfiguracao (values) {
   }
 }
 
-export function salvarEstrategia (values) {
+export function salvarEstrategia(values) {
   const url = `${ambiente.URL.api}/configuracao`
 
   return dispatch => {

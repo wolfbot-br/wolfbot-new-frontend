@@ -1,29 +1,17 @@
-import React, { Component } from 'react'
-import { Row, Card } from 'reactstrap'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import React from 'react'
+import { Row, Col } from 'reactstrap'
+import FormConfiguracao from './screens/FormConfiguracao'
 
-class Configuracao extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-
-    }
-  }
-
-  render() {
-    return (
-      <div className='content'>
-        <Row>
-          <div>
-          </div>
-        </Row >
-      </div >
-    )
-  }
+const Configuracao = () => {
+  return (
+    <div className='content'>
+      <Row>
+        <Col>
+          <FormConfiguracao />
+        </Col>
+      </Row >
+    </div >
+  )
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch)
-const mapStateToProps = state => ({
-})
-export default connect(mapStateToProps, mapDispatchToProps)(Configuracao)
+export default Configuracao;
