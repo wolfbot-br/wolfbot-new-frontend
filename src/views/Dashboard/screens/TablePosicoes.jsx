@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Card, CardBody } from 'reactstrap';
-import ReactTable from '../../../components/ReactTable/Table';
+import ReactTable from 'react-table';
 
 class TablePosicoes extends Component {
   constructor(props) {
@@ -24,33 +24,45 @@ class TablePosicoes extends Component {
 
     const columns = [{
       Header: 'Moeda',
-      accessor: 'moeda'
+      accessor: 'moeda',
+      headerClassName: "text-center"
     }, {
       Header: 'Quantidade',
-      accessor: 'quantidade'
+      accessor: 'quantidade',
+      headerClassName: "text-center"
     }, {
       Header: 'Custo',
-      accessor: 'custo'
+      accessor: 'custo',
+      headerClassName: "text-center"
     }, {
       Header: 'Tempo',
-      accessor: 'tempo'
+      accessor: 'tempo',
+      headerClassName: "text-center"
     }, {
       Header: 'Ação',
       Cell: row => (
         <div>
-          <Button className='btn btn-outline-success btn-sm mr-1 margin-right: 1rem'>Vender</Button>
-          <Button className='btn btn-outline-info btn-sm'>Info</Button>
+          <Button className='btn-simple btn-success btn-sm mr-1 margin-right: 1rem'>Vender</Button>
+          <Button className='btn-simple btn-info btn-sm'>Info</Button>
         </div>
-      )
+      ),
+      headerClassName: "text-center",
+      sortable: false,
+      filterable: false
     }]
 
     return (
-      <Card className="mt-5 text-center">
+      <Card className="text-center">
         <CardBody>
           <ReactTable
             data={data}
+            filterable
+            resizable={false}
             columns={columns}
             defaultPageSize={5}
+            showPaginationTop
+            showPaginationBottom={false}
+            className="-striped -highlight"
           />
         </CardBody>
       </Card>

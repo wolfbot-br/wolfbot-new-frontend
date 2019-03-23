@@ -1,38 +1,77 @@
 import React from 'react';
-import { Row, Col, Card, CardHeader, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
+import { Row, Col, Card, CardHeader, CardBody, CardTitle, CardFooter } from 'reactstrap';
 
 const ResumoOperacoes = () => {
   return (
-    <Card>
+    <Card className="card-stats card">
       <CardHeader>
-        <CardTitle>Resumo de Operaçoes</CardTitle>
+        <CardTitle>
+          <i className='tim-icons icon-notes text-success' /> Resumo de Operaçoes
+        </CardTitle>
       </CardHeader>
       <CardBody>
         <Row>
-          <Col lg='8' className='text-center' >
-            <CardTitle>Total de Ordens Abertas</CardTitle>
-            <hr />
-            <Row>
-              <Col>
-                <CardSubtitle className="mb-2 mt-2 text-muted">Custo</CardSubtitle>
-                <CardText>24,87653494</CardText>
-              </Col>
-              <Col>
-                <CardSubtitle className="mb-2 mt-2 text-muted">Resultado</CardSubtitle>
-                <CardText>35,46%</CardText>
-              </Col>
-              <Col>
-                <CardSubtitle className="mb-2 mt-2 text-muted">Tempo</CardSubtitle>
-                <CardText>24 dias</CardText>
-              </Col>
-              <Col>
-                <CardSubtitle className="mb-2 mt-2 text-muted">Nº Ordens</CardSubtitle>
-                <CardText>34</CardText>
-              </Col>
-            </Row>
+          <Col xs="4" >
+            <CardTitle className="text-center">
+              Valor total investido(USD):
+            </CardTitle>
+          </Col>
+          <Col xs="2">
+            <CardTitle>
+              $ 345.00
+            </CardTitle>
+          </Col>
+          <Col xs="4" >
+            <CardTitle className="text-center">
+              Retorno do investimento(USD):
+            </CardTitle>
+          </Col>
+          <Col xs="2">
+            <CardTitle>
+              $ 678.00
+            </CardTitle>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs="4" >
+            <CardTitle className="text-center">
+              Lucro / Perda total(USD):
+            </CardTitle>
+          </Col>
+          <Col xs="2">
+            <CardTitle>
+              $ 100.00
+            </CardTitle>
+          </Col>
+          <Col xs="4" >
+            <CardTitle className="text-center">
+              Lucro / Perda total(%):
+            </CardTitle>
+          </Col>
+          <Col xs="2">
+            <CardTitle>
+              $ 678.00
+            </CardTitle>
           </Col>
         </Row>
       </CardBody>
+      <CardFooter>
+        <hr />
+        <Row>
+          <Col xs="12" >
+            <CardTitle tag="h3" className="text-center">
+              USD Total em Ativos na Exchange
+            </CardTitle>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs="12" >
+            <CardTitle tag="h3" className="text-center text-success">
+              $ 657.98
+            </CardTitle>
+          </Col>
+        </Row>
+      </CardFooter>
     </Card>
   )
 }

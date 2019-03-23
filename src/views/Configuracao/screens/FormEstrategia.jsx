@@ -108,7 +108,7 @@ class FormConfiguracao extends Component {
                             <Row>
                                 <Label sm="2">Vender pelo indicador</Label>
                                 <Col sm="10">
-                                    <FormGroup style={{ paddingTop: "6px" }}>
+                                    <FormGroup style={{ paddingTop: 6 }}>
                                         <Switch
                                             defaultValue={false}
                                             offColor=""
