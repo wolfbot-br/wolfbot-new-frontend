@@ -11,6 +11,8 @@ import Footer from "components/Footer/Footer.jsx";
 import Sidebar from "components/Sidebar/Sidebar.jsx";
 import FixedPlugin from "components/FixedPlugin/FixedPlugin.jsx";
 
+import { validateToken } from "../../views/pages/AuthRequests";
+
 import routes from "routes.js";
 
 import logo from "assets/img/react-logo.png";
@@ -27,17 +29,22 @@ class Admin extends React.Component {
       sidebarOpened: false
     };
   }
-  componentDidMount() {
-    if (navigator.platform.indexOf("Win") > -1) {
-      document.documentElement.className += " perfect-scrollbar-on";
-      document.documentElement.classList.remove("perfect-scrollbar-off");
-      ps = new PerfectScrollbar(this.refs.mainPanel);
-      let tables = document.querySelectorAll(".table-responsive");
-      for (let i = 0; i < tables.length; i++) {
-        ps = new PerfectScrollbar(tables[i]);
+  async componentDidMount() {
+    const userInfo = await validateToken(this.props.token);
+    if (!userInfo.errors) {
+      if (navigator.platform.indexOf("Win") > -1) {
+        document.documentElement.className += " perfect-scrollbar-on";
+        document.documentElement.classList.remove("perfect-scrollbar-off");
+        ps = new PerfectScrollbar(this.refs.mainPanel);
+        let tables = document.querySelectorAll(".table-responsive");
+        for (let i = 0; i < tables.length; i++) {
+          ps = new PerfectScrollbar(tables[i]);
+        }
       }
+      window.addEventListener("scroll", this.showNavbarButton);
+    } else {
+      this.props.history.replace("/auth/login");
     }
-    window.addEventListener("scroll", this.showNavbarButton);
   }
   componentWillUnmount() {
     if (navigator.platform.indexOf("Win") > -1) {
@@ -47,17 +54,22 @@ class Admin extends React.Component {
     }
     window.removeEventListener("scroll", this.showNavbarButton);
   }
-  componentDidUpdate(e) {
-    if (e.location.pathname !== e.history.location.pathname) {
-      if (navigator.platform.indexOf("Win") > -1) {
-        let tables = document.querySelectorAll(".table-responsive");
-        for (let i = 0; i < tables.length; i++) {
-          ps = new PerfectScrollbar(tables[i]);
+  async componentDidUpdate(e) {
+    const userInfo = await validateToken(this.props.token);
+    if (!userInfo.errors) {
+      if (e.location.pathname !== e.history.location.pathname) {
+        if (navigator.platform.indexOf("Win") > -1) {
+          let tables = document.querySelectorAll(".table-responsive");
+          for (let i = 0; i < tables.length; i++) {
+            ps = new PerfectScrollbar(tables[i]);
+          }
         }
+        document.documentElement.scrollTop = 0;
+        document.scrollingElement.scrollTop = 0;
+        this.refs.mainPanel.scrollTop = 0;
       }
-      document.documentElement.scrollTop = 0;
-      document.scrollingElement.scrollTop = 0;
-      this.refs.mainPanel.scrollTop = 0;
+    } else {
+      this.props.history.replace("/auth/login");
     }
   }
   showNavbarButton = () => {

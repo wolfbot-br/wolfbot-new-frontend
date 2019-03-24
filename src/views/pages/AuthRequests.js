@@ -11,4 +11,18 @@ const loginRequest = async values => {
   }
 };
 
-export { loginRequest };
+const validateToken = async token => {
+  const url = `${ambiente.URL.api}/userinfo`;
+  try {
+    const result = await axios.get(url, {
+      headers: {
+        Authorization: token
+      }
+    });
+    return result.data;
+  } catch (e) {
+    return e.response.data;
+  }
+};
+
+export { loginRequest, validateToken };

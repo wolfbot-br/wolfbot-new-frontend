@@ -22,22 +22,23 @@ const devTools =
 const store = applyMiddleware(promise, thunk)(createStore)(reducers, devTools);
 const hist = createBrowserHistory();
 
-const authenticate = props => {
+const manageRoute = props => {
   const userLocalStorage = functions.loadLocalStorage("user_bot");
   const { path } = props.match;
 
-  if (!userLocalStorage && path !== "/auth")
+  if (path === "/auth") {
+    functions.removeLocalStorageItem("user_bot");
+    return <AuthLayout {...props} />;
+  }
+
+  if (!userLocalStorage) {
     return <Redirect from={props.location.pathname} to="/auth/login" />;
-
-  if (path === "/auth") functions.removeLocalStorageItem("user_bot");
-
-  switch (path) {
-    case "/auth":
-      return <AuthLayout {...props} />;
-    case "/admin":
-      return <AdminLayout {...props} />;
-    default:
-      return <AuthLayout {...props} />;
+  } else {
+    const {
+      authenticatedUser: { accessToken }
+    } = userLocalStorage;
+    props.token = accessToken;
+    return <AdminLayout {...props} />;
   }
 };
 
@@ -45,8 +46,8 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={hist}>
       <Switch>
-        <Route path="/auth" render={props => authenticate(props)} />
-        <Route path="/admin" render={props => authenticate(props)} />
+        <Route path="/auth" render={props => manageRoute(props)} />
+        <Route path="/admin" render={props => manageRoute(props)} />
         <Redirect from="/" to="/auth/login" />
       </Switch>
     </Router>
