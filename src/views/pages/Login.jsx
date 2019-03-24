@@ -1,6 +1,14 @@
 import React from "react";
+import { reduxForm, Field } from "redux-form";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import NotificationAlert from "react-notification-alert";
 
-// reactstrap components
+import { login } from "./authActions";
+import { loginRequest } from "./AuthRequests";
+
+import Input from "../../components/Input/Input";
+
 import {
   Button,
   Card,
@@ -8,8 +16,6 @@ import {
   CardBody,
   CardFooter,
   CardTitle,
-  Form,
-  Input,
   InputGroupAddon,
   InputGroupText,
   InputGroup,
@@ -18,6 +24,31 @@ import {
 } from "reactstrap";
 
 class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  // login
+  async onSubmit(values) {
+    const { login } = this.props;
+    const loginResult = await loginRequest(values);
+    if (!loginResult.data.sucess) {
+      loginResult.data.errors.forEach(erro => {
+        const options = {
+          place: "tr",
+          message: erro.message,
+          type: "danger",
+          icon: "tim-icons icon-bell-55",
+          autoDismiss: 3
+        };
+        this.refs.notificationAlert.notificationAlert(options);
+      });
+    } else {
+      login(loginResult.data);
+    }
+  }
+
   componentDidMount() {
     document.body.classList.toggle("login-page");
   }
@@ -25,19 +56,26 @@ class Login extends React.Component {
     document.body.classList.toggle("login-page");
   }
   render() {
+    const { handleSubmit } = this.props;
     return (
       <>
         <div className="content">
+          <div className="rna-container">
+            <NotificationAlert ref="notificationAlert" />
+          </div>
           <Container>
             <Col className="ml-auto mr-auto" lg="4" md="6">
-              <Form className="form">
+              <form
+                onSubmit={handleSubmit(value => this.onSubmit(value))}
+                className="form"
+              >
                 <Card className="card-login card-white">
                   <CardHeader>
                     <img
                       alt="..."
                       src={require("assets/img/card-primary.png")}
                     />
-                    <CardTitle tag="h1">Log in</CardTitle>
+                    <CardTitle tag="h1">Login</CardTitle>
                   </CardHeader>
                   <CardBody>
                     <InputGroup>
@@ -46,7 +84,12 @@ class Login extends React.Component {
                           <i className="tim-icons icon-email-85" />
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input placeholder="Email" type="text" />
+                      <Field
+                        component={Input}
+                        placeholder="Email"
+                        type="email"
+                        name="email"
+                      />
                     </InputGroup>
                     <InputGroup>
                       <InputGroupAddon addonType="prepend">
@@ -54,7 +97,12 @@ class Login extends React.Component {
                           <i className="tim-icons icon-lock-circle" />
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input placeholder="Password" type="text" />
+                      <Field
+                        component={Input}
+                        type="password"
+                        name="password"
+                        placeholder="Senha"
+                      />
                     </InputGroup>
                   </CardBody>
                   <CardFooter>
@@ -62,11 +110,10 @@ class Login extends React.Component {
                       block
                       className="mb-3"
                       color="primary"
-                      href="#pablo"
-                      onClick={e => e.preventDefault()}
+                      type="submit"
                       size="lg"
                     >
-                      Get Started
+                      Entrar
                     </Button>
                     <div className="pull-left">
                       <h6>
@@ -75,7 +122,7 @@ class Login extends React.Component {
                           href="#pablo"
                           onClick={e => e.preventDefault()}
                         >
-                          Create Account
+                          Criar uma conta
                         </a>
                       </h6>
                     </div>
@@ -86,13 +133,13 @@ class Login extends React.Component {
                           href="#pablo"
                           onClick={e => e.preventDefault()}
                         >
-                          Need Help?
+                          Precisa de ajuda?
                         </a>
                       </h6>
                     </div>
                   </CardFooter>
                 </Card>
-              </Form>
+              </form>
             </Col>
           </Container>
         </div>
@@ -101,4 +148,9 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+Login = reduxForm({ form: "authForm" })(Login);
+const mapDispatchToProps = dispatch => bindActionCreators({ login }, dispatch);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Login);

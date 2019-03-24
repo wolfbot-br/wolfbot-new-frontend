@@ -1,14 +1,13 @@
-
 import Login from "./views/pages/Login";
 import Register from "./views/pages/Register";
 import Pricing from "./views/pages/Pricing";
 import Lock from "./views/pages/Lock";
 import Dashboard from "./views/Dashboard/Dashboard";
-import Carteira from './views/Carteira/Carteira'
-import Configuracao from './views/Configuracao/Configuracao'
-import Backtest from './views/Backtest/Backtest'
-import Estatisticas from './views/Estatisticas/Estatisticas'
-import Historico from './views/Historico/Historico'
+import Carteira from "./views/Carteira/Carteira";
+import Configuracao from "./views/Configuracao/Configuracao";
+import Backtest from "./views/Backtest/Backtest";
+import Estatisticas from "./views/Estatisticas/Estatisticas";
+import Historico from "./views/Historico/Historico";
 
 const routes = [
   {
@@ -80,7 +79,7 @@ const routes = [
     icon: "tim-icons icon-single-copy-04",
     component: Historico,
     layout: "/admin"
-  },
+  }
 ];
 
 export default routes;
