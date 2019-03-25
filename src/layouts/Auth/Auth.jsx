@@ -54,8 +54,6 @@ class Pages extends React.Component {
         return "login-page";
       case "Register":
         return "register-page";
-      case "Lock Screen":
-        return "lock-page";
       default:
         return "Default Brand Text";
     }

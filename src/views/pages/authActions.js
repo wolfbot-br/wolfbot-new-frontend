@@ -1,4 +1,4 @@
-import { toastr } from "react-redux-toastr";
+// import { toastr } from "react-redux-toastr";
 import axios from "axios";
 import ambiente from "../../config";
 import functions from "../../utils/functions";
@@ -20,9 +20,9 @@ const signup = values => {
         dispatch({ type: "REGISTER_SUCCESS", payload: resp.data });
       })
       .catch(e => {
-        for (var i = 0; i < e.response.data.errors.length; i++) {
-          toastr.error("Erro", e.response.data.errors[i].message);
-        }
+        // for (var i = 0; i < e.response.data.errors.length; i++) {
+        //   toastr.error("Erro", e.response.data.errors[i].message);
+        // }
       });
   };
 };

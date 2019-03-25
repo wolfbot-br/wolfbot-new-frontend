@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import { Col, Card } from 'reactstrap'
 
 class CompraManual extends Component {
-  constructor(props) {
-    super(props)
-  }
 
   render() {
     return (

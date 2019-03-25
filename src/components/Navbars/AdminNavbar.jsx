@@ -1,6 +1,7 @@
 import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
+import { Link } from 'react-router-dom'
 
 // reactstrap components
 import {
@@ -200,10 +201,9 @@ class AdminNavbar extends React.Component {
                   </DropdownToggle>
                   <DropdownMenu className="dropdown-navbar" right tag="ul">
                     <NavLink tag="li">
-                      <DropdownItem className="nav-item">Profile</DropdownItem>
-                    </NavLink>
-                    <NavLink tag="li">
-                      <DropdownItem className="nav-item">Settings</DropdownItem>
+                      <Link to="/admin/profile">
+                        <DropdownItem className="nav-item">Profile</DropdownItem>
+                      </Link>
                     </NavLink>
                     <DropdownItem divider tag="li" />
                     <NavLink tag="li">

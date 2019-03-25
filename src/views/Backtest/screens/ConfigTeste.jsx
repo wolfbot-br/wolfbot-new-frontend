@@ -5,7 +5,7 @@ import Select from 'react-select'
 import classnames from 'classnames'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { testarStrategy } from '../../../_actions/BacktestAction'
+import { testarStrategy } from '../BacktestAction'
 import ResultadoTeste from './ResultadoTeste'
 import { toastr } from 'react-redux-toastr'
 

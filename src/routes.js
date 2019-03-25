@@ -1,7 +1,7 @@
 import Login from "./views/pages/Login";
 import Register from "./views/pages/Register";
 import Pricing from "./views/pages/Pricing";
-import Lock from "./views/pages/Lock";
+import Profile from "./views/pages/User";
 import Dashboard from "./views/Dashboard/Dashboard";
 import Carteira from "./views/Carteira/Carteira";
 import Configuracao from "./views/Configuracao/Configuracao";
@@ -32,10 +32,10 @@ const routes = [
     invisible: true
   },
   {
-    path: "/lock-screen",
-    name: "Lock",
-    component: Lock,
-    layout: "/auth",
+    path: "/profile",
+    name: "Profile",
+    component: Profile,
+    layout: "/admin",
     invisible: true
   },
   {

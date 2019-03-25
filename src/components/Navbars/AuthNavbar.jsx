@@ -88,11 +88,6 @@ class AuthNavbar extends React.Component {
                   <i className="tim-icons icon-coins" /> Pricing
                 </NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink to="/auth/lock-screen" className="nav-link">
-                  <i className="tim-icons icon-lock-circle" /> Lock
-                </NavLink>
-              </NavItem>
             </Nav>
           </Collapse>
         </Container>

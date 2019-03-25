@@ -15,6 +15,7 @@ import {
   Row,
   Col
 } from "reactstrap";
+import bgImagem from '../../assets/img/bg-login.jpg'
 
 class Pricing extends React.Component {
   componentDidMount() {
@@ -26,7 +27,7 @@ class Pricing extends React.Component {
   render() {
     return (
       <>
-        <div className="content">
+        <div className="content" style={{ backgroundImage: "url(" + bgImagem + ")" }}>
           <Container>
             <Row>
               <Col className="ml-auto mr-auto text-center" md="6">

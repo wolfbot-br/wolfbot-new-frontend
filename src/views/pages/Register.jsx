@@ -20,6 +20,7 @@ import {
   Row,
   Col
 } from "reactstrap";
+import bgImagem from '../../assets/img/bg-login.jpg'
 
 class Register extends React.Component {
   componentDidMount() {
@@ -31,7 +32,7 @@ class Register extends React.Component {
   render() {
     return (
       <>
-        <div className="content">
+        <div className="content" style={{ backgroundImage: "url(" + bgImagem + ")" }}>
           <Container>
             <Row>
               <Col className="ml-auto" md="5">
