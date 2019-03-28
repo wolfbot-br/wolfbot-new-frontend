@@ -10,4 +10,8 @@ const loadLocalStorage = key => {
   }
 };
 
-export default { loadLocalStorage };
+const removeLocalStorageItem = key => {
+  localStorage.removeItem(key);
+};
+
+export default { loadLocalStorage, removeLocalStorageItem };

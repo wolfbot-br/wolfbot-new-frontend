@@ -46,6 +46,7 @@ class Login extends React.Component {
       });
     } else {
       login(loginResult.data);
+      this.props.history.replace("/admin/dashboard");
     }
   }
 
