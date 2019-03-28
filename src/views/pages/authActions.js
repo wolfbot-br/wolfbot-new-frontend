@@ -9,21 +9,9 @@ const login = data => {
   };
 };
 
-//Firebase Auth - Realizará o cadastro do usuári
-const signup = values => {
-  const url = `${ambiente.URL.account}/signup`;
-
+const signup = data => {
   return dispatch => {
-    axios
-      .post(url, values)
-      .then(resp => {
-        dispatch({ type: "REGISTER_SUCCESS", payload: resp.data });
-      })
-      .catch(e => {
-        // for (var i = 0; i < e.response.data.errors.length; i++) {
-        //   toastr.error("Erro", e.response.data.errors[i].message);
-        // }
-      });
+    dispatch({ type: "REGISTER_SUCCESS", payload: data });
   };
 };
 
