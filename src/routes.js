@@ -8,6 +8,7 @@ import Configuracao from "./views/Configuracao/Configuracao";
 import Backtest from "./views/Backtest/Backtest";
 import Estatisticas from "./views/Estatisticas/Estatisticas";
 import Historico from "./views/Historico/Historico";
+import EmailSendActiveAccount from "./views/pages/EmailSendActiveAccount";
 
 const routes = [
   {
@@ -28,6 +29,13 @@ const routes = [
     path: "/pricing",
     name: "Pricing",
     component: Pricing,
+    layout: "/auth",
+    invisible: true
+  },
+  {
+    path: "/emailsendactiveaccount",
+    name: "EmailSendActiveAccount",
+    component: EmailSendActiveAccount,
     layout: "/auth",
     invisible: true
   },

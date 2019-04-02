@@ -2,10 +2,11 @@ import React from "react";
 import { reduxForm, Field } from "redux-form";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { NotificationAlert } from "react-notification-alert";
+import NotificationAlert from "react-notification-alert";
 
 import { signup } from "./authActions";
 import { signupRequest } from "./AuthRequests";
+import bgImagem from "../../assets/img/bg-login.jpg";
 import Input from "../../components/Input/Input";
 
 // reactstrap components
@@ -24,38 +25,38 @@ import {
   Row,
   Col
 } from "reactstrap";
-import bgImagem from "../../assets/img/bg-login.jpg";
 
 class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-  componentDidMount() {
-    document.body.classList.toggle("register-page");
-  }
-
-  componentWillUnmount() {
-    document.body.classList.toggle("register-page");
-  }
 
   async onSubmit(values) {
     const { signup } = this.props;
     const signupResult = await signupRequest(values);
-    if (!signupResult.data.sucess) {
+    if (!signupResult.data.success) {
       signupResult.data.errors.forEach(erro => {
         const options = {
           place: "tr",
           message: erro.message,
           type: "danger",
           icon: "tim-icons icon bell-55",
-          autoDismiss: 3
+          autoDismiss: 1.2
         };
-        this.refs.NotificationAlert.NotificationAlert(options);
+        this.refs.notificationAlert.notificationAlert(options);
       });
     } else {
-      alert("sucesso");
+      signup(values);
+      this.props.history.replace("/auth/emailsendactiveaccount");
     }
+  }
+
+  componentDidMount() {
+    document.body.classList.toggle("register-page");
+  }
+  componentWillUnmount() {
+    document.body.classList.toggle("register-page");
   }
 
   render() {
@@ -66,6 +67,9 @@ class Register extends React.Component {
           className="content"
           style={{ backgroundImage: "url(" + bgImagem + ")" }}
         >
+          <div className="rna-container">
+            <NotificationAlert ref="notificationAlert" />
+          </div>
           <Container>
             <Row>
               <Col className="ml-auto" md="5">
@@ -110,7 +114,7 @@ class Register extends React.Component {
                 className="form"
               >
                 <Col className="mr-auto" md="7">
-                  <Card className="card-register card-white">
+                  <Card className="card-white">
                     <CardHeader>
                       <CardImg
                         alt="..."
@@ -171,23 +175,13 @@ class Register extends React.Component {
                           placeholder="Senha de Confirmação"
                         />
                       </InputGroup>
-                      {/* <FormGroup check className="text-left">
-                        <Label check>
-                          <Input type="checkbox" />
-                          <span className="form-check-sign" />I agree to the{" "}
-                          <a href="#pablo" onClick={e => e.preventDefault()}>
-                            terms and conditions
-                          </a>
-                          .
-                        </Label>
-                      </FormGroup> */}
                     </CardBody>
                     <CardFooter>
                       <Button
                         className="btn-round"
                         color="primary"
                         href="#pablo"
-                        onClick={e => e.preventDefault()}
+                        onClick={handleSubmit(value => this.onSubmit(value))}
                         size="lg"
                       >
                         Criar Conta

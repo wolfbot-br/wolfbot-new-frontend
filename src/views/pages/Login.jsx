@@ -6,7 +6,7 @@ import NotificationAlert from "react-notification-alert";
 
 import { login } from "./authActions";
 import { loginRequest } from "./AuthRequests";
-import bgImagem from '../../assets/img/bg-login.jpg'
+import bgImagem from "../../assets/img/bg-login.jpg";
 import Input from "../../components/Input/Input";
 
 import {
@@ -60,7 +60,10 @@ class Login extends React.Component {
     const { handleSubmit } = this.props;
     return (
       <>
-        <div className="content" style={{ backgroundImage: "url(" + bgImagem + ")" }}>
+        <div
+          className="content"
+          style={{ backgroundImage: "url(" + bgImagem + ")" }}
+        >
           <div className="rna-container">
             <NotificationAlert ref="notificationAlert" />
           </div>
