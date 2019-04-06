@@ -10,8 +10,6 @@ import {
   CardGroup,
   CardFooter,
   CardTitle,
-  CardHeader,
-  CardImg,
   Container,
   Col,
   Row

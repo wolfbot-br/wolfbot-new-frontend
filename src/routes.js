@@ -9,8 +9,10 @@ import Backtest from "./views/Backtest/Backtest";
 import Estatisticas from "./views/Estatisticas/Estatisticas";
 import Historico from "./views/Historico/Historico";
 import EmailSendActiveAccount from "./views/pages/EmailSendActiveAccount";
+import ActiveAccount from "./views/pages/ActiveAccount";
 
 const routes = [
+  // Auth Routes
   {
     path: "/login",
     name: "Login",
@@ -39,6 +41,14 @@ const routes = [
     layout: "/auth",
     invisible: true
   },
+  {
+    path: "/activeaccount",
+    name: "ActiveAccount",
+    component: ActiveAccount,
+    layout: "/auth",
+    invisible: true
+  },
+  // Admin Routes
   {
     path: "/profile",
     name: "Profile",
