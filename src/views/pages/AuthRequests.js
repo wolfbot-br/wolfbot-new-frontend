@@ -25,4 +25,14 @@ const validateToken = async token => {
   }
 };
 
-export { loginRequest, validateToken };
+const signupRequest = async values => {
+  const url = `${ambiente.URL.account}/signup`;
+  try {
+    const signupResult = await axios.post(url, values);
+    return signupResult;
+  } catch (e) {
+    return e.response;
+  }
+};
+
+export { loginRequest, validateToken, signupRequest };

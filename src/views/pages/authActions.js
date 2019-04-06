@@ -1,7 +1,6 @@
 // import { toastr } from "react-redux-toastr";
 import axios from "axios";
 import ambiente from "../../config";
-import functions from "../../utils/functions";
 
 const login = data => {
   return dispatch => {
@@ -9,75 +8,29 @@ const login = data => {
   };
 };
 
-//Firebase Auth - Realizará o cadastro do usuári
-const signup = values => {
-  const url = `${ambiente.URL.account}/signup`;
-
+const signup = data => {
   return dispatch => {
-    axios
-      .post(url, values)
-      .then(resp => {
-        dispatch({ type: "REGISTER_SUCCESS", payload: resp.data });
-      })
-      .catch(e => {
-        // for (var i = 0; i < e.response.data.errors.length; i++) {
-        //   toastr.error("Erro", e.response.data.errors[i].message);
-        // }
-      });
+    dispatch({ type: "REGISTER_SUCCESS", payload: data });
   };
 };
 
-// Firebase Auth - Action que é chamada quando o usuário clica no link para ativar a conta
-const verifiyActiveAccount = code => {
-  return dispatch => {
-    axios
-      .get(`${ambiente.URL.account}/active`, { headers: { code: code } })
-      .then(resp => {
+const verifyActiveAccount = async code => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(`${ambiente.URL.account}/active`, {
+        headers: { code: code }
+      });
+      if (response.status === 200)
         dispatch({ type: "ACCOUNT_ACTIVE", payload: 1 });
-      })
-      .catch(e => {
-        console.log(e.response.data.errors[0].code);
-        if (e.response.data.errors[0].code === "emailIsActive") {
-          dispatch({ type: "ACCOUNT_ACTIVE", payload: 2 });
-        } else {
-          dispatch({ type: "ACCOUNT_ACTIVE", payload: 3 });
-        }
-      });
-  };
-};
-
-// Firebase Auth - Desloga o usuário
-const logout = () => {
-  return { type: "TOKEN_VALIDATED", payload: false };
-};
-
-// Firebase Auth - Verifica se o token do usuário é valido, se não é então desloga o usuário
-const validateToken = token => {
-  return dispatch => {
-    if (token) {
-      axios
-        .get(`${ambiente.URL.account}/me`, {
-          headers: { authorization: token }
-        })
-        .then(resp => {
-          dispatch({ type: "TOKEN_VALIDATED", payload: true });
-        })
-        .catch(e => dispatch({ type: "TOKEN_VALIDATED", payload: false }));
-    } else {
-      dispatch({ type: "TOKEN_VALIDATED", payload: false });
+    } catch (error) {
+      if (
+        error.response.data.errors[0].messages ===
+        "Email já foi verificado pelo usuário"
+      )
+        dispatch({ type: "ACCOUNT_ACTIVE", payload: 2 });
+      else dispatch({ type: "ACCOUNT_ACTIVE", payload: 3 });
     }
   };
-};
-
-// Firebase Auth - É chamado quando a página de login é carregada
-const loadLoginPage = () => {
-  return { type: "PAGE_LOGIN_UPDATED", payload: false };
-};
-
-// Firebase Auth - Recupera os dados da sessão do usuário no localStorage
-const loadSession = () => {
-  const USER_BOT = functions.loadLocalStorage("user_bot");
-  return { type: "LOAD_SESSSION_USER", payload: USER_BOT };
 };
 
 const passwordRecovery = email => {
@@ -137,11 +90,7 @@ const changePassword = (values, changePasswordHash) => {
 export {
   login,
   signup,
-  verifiyActiveAccount,
-  logout,
-  validateToken,
-  loadLoginPage,
-  loadSession,
+  verifyActiveAccount,
   passwordRecovery,
   loadChangePasswordPage,
   changePassword
