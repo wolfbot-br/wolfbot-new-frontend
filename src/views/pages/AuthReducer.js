@@ -60,6 +60,13 @@ export default (state = INITIAL_STATE, action) => {
             codeActiveAccountInvalid: true,
             emailIsActive: false
           };
+        default:
+          return {
+            ...state,
+            accountActive: false,
+            codeActiveAccountInvalid: true,
+            emailIsActive: false
+          };
       }
     case "PASSWORD_RECOVERY":
       if (action.payload) {

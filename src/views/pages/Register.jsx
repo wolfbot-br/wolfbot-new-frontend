@@ -1,4 +1,13 @@
 import React from "react";
+import { reduxForm, Field } from "redux-form";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import NotificationAlert from "react-notification-alert";
+
+import { signup } from "./authActions";
+import { signupRequest } from "./AuthRequests";
+import bgImagem from "../../assets/img/bg-login.jpg";
+import Input from "../../components/Input/Input";
 
 // reactstrap components
 import {
@@ -9,10 +18,6 @@ import {
   CardFooter,
   CardImg,
   CardTitle,
-  Label,
-  FormGroup,
-  Form,
-  Input,
   InputGroupAddon,
   InputGroupText,
   InputGroup,
@@ -20,19 +25,51 @@ import {
   Row,
   Col
 } from "reactstrap";
-import bgImagem from '../../assets/img/bg-login.jpg'
 
 class Register extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  async onSubmit(values) {
+    const { signup } = this.props;
+    const signupResult = await signupRequest(values);
+    if (!signupResult.data.success) {
+      signupResult.data.errors.forEach(erro => {
+        const options = {
+          place: "tr",
+          message: erro.message,
+          type: "danger",
+          icon: "tim-icons icon bell-55",
+          autoDismiss: 1.2
+        };
+        this.refs.notificationAlert.notificationAlert(options);
+      });
+    } else {
+      signup(values);
+      this.props.history.replace("/auth/emailsendactiveaccount");
+    }
+  }
+
   componentDidMount() {
     document.body.classList.toggle("register-page");
   }
   componentWillUnmount() {
     document.body.classList.toggle("register-page");
   }
+
   render() {
+    const { handleSubmit } = this.props;
     return (
       <>
-        <div className="content" style={{ backgroundImage: "url(" + bgImagem + ")" }}>
+        <div
+          className="content"
+          style={{ backgroundImage: "url(" + bgImagem + ")" }}
+        >
+          <div className="rna-container">
+            <NotificationAlert ref="notificationAlert" />
+          </div>
           <Container>
             <Row>
               <Col className="ml-auto" md="5">
@@ -41,10 +78,9 @@ class Register extends React.Component {
                     <i className="tim-icons icon-wifi" />
                   </div>
                   <div className="description">
-                    <h3 className="info-title">Marketing</h3>
+                    <h3 className="info-title">Estratégia</h3>
                     <p className="description">
-                      We've created the marketing campaign of the website. It
-                      was a very interesting collaboration.
+                      Escolha a melhor estratégia para você e tenha resultados
                     </p>
                   </div>
                 </div>
@@ -53,10 +89,10 @@ class Register extends React.Component {
                     <i className="tim-icons icon-triangle-right-17" />
                   </div>
                   <div className="description">
-                    <h3 className="info-title">Fully Coded in HTML5</h3>
+                    <h3 className="info-title">Backtest</h3>
                     <p className="description">
-                      We've developed the website with HTML5 and CSS3. The
-                      client has access to the code using GitHub.
+                      Teste sua estratégia e análise se sua estratégia teria
+                      dado certo ou não
                     </p>
                   </div>
                 </div>
@@ -65,32 +101,40 @@ class Register extends React.Component {
                     <i className="tim-icons icon-trophy" />
                   </div>
                   <div className="description">
-                    <h3 className="info-title">Built Audience</h3>
+                    <h3 className="info-title">Compra e Venda</h3>
                     <p className="description">
-                      There is also a Fully Customizable CMS Admin Dashboard for
-                      this product.
+                      Realize operações manuais dentro da plataforma com
+                      segurança
                     </p>
                   </div>
                 </div>
               </Col>
-              <Col className="mr-auto" md="7">
-                <Card className="card-register card-white">
-                  <CardHeader>
-                    <CardImg
-                      alt="..."
-                      src={require("assets/img/card-primary.png")}
-                    />
-                    <CardTitle tag="h4">Register</CardTitle>
-                  </CardHeader>
-                  <CardBody>
-                    <Form className="form">
+              <form
+                onSubmit={handleSubmit(values => this.onSubmit(values))}
+                className="form"
+              >
+                <Col className="mr-auto" md="7">
+                  <Card className="card-white">
+                    <CardHeader>
+                      <CardImg
+                        alt="..."
+                        src={require("assets/img/card-primary.png")}
+                      />
+                      <CardTitle tag="h4">Cadastro</CardTitle>
+                    </CardHeader>
+                    <CardBody>
                       <InputGroup>
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
                             <i className="tim-icons icon-single-02" />
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input placeholder="Full Name" type="text" />
+                        <Field
+                          component={Input}
+                          placeholder="Nome"
+                          type="text"
+                          name="name"
+                        />
                       </InputGroup>
                       <InputGroup>
                         <InputGroupAddon addonType="prepend">
@@ -98,7 +142,12 @@ class Register extends React.Component {
                             <i className="tim-icons icon-email-85" />
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input placeholder="Email" type="text" />
+                        <Field
+                          component={Input}
+                          placeholder="Email"
+                          type="email"
+                          name="email"
+                        />
                       </InputGroup>
                       <InputGroup>
                         <InputGroupAddon addonType="prepend">
@@ -106,33 +155,41 @@ class Register extends React.Component {
                             <i className="tim-icons icon-lock-circle" />
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input placeholder="Password" type="text" />
+                        <Field
+                          component={Input}
+                          type="password"
+                          name="password"
+                          placeholder="Senha"
+                        />
                       </InputGroup>
-                      <FormGroup check className="text-left">
-                        <Label check>
-                          <Input type="checkbox" />
-                          <span className="form-check-sign" />I agree to the{" "}
-                          <a href="#pablo" onClick={e => e.preventDefault()}>
-                            terms and conditions
-                          </a>
-                          .
-                        </Label>
-                      </FormGroup>
-                    </Form>
-                  </CardBody>
-                  <CardFooter>
-                    <Button
-                      className="btn-round"
-                      color="primary"
-                      href="#pablo"
-                      onClick={e => e.preventDefault()}
-                      size="lg"
-                    >
-                      Get Started
-                    </Button>
-                  </CardFooter>
-                </Card>
-              </Col>
+                      <InputGroup>
+                        <InputGroupAddon addonType="prepend">
+                          <InputGroupText>
+                            <i className="tim-icons icon-lock-circle" />
+                          </InputGroupText>
+                        </InputGroupAddon>
+                        <Field
+                          component={Input}
+                          type="password"
+                          name="passwordConfirm"
+                          placeholder="Senha de Confirmação"
+                        />
+                      </InputGroup>
+                    </CardBody>
+                    <CardFooter>
+                      <Button
+                        className="btn-round"
+                        color="primary"
+                        href="#pablo"
+                        onClick={handleSubmit(value => this.onSubmit(value))}
+                        size="lg"
+                      >
+                        Criar Conta
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                </Col>
+              </form>
             </Row>
           </Container>
         </div>
@@ -141,4 +198,9 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+Register = reduxForm({ form: "registerForm" })(Register);
+const mapDispatchToProps = dispatch => bindActionCreators({ signup }, dispatch);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Register);

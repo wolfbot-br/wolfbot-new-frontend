@@ -54,6 +54,8 @@ class Pages extends React.Component {
         return "login-page";
       case "Register":
         return "register-page";
+      case "EmailSendActiveAccount":
+        return "email-send-active-account-page";
       default:
         return "Default Brand Text";
     }
