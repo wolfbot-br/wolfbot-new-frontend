@@ -34,7 +34,7 @@ class FormConfiguracao extends Component {
                 </CardHeader>
                 <CardBody>
                     <Col xs="12">
-                        <Form action="/" className="form-horizontal" method="get">
+                        <Form action="/" className="form-horizontal">
                             <Row>
                                 <Label sm="2">Exchange</Label>
                                 <Col sm="10">

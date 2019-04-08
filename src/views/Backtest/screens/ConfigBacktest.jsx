@@ -27,39 +27,28 @@ class ConfigBacktest extends Component {
             stop: '',
             base_currency: 'USD',
             date: '',
-            indicators: [
-                {
-                    name: 'EMA',
-                    state: false,
-                    short_period: 0,
-                    long_period: 0,
-                    signal_period: 0,
-                },
-                {
-                    name: 'MACD',
-                    state: false,
-                    short_period: 0,
-                    long_period: 0,
-                },
-                {
-                    name: 'CCI',
-                    state: false,
-                    short_period: 0,
-                    long_period: 0,
-                },
-                {
-                    name: 'BBANDS',
-                    state: false,
-                    short_period: 0,
-                    long_period: 0,
-                },
-                {
-                    name: 'STOCH',
-                    state: false,
-                    short_period: 0,
-                    long_period: 0,
-                }
-            ],
+
+            emaName: 'EMA',
+            emaState: false,
+            emaShortPeriod: 0,
+            emaLongPeriod: 0,
+
+            macdName: 'MACD',
+            macdState: false,
+            macdShortPeriod: 0,
+            macdLongPeriod: 0,
+
+            cciName: 'CCI',
+            cciState: false,
+            cciPeriod: 0,
+
+            bbandsName: 'BBANDS',
+            bbandsState: false,
+            bbandsPeriod: 0,
+
+            stochName: 'STOCH',
+            stochState: false,
+            stochPeriod: 0,
         };
     }
 
@@ -69,37 +58,39 @@ class ConfigBacktest extends Component {
         this.setState({ [name]: value })
     }
     handleSwitch = (elem, state) => {
-        console.log(elem)
-        console.log(state)
+        const name = elem.props.name;
+        const value = elem.props.value;
+        this.setState({ [name]: !value });
     }
 
     onSubmit = e => {
         e.preventDefault();
-        const arrIndicators = this.state.indicators;
-        const indicators = arrIndicators.filter(item => {
-            if (item.state === true) {
-                return item;
-            }
-        });
-
-
         const values = {
             exchange: this.state.exchangeSelect.value,
             target_currency: this.state.currencySelect.value,
             candle_size: this.state.candleSelect.value,
-            indicators: indicators,
+            indicators: [
+                this.state.emaState
+                    ? {
+                        name: this.state.emaName,
+                        short_period: this.state.emaShortPeriod,
+                        long_period: this.state.emaLongPeriod,
+                    }
+                    : null,
+                this.state.macdState
+                    ? {
+                        name: this.state.macdName,
+                        short_period: this.state.macdShortPeriod,
+                        long_period: this.state.macdLongPeriod,
+                    }
+                    : null,
+            ],
             profit: this.state.profit,
             stop: this.state.stop,
             base_currency: this.state.base_currency,
             date: this.state.date
         }
         console.log(values)
-
-        if (indicators.length > 0) {
-            console.log('success');
-        } else {
-            console.log('deu ruim')
-        }
     }
     render() {
         return (
@@ -182,74 +173,153 @@ class ConfigBacktest extends Component {
                             </Row>
                             <Row>
                                 <Label sm="2">EMA</Label>
-                                <Col sm="2">
+                                <Col sm="1">
                                     <FormGroup style={{ paddingTop: 6 }}>
                                         <Switch
-                                            value={this.state.indicators[0].state}
+                                            value={this.state.emaState}
                                             onChange={
-                                                (elem, state) => this.handleSwitch(elem, state)
+                                                (elem) => this.handleSwitch(elem)
                                             }
-                                            name="ema"
-                                            offColor=""
-                                            onColor=""
+                                            name="emaState"
                                         />
                                     </FormGroup>
                                 </Col>
-                                <Col>
-                                    {
-                                        this.state.indicators[0].state === true
-                                            ? (<Label>teste</Label>)
-                                            : null
-                                    }
-                                </Col>
+                                {
+                                    this.state.emaState === true
+                                        ? (
+                                            <Row>
+                                                <Label sm="2">short period</Label>
+                                                <Col sm="3">
+                                                    <Input type="number" placeholder="short period" />
+                                                </Col>
+                                                <Label sm="2">long period</Label>
+                                                <Col sm="3">
+                                                    <Input type="number" placeholder="long period" />
+                                                </Col>
+                                            </Row>
+                                        )
+                                        : null
+                                }
                             </Row>
                             <Row>
                                 <Label sm="2">MACD</Label>
-                                <Col sm="10">
+                                <Col sm="1">
                                     <FormGroup style={{ paddingTop: 6 }}>
                                         <Switch
-                                            defaultValue={false}
-                                            offColor=""
-                                            onColor=""
+                                            value={this.state.macdState}
+                                            onChange={
+                                                (elem) => this.handleSwitch(elem)
+                                            }
+                                            name="macdState"
                                         />
                                     </FormGroup>
                                 </Col>
+                                {
+                                    this.state.macdState === true
+                                        ? (
+                                            <Row>
+                                                <Label sm="2">short period</Label>
+                                                <Col sm="3">
+                                                    <Input type="number" placeholder="short period" />
+                                                </Col>
+                                                <Label sm="2">long period</Label>
+                                                <Col sm="3">
+                                                    <Input type="number" placeholder="long period" />
+                                                </Col>
+                                            </Row>
+                                        )
+                                        : null
+                                }
                             </Row>
                             <Row>
                                 <Label sm="2">CCI</Label>
-                                <Col sm="10">
+                                <Col sm="1">
                                     <FormGroup style={{ paddingTop: 6 }}>
                                         <Switch
-                                            defaultValue={false}
-                                            offColor=""
-                                            onColor=""
+                                            value={this.state.cciState}
+                                            onChange={
+                                                (elem) => this.handleSwitch(elem)
+                                            }
+                                            name="cciState"
                                         />
                                     </FormGroup>
                                 </Col>
+                                {
+                                    this.state.cciState === true
+                                        ? (
+                                            <Row>
+                                                <Label sm="2">short period</Label>
+                                                <Col sm="3">
+                                                    <Input type="number" placeholder="short period" />
+                                                </Col>
+                                                <Label sm="2">long period</Label>
+                                                <Col sm="3">
+                                                    <Input type="number" placeholder="long period" />
+                                                </Col>
+                                            </Row>
+                                        )
+                                        : null
+                                }
                             </Row>
                             <Row>
                                 <Label sm="2">BBANDS</Label>
-                                <Col sm="10">
+                                <Col sm="1">
                                     <FormGroup style={{ paddingTop: 6 }}>
                                         <Switch
-                                            defaultValue={false}
-                                            offColor=""
-                                            onColor=""
+                                            value={this.state.bbandsState}
+                                            onChange={
+                                                (elem) => this.handleSwitch(elem)
+                                            }
+                                            name="bbandsState"
                                         />
                                     </FormGroup>
                                 </Col>
+                                {
+                                    this.state.bbandsState === true
+                                        ? (
+                                            <Row>
+                                                <Label sm="2">short period</Label>
+                                                <Col sm="3">
+                                                    <Input type="number" placeholder="short period" />
+                                                </Col>
+                                                <Label sm="2">long period</Label>
+                                                <Col sm="3">
+                                                    <Input type="number" placeholder="long period" />
+                                                </Col>
+                                            </Row>
+                                        )
+                                        : null
+                                }
                             </Row>
                             <Row>
                                 <Label sm="2">STOCH</Label>
-                                <Col sm="10">
+                                <Col sm="1">
                                     <FormGroup style={{ paddingTop: 6 }}>
                                         <Switch
-                                            defaultValue={false}
-                                            offColor=""
-                                            onColor=""
+                                            value={this.state.stochState}
+                                            onChange={
+                                                (elem) => this.handleSwitch(elem)
+                                            }
+                                            name="stochState"
                                         />
                                     </FormGroup>
                                 </Col>
+                                {
+                                    this.state.stochState === true
+                                        ? (
+                                            <Row>
+                                                <Label sm="2">short period</Label>
+                                                <Col sm="3">
+                                                    <Input type="number" placeholder="short period" />
+                                                </Col>
+                                                <Label sm="2">long period</Label>
+                                                <Col sm="3">
+                                                    <Input type="number" placeholder="long period" />
+                                                </Col>
+                                            </Row>
+                                        )
+                                        : null
+                                }
                             </Row>
                             <Row>
                                 <Label sm="2">Lucro</Label>
