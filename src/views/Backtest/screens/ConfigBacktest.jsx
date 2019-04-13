@@ -37,6 +37,7 @@ class ConfigBacktest extends Component {
             macdState: false,
             macdShortPeriod: 0,
             macdLongPeriod: 0,
+            macdSignalPeriod: 0,
 
             cciName: 'CCI',
             cciState: false,
@@ -45,10 +46,13 @@ class ConfigBacktest extends Component {
             bbandsName: 'BBANDS',
             bbandsState: false,
             bbandsPeriod: 0,
+            bbandsStddevPeriod: 0,
 
             stochName: 'STOCH',
             stochState: false,
-            stochPeriod: 0,
+            stochKperiod: 0,
+            stochKslowPeriod: 0,
+            stochDperiod: 0,
         };
     }
 
@@ -82,6 +86,28 @@ class ConfigBacktest extends Component {
                         name: this.state.macdName,
                         short_period: this.state.macdShortPeriod,
                         long_period: this.state.macdLongPeriod,
+                        signal_period: this.state.macdSignalPeriod,
+                    }
+                    : null,
+                this.state.cciState
+                    ? {
+                        name: this.state.cciName,
+                        period: this.state.cciPeriod,
+                    }
+                    : null,
+                this.state.bbandsState
+                    ? {
+                        name: this.state.bbandsName,
+                        period: this.state.bbandsPeriod,
+                        stddev_period: this.state.bbandsStddevPeriod,
+                    }
+                    : null,
+                this.state.stochState
+                    ? {
+                        name: this.state.stochName,
+                        k_period: this.state.stochKperiod,
+                        k_slow_period: this.state.stochKslowPeriod,
+                        d_period: this.state.stochDperiod,
                     }
                     : null,
             ],
@@ -219,11 +245,15 @@ class ConfigBacktest extends Component {
                                         ? (
                                             <Row>
                                                 <Label sm="2">short period</Label>
-                                                <Col sm="3">
+                                                <Col sm="2">
                                                     <Input type="number" placeholder="short period" />
                                                 </Col>
                                                 <Label sm="2">long period</Label>
-                                                <Col sm="3">
+                                                <Col sm="2">
+                                                    <Input type="number" placeholder="long period" />
+                                                </Col>
+                                                <Label sm="2">signal period</Label>
+                                                <Col sm="2">
                                                     <Input type="number" placeholder="long period" />
                                                 </Col>
                                             </Row>
@@ -248,13 +278,9 @@ class ConfigBacktest extends Component {
                                     this.state.cciState === true
                                         ? (
                                             <Row>
-                                                <Label sm="2">short period</Label>
+                                                <Label sm="2">period</Label>
                                                 <Col sm="3">
                                                     <Input type="number" placeholder="short period" />
-                                                </Col>
-                                                <Label sm="2">long period</Label>
-                                                <Col sm="3">
-                                                    <Input type="number" placeholder="long period" />
                                                 </Col>
                                             </Row>
                                         )
@@ -278,11 +304,11 @@ class ConfigBacktest extends Component {
                                     this.state.bbandsState === true
                                         ? (
                                             <Row>
-                                                <Label sm="2">short period</Label>
+                                                <Label sm="2">period</Label>
                                                 <Col sm="3">
                                                     <Input type="number" placeholder="short period" />
                                                 </Col>
-                                                <Label sm="2">long period</Label>
+                                                <Label sm="2">stddev period</Label>
                                                 <Col sm="3">
                                                     <Input type="number" placeholder="long period" />
                                                 </Col>
@@ -308,12 +334,16 @@ class ConfigBacktest extends Component {
                                     this.state.stochState === true
                                         ? (
                                             <Row>
-                                                <Label sm="2">short period</Label>
-                                                <Col sm="3">
+                                                <Label sm="2">k period</Label>
+                                                <Col sm="2">
                                                     <Input type="number" placeholder="short period" />
                                                 </Col>
-                                                <Label sm="2">long period</Label>
-                                                <Col sm="3">
+                                                <Label sm="2">k slow period</Label>
+                                                <Col sm="2">
+                                                    <Input type="number" placeholder="long period" />
+                                                </Col>
+                                                <Label sm="2">d period</Label>
+                                                <Col sm="2">
                                                     <Input type="number" placeholder="long period" />
                                                 </Col>
                                             </Row>
