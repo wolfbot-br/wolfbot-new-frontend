@@ -1,12 +1,29 @@
 const INITIAL_STATE = {
-  profile: false,
-  tab_perfil: 'dados_pessoais'
-}
+  email: "",
+  name: "",
+  lastname: "",
+  address: "",
+  city: "",
+  country: "",
+  about: ""
+};
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case 'CHANGED_TAB_PERFIL':
-      return { ...state, tab_perfil: action.payload }
+    case "GET_USER_PROFILE":
+      const user = action.payload.data[0];
+      return {
+        ...state,
+        email: user.email,
+        name: user.name,
+        lastname: user.lastname,
+        address: user.address,
+        city: user.city,
+        country: user.country,
+        about: user.about
+      };
+    case "SAVE_USER_PROFILE":
+      return { ...state };
     default:
-      return state
+      return state;
   }
-}
+};

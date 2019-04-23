@@ -113,7 +113,7 @@ class Register extends React.Component {
                 onSubmit={handleSubmit(values => this.onSubmit(values))}
                 className="form"
               >
-                <Col className="mr-auto" md="7">
+                <Col className="mr-auto" md="9">
                   <Card className="card-default">
                     <CardHeader>
                       <CardImg

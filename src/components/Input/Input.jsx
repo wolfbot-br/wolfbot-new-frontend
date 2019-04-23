@@ -8,5 +8,6 @@ export default props => (
     placeholder={props.placeholder}
     type={props.type}
     maxLength={40}
+    disabled={props.disabled ? true : false}
   />
 );

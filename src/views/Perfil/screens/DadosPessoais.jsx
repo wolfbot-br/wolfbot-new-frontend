@@ -5,22 +5,17 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
-  CardText,
-  FormGroup,
-  Form,
-  Input,
   Row,
-  Col,
-  Nav,
-  NavItem,
-  NavLink,
-  TabContent,
-  TabPane
+  FormGroup,
+  Col
 } from "reactstrap";
 import NotificationAlert from "react-notification-alert";
+import Input from "../../../components/Input/Input";
 import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { getUserProfile, saveUserProfile } from "../PerfilRequests";
+import { getUser, saveUser } from "../PerfilActions";
 
 class DadosPessoais extends Component {
   constructor(props) {
@@ -28,23 +23,76 @@ class DadosPessoais extends Component {
     this.state = {};
   }
 
-  onSubmit(values) {}
+  async onSubmit(values) {
+    const { saveUser } = this.props;
+    const saveResult = await saveUserProfile(values);
+    if (!saveResult.data.success) {
+      saveResult.data.errors.forEach(erro => {
+        const options = {
+          place: "tr",
+          message: erro.message,
+          type: "danger",
+          icon: "tim-icons icon-bell-55",
+          autoDismiss: 3
+        };
+        this.refs.notificationAlert.notificationAlert(options);
+      });
+    } else {
+      saveUser(saveResult.data);
+      const options = {
+        place: "tr",
+        message: "Suas informações foram salvas",
+        type: "success",
+        icon: "tim-icons icon-bell-55",
+        autoDismiss: 3
+      };
+      this.refs.notificationAlert.notificationAlert(options);
+    }
+  }
+
+  async componentWillMount() {
+    const { getUser } = this.props;
+    const user = await getUserProfile();
+    if (!user.data.success) {
+      user.data.errors.forEach(erro => {
+        const options = {
+          place: "tr",
+          message: erro.message,
+          type: "danger",
+          icon: "tim-icons icon-bell-55",
+          autoDismiss: 3
+        };
+        this.refs.notificationAlert.notificationAlert(options);
+      });
+    } else {
+      getUser(user);
+      this.props.initialize({
+        email: this.props.email,
+        name: this.props.name,
+        lastname: this.props.lastname,
+        address: this.props.address,
+        city: this.props.city,
+        country: this.props.country,
+        about: this.props.about
+      });
+    }
+  }
 
   render() {
     const { handleSubmit } = this.props;
     return (
       <Card>
-        <div className="rna-container">
-          <NotificationAlert ref="notificationAlert" />
-        </div>
-        <CardHeader>
-          <h5 className="title">Editar Perfil</h5>
-        </CardHeader>
-        <CardBody>
-          <form
-            onSubmit={handleSubmit(values => this.onSubmit(values))}
-            className="form"
-          >
+        <form
+          onSubmit={handleSubmit(value => this.onSubmit(value))}
+          className="form"
+        >
+          <div className="rna-container">
+            <NotificationAlert ref="notificationAlert" />
+          </div>
+          <CardHeader>
+            <h5 className="title">Editar Perfil</h5>
+          </CardHeader>
+          <CardBody>
             <Row>
               <Col className="pr-md-1" md="5">
                 <FormGroup>
@@ -55,17 +103,6 @@ class DadosPessoais extends Component {
                     type="text"
                     name="email"
                     disabled
-                  />
-                </FormGroup>
-              </Col>
-              <Col className="px-md-1" md="3">
-                <FormGroup>
-                  <label>Username</label>
-                  <Field
-                    component={Input}
-                    placeholder="Username"
-                    type="text"
-                    name="username"
                   />
                 </FormGroup>
               </Col>
@@ -89,7 +126,7 @@ class DadosPessoais extends Component {
                     component={Input}
                     placeholder="Sobrenome"
                     type="text"
-                    name="sobrenome"
+                    name="lastname"
                   />
                 </FormGroup>
               </Col>
@@ -102,7 +139,7 @@ class DadosPessoais extends Component {
                     component={Input}
                     placeholder="Endereço"
                     type="text"
-                    name="endereco"
+                    name="address"
                   />
                 </FormGroup>
               </Col>
@@ -115,7 +152,7 @@ class DadosPessoais extends Component {
                     component={Input}
                     placeholder="Cidade"
                     type="text"
-                    name="cidade"
+                    name="city"
                   />
                 </FormGroup>
               </Col>
@@ -126,7 +163,7 @@ class DadosPessoais extends Component {
                     component={Input}
                     placeholder="País"
                     type="text"
-                    name="pais"
+                    name="country"
                   />
                 </FormGroup>
               </Col>
@@ -139,27 +176,37 @@ class DadosPessoais extends Component {
                     component={Input}
                     placeholder="Sobre"
                     type="textarea"
-                    name="sobre"
+                    name="about"
                     rows="4"
                   />
                 </FormGroup>
               </Col>
             </Row>
-          </form>
-        </CardBody>
-        <CardFooter>
-          <Button className="btn-fill" color="primary" type="submit">
-            Salvar
-          </Button>
-        </CardFooter>
+          </CardBody>
+          <CardFooter>
+            <Button className="btn-fill" color="success" type="submit">
+              Salvar Alterações
+            </Button>
+          </CardFooter>
+        </form>
       </Card>
     );
   }
 }
 
 DadosPessoais = reduxForm({ form: "dadosPessoaisForm" })(DadosPessoais);
-const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ getUser, saveUser }, dispatch);
+const mapStateToProps = state => ({
+  email: state.profile.email,
+  name: state.profile.name,
+  lastname: state.profile.lastname,
+  address: state.profile.address,
+  city: state.profile.city,
+  country: state.profile.country,
+  about: state.profile.about
+});
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(DadosPessoais);
