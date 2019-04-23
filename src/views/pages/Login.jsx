@@ -77,7 +77,7 @@ class Login extends React.Component {
                   <CardHeader>
                     <img
                       alt="..."
-                      src={require("assets/img/card-primary.png")}
+                      src={require("../../assets/img/card-primary.png")}
                     />
                     <CardTitle tag="h1">Login</CardTitle>
                   </CardHeader>

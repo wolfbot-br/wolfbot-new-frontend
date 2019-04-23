@@ -135,7 +135,7 @@ class User extends React.Component {
                       <img
                         alt="..."
                         className="avatar"
-                        src={require("assets/img/emilyz.jpg")}
+                        src={require("../../assets/img/emilyz.jpg")}
                       />
                       <h5 className="title">Mike Andrew</h5>
                     </a>

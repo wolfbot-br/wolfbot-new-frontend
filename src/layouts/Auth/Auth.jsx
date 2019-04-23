@@ -1,10 +1,10 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
-import AuthNavbar from "components/Navbars/AuthNavbar.jsx";
-import Footer from "components/Footer/Footer.jsx";
+import AuthNavbar from "../../components/Navbars/AuthNavbar";
+import Footer from "../../components/Footer/Footer";
 
-import routes from "routes.js";
+import routes from "../../routes";
 
 class Pages extends React.Component {
   getRoutes = routes => {
