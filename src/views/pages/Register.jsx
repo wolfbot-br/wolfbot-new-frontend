@@ -118,7 +118,7 @@ class Register extends React.Component {
                     <CardHeader>
                       <CardImg
                         alt="..."
-                        src={require("assets/img/card-primary.png")}
+                        src={require("../../assets/img/card-primary.png")}
                       />
                       <CardTitle tag="h1" style={{ fontSize: "28px" }}>
                         Cadastro
