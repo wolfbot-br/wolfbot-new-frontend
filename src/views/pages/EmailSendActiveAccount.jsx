@@ -42,7 +42,7 @@ class EmailSendActiveAccount extends React.Component {
             <Row className="justify-content-center">
               <Col md="8">
                 <CardGroup>
-                  <Card className="card-white card p-4">
+                  <Card className="card-default card p-4">
                     <CardBody>
                       <img
                         src="https://i.ibb.co/s210zrF/email.png"
@@ -62,12 +62,12 @@ class EmailSendActiveAccount extends React.Component {
                       <Row className="justify-content-center">
                         <p className="pageCardText text-muted">
                           Entrar em sua conta?
+                          <Link to="/login">
+                            <Button color="link" className="px-0">
+                              Login
+                            </Button>
+                          </Link>
                         </p>
-                        <Link to="/login">
-                          <Button color="link" className="px-0">
-                            Login
-                          </Button>
-                        </Link>
                       </Row>
                     </CardFooter>
                     <CardFooter className="pageCardFooter p-4">

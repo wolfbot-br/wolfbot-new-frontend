@@ -50,6 +50,10 @@ class Login extends React.Component {
     }
   }
 
+  criarUmaConta(values) {
+    this.props.history.replace("/auth/register");
+  }
+
   componentDidMount() {
     document.body.classList.toggle("login-page");
   }
@@ -73,13 +77,15 @@ class Login extends React.Component {
                 onSubmit={handleSubmit(value => this.onSubmit(value))}
                 className="form"
               >
-                <Card className="card-login card-white">
+                <Card className="card-login card-default">
                   <CardHeader>
                     <img
                       alt="..."
                       src={require("assets/img/card-primary.png")}
                     />
-                    <CardTitle tag="h1">Login</CardTitle>
+                    <CardTitle tag="h1" style={{ fontSize: "41px" }}>
+                      Login
+                    </CardTitle>
                   </CardHeader>
                   <CardBody>
                     <InputGroup>
@@ -124,7 +130,9 @@ class Login extends React.Component {
                         <a
                           className="link footer-link"
                           href="#pablo"
-                          onClick={e => e.preventDefault()}
+                          onClick={handleSubmit(value =>
+                            this.criarUmaConta(value)
+                          )}
                         >
                           Criar uma conta
                         </a>
@@ -137,7 +145,7 @@ class Login extends React.Component {
                           href="#pablo"
                           onClick={e => e.preventDefault()}
                         >
-                          Precisa de ajuda?
+                          Esqueci a senha!
                         </a>
                       </h6>
                     </div>
@@ -151,7 +159,6 @@ class Login extends React.Component {
     );
   }
 }
-
 Login = reduxForm({ form: "authForm" })(Login);
 const mapDispatchToProps = dispatch => bindActionCreators({ login }, dispatch);
 export default connect(

@@ -66,7 +66,7 @@ class Pages extends React.Component {
   render() {
     return (
       <>
-        <AuthNavbar brandText={this.getActiveRoute(routes) + " Page"} />
+        <AuthNavbar brandText={this.getActiveRoute(routes) + ""} />
         <div className="wrapper wrapper-full-page" ref="fullPages">
           <div className={"full-page " + this.getFullPageName(routes)}>
             <Switch>{this.getRoutes(routes)}</Switch>

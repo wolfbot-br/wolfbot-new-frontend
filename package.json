@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://www.wolfbot.com.br",
   "dependencies": {
+    "@material-ui/core": "^3.9.3",
     "axios": "^0.18.0",
     "chart.js": "2.7.3",
     "classnames": "2.2.6",

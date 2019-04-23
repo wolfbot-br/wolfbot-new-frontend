@@ -75,7 +75,7 @@ class Register extends React.Component {
               <Col className="ml-auto" md="5">
                 <div className="info-area info-horizontal mt-5">
                   <div className="icon icon-warning">
-                    <i className="tim-icons icon-wifi" />
+                    <i className="tim-icons icon-settings-gear-63" />
                   </div>
                   <div className="description">
                     <h3 className="info-title">Estratégia</h3>
@@ -98,7 +98,7 @@ class Register extends React.Component {
                 </div>
                 <div className="info-area info-horizontal">
                   <div className="icon icon-info">
-                    <i className="tim-icons icon-trophy" />
+                    <i className="tim-icons icon-money-coins" />
                   </div>
                   <div className="description">
                     <h3 className="info-title">Compra e Venda</h3>
@@ -114,13 +114,15 @@ class Register extends React.Component {
                 className="form"
               >
                 <Col className="mr-auto" md="7">
-                  <Card className="card-white">
+                  <Card className="card-default">
                     <CardHeader>
                       <CardImg
                         alt="..."
                         src={require("assets/img/card-primary.png")}
                       />
-                      <CardTitle tag="h4">Cadastro</CardTitle>
+                      <CardTitle tag="h1" style={{ fontSize: "28px" }}>
+                        Cadastro
+                      </CardTitle>
                     </CardHeader>
                     <CardBody>
                       <InputGroup>

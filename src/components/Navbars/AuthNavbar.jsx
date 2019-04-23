@@ -44,11 +44,11 @@ class AuthNavbar extends React.Component {
         expand="lg"
       >
         <Container fluid>
-          <div className="navbar-wrapper">
+          {/* <div className="navbar-wrapper">
             <NavbarBrand href="#pablo" onClick={e => e.preventDefault()}>
               {this.props.brandText}
             </NavbarBrand>
-          </div>
+          </div> */}
           <button
             aria-controls="navigation-index"
             aria-expanded={false}
@@ -64,7 +64,7 @@ class AuthNavbar extends React.Component {
           </button>
           <Collapse isOpen={this.state.collapseOpen} navbar>
             <Nav navbar className="ml-auto">
-              <NavItem>
+              {/* <NavItem>
                 <NavLink
                   to="/admin/dashboard"
                   className="nav-link text-primary"
@@ -72,10 +72,10 @@ class AuthNavbar extends React.Component {
                   <i className="tim-icons icon-minimal-left" /> Back to
                   Dashboard
                 </NavLink>
-              </NavItem>
+              </NavItem> */}
               <NavItem>
                 <NavLink to="/auth/register" className="nav-link">
-                  <i className="tim-icons icon-laptop" /> Register
+                  <i className="tim-icons icon-laptop" /> Cadastro
                 </NavLink>
               </NavItem>
               <NavItem>
@@ -85,7 +85,12 @@ class AuthNavbar extends React.Component {
               </NavItem>
               <NavItem>
                 <NavLink to="/auth/pricing" className="nav-link">
-                  <i className="tim-icons icon-coins" /> Pricing
+                  <i className="tim-icons icon-coins" /> Preços
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink to="/auth/pricing" className="nav-link">
+                  <i className="tim-icons icon-align-center" /> Sobre
                 </NavLink>
               </NavItem>
             </Nav>

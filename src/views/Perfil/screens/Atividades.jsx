@@ -22,7 +22,7 @@ import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-class DadosPessoais extends Component {
+class Atividades extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -157,9 +157,9 @@ class DadosPessoais extends Component {
   }
 }
 
-DadosPessoais = reduxForm({ form: "dadosPessoaisForm" })(DadosPessoais);
+Atividades = reduxForm({ form: "dadosPessoaisForm" })(Atividades);
 const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
 export default connect(
   null,
   mapDispatchToProps
-)(DadosPessoais);
+)(Atividades);
