@@ -79,7 +79,9 @@ class EmailSendActiveAccount extends React.Component {
                           style={{ display: "block", margin: "10px auto" }}
                         />
                       </Row>
-                      <CardTitle style={{ textAlign: "center" }} tag="h3">
+                      <CardTitle
+                        style={{ textAlign: "center", color: "#ffffff" }}
+                      >
                         Wolfbot
                       </CardTitle>
                     </CardFooter>

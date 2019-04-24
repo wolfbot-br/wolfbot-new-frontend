@@ -42,7 +42,7 @@ class Register extends React.Component {
           message: erro.message,
           type: "danger",
           icon: "tim-icons icon bell-55",
-          autoDismiss: 1.2
+          autoDismiss: 5
         };
         this.refs.notificationAlert.notificationAlert(options);
       });
@@ -80,7 +80,7 @@ class Register extends React.Component {
                   <div className="description">
                     <h3 className="info-title">Estratégia</h3>
                     <p className="description">
-                      Escolha a melhor estratégia para você e tenha resultados
+                      Escolha a melhor estratégia para você e tenha resultados.
                     </p>
                   </div>
                 </div>
@@ -91,8 +91,8 @@ class Register extends React.Component {
                   <div className="description">
                     <h3 className="info-title">Backtest</h3>
                     <p className="description">
-                      Teste sua estratégia e análise se sua estratégia teria
-                      dado certo ou não
+                      Teste sua estratégia e analise se sua estratégia teria
+                      dado certo ou não.
                     </p>
                   </div>
                 </div>
@@ -103,8 +103,7 @@ class Register extends React.Component {
                   <div className="description">
                     <h3 className="info-title">Compra e Venda</h3>
                     <p className="description">
-                      Realize operações manuais dentro da plataforma com
-                      segurança
+                      Realize operações manuais dentro da plataforma.
                     </p>
                   </div>
                 </div>
@@ -121,7 +120,7 @@ class Register extends React.Component {
                         src={require("../../assets/img/card-primary.png")}
                       />
                       <CardTitle tag="h1" style={{ fontSize: "28px" }}>
-                        Cadastro
+                        wolfbot
                       </CardTitle>
                     </CardHeader>
                     <CardBody>

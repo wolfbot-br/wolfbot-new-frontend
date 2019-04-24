@@ -83,8 +83,11 @@ class Login extends React.Component {
                       alt="..."
                       src={require("../../assets/img/card-primary.png")}
                     />
-                    <CardTitle tag="h1" style={{ fontSize: "41px" }}>
-                      Login
+                    <CardTitle
+                      tag="h1"
+                      style={{ fontSize: "41px", textAlign: "center" }}
+                    >
+                      WOLFBOT
                     </CardTitle>
                   </CardHeader>
                   <CardBody>

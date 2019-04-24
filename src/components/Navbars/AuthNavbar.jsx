@@ -3,14 +3,7 @@ import classnames from "classnames";
 import { NavLink } from "react-router-dom";
 
 // reactstrap components
-import {
-  Collapse,
-  NavbarBrand,
-  Navbar,
-  NavItem,
-  Nav,
-  Container
-} from "reactstrap";
+import { Collapse, Navbar, NavItem, Nav, Container } from "reactstrap";
 
 class AuthNavbar extends React.Component {
   constructor(props) {
@@ -64,23 +57,22 @@ class AuthNavbar extends React.Component {
           </button>
           <Collapse isOpen={this.state.collapseOpen} navbar>
             <Nav navbar className="ml-auto">
-              {/* <NavItem>
-                <NavLink
-                  to="/admin/dashboard"
-                  className="nav-link text-primary"
-                >
-                  <i className="tim-icons icon-minimal-left" /> Back to
-                  Dashboard
-                </NavLink>
-              </NavItem> */}
               <NavItem>
-                <NavLink to="/auth/register" className="nav-link">
-                  <i className="tim-icons icon-laptop" /> Cadastro
-                </NavLink>
+                <a
+                  href="http://www.wolfbot.com.br"
+                  class="nav-link text-primary"
+                >
+                  <i className="tim-icons icon-minimal-left" /> Site
+                </a>
               </NavItem>
               <NavItem>
                 <NavLink to="/auth/login" className="nav-link">
                   <i className="tim-icons icon-single-02" /> Login
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink to="/auth/register" className="nav-link">
+                  <i className="tim-icons icon-laptop" /> Cadastro
                 </NavLink>
               </NavItem>
               <NavItem>

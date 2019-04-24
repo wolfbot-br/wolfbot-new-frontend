@@ -10,6 +10,7 @@ import Estatisticas from "./views/Estatisticas/Estatisticas";
 import Historico from "./views/Historico/Historico";
 import EmailSendActiveAccount from "./views/pages/EmailSendActiveAccount";
 import ActiveAccount from "./views/pages/ActiveAccount";
+import Page404 from "./views/pages/Page404";
 
 const routes = [
   // Auth Routes
@@ -45,6 +46,13 @@ const routes = [
     path: "/activeaccount",
     name: "ActiveAccount",
     component: ActiveAccount,
+    layout: "/auth",
+    invisible: true
+  },
+  {
+    path: "/page404",
+    name: "Page404",
+    component: Page404,
     layout: "/auth",
     invisible: true
   },

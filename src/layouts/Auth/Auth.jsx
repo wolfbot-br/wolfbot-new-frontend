@@ -43,7 +43,8 @@ class Pages extends React.Component {
         }
       }
     }
-    return activeRoute;
+    this.props.history.replace("/auth/page404");
+    return "Page404";
   };
   getFullPageName = routes => {
     let pageName = this.getActiveRoute(routes);
@@ -56,6 +57,8 @@ class Pages extends React.Component {
         return "register-page";
       case "EmailSendActiveAccount":
         return "email-send-active-account-page";
+      case "Page404":
+        return "404-page";
       default:
         return "Default Brand Text";
     }
