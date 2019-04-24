@@ -53,19 +53,31 @@ class DadosPessoais extends Component {
   async componentWillMount() {
     const { getUser } = this.props;
     const user = await getUserProfile();
-    if (!user.data.success) {
-      user.data.errors.forEach(erro => {
-        const options = {
-          place: "tr",
-          message: erro.message,
-          type: "danger",
-          icon: "tim-icons icon-bell-55",
-          autoDismiss: 3
-        };
-        this.refs.notificationAlert.notificationAlert(options);
-      });
-    } else {
-      getUser(user);
+    try {
+      if (!user.data.success) {
+        user.data.errors.forEach(erro => {
+          const options = {
+            place: "tr",
+            message: erro.message,
+            type: "danger",
+            icon: "tim-icons icon-bell-55",
+            autoDismiss: 3
+          };
+          this.refs.notificationAlert.notificationAlert(options);
+        });
+      } else {
+        getUser(user);
+        this.props.initialize({
+          email: this.props.email,
+          name: this.props.name,
+          lastname: this.props.lastname,
+          address: this.props.address,
+          city: this.props.city,
+          country: this.props.country,
+          about: this.props.about
+        });
+      }
+    } catch (error) {
       this.props.initialize({
         email: this.props.email,
         name: this.props.name,

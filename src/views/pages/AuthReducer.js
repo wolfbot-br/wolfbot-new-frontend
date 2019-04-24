@@ -1,3 +1,5 @@
+import functions from "../../utils/functions";
+
 const userKey = "user_bot";
 const INITIAL_STATE = {
   user: "",
@@ -17,7 +19,11 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case "LOGIN_SUCCESS":
-      localStorage.setItem(userKey, JSON.stringify(action.payload));
+      const userLogIn = JSON.stringify({
+        ...action.payload,
+        dashboard_reload: 1
+      });
+      localStorage.setItem(userKey, userLogIn);
       const {
         authenticatedUser: {
           accessToken,
