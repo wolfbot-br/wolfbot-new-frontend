@@ -23,6 +23,8 @@ export default (state = INITIAL_STATE, action) => {
       };
     case "SAVE_USER_PROFILE":
       return { ...state };
+    case "PASSWORD_CHANGED":
+      return { ...state };
     default:
       return state;
   }

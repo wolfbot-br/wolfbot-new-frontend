@@ -28,4 +28,17 @@ const saveUserProfile = async values => {
   }
 };
 
-export { getUserProfile, saveUserProfile };
+const changePasswordProfile = async values => {
+  const url = `${ambiente.URL.api}/profile/changepassword`;
+  console.log(values);
+  try {
+    const result = await axios.post(url, values, {
+      headers: { authorization: USER_BOT.authenticatedUser.accessToken }
+    });
+    return result;
+  } catch (e) {
+    return e.response;
+  }
+};
+
+export { getUserProfile, saveUserProfile, changePasswordProfile };

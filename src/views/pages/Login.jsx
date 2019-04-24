@@ -72,7 +72,7 @@ class Login extends React.Component {
             <NotificationAlert ref="notificationAlert" />
           </div>
           <Container>
-            <Col className="ml-auto mr-auto" lg="4" md="6">
+            <Col className="ml-auto mr-auto" lg="5" md="7">
               <form
                 onSubmit={handleSubmit(value => this.onSubmit(value))}
                 className="form"

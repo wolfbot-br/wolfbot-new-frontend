@@ -10,4 +10,10 @@ const saveUser = response => {
   };
 };
 
-export { getUser, saveUser };
+const changePassword = response => {
+  return dispatch => {
+    dispatch({ type: "PASSWORD_CHANGED", payload: response.data });
+  };
+};
+
+export { getUser, saveUser, changePassword };
