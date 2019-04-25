@@ -50,6 +50,10 @@ class Login extends React.Component {
     }
   }
 
+  criarUmaConta(values) {
+    this.props.history.replace("/auth/register");
+  }
+
   componentDidMount() {
     document.body.classList.toggle("login-page");
   }
@@ -68,18 +72,23 @@ class Login extends React.Component {
             <NotificationAlert ref="notificationAlert" />
           </div>
           <Container>
-            <Col className="ml-auto mr-auto" lg="4" md="6">
+            <Col className="ml-auto mr-auto" lg="5" md="7">
               <form
                 onSubmit={handleSubmit(value => this.onSubmit(value))}
                 className="form"
               >
-                <Card className="card-login card-white">
+                <Card className="card-login card-default">
                   <CardHeader>
                     <img
                       alt="..."
-                      src={require("../../assets/img/card-primary.png")}
+                      src={require("../../assets/img/card-info.png")}
                     />
-                    <CardTitle tag="h1">Login</CardTitle>
+                    <CardTitle
+                      tag="h1"
+                      style={{ fontSize: "41px", textAlign: "center" }}
+                    >
+                      WOLFBOT
+                    </CardTitle>
                   </CardHeader>
                   <CardBody>
                     <InputGroup>
@@ -113,7 +122,7 @@ class Login extends React.Component {
                     <Button
                       block
                       className="mb-3"
-                      color="primary"
+                      color="info"
                       type="submit"
                       size="lg"
                     >
@@ -122,9 +131,11 @@ class Login extends React.Component {
                     <div className="pull-left">
                       <h6>
                         <a
-                          className="link footer-link"
+                          className="link text-info info footer-link"
                           href="#pablo"
-                          onClick={e => e.preventDefault()}
+                          onClick={handleSubmit(value =>
+                            this.criarUmaConta(value)
+                          )}
                         >
                           Criar uma conta
                         </a>
@@ -133,11 +144,11 @@ class Login extends React.Component {
                     <div className="pull-right">
                       <h6>
                         <a
-                          className="link footer-link"
+                          className="link text-info footer-link"
                           href="#pablo"
                           onClick={e => e.preventDefault()}
                         >
-                          Precisa de ajuda?
+                          Esqueci a senha!
                         </a>
                       </h6>
                     </div>
@@ -151,7 +162,6 @@ class Login extends React.Component {
     );
   }
 }
-
 Login = reduxForm({ form: "authForm" })(Login);
 const mapDispatchToProps = dispatch => bindActionCreators({ login }, dispatch);
 export default connect(

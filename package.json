@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://www.wolfbot.com.br",
   "dependencies": {
+    "@material-ui/core": "^3.9.3",
     "axios": "^0.18.0",
     "chart.js": "2.7.3",
     "classnames": "2.2.6",
@@ -38,7 +39,8 @@
     "redux": "^4.0.1",
     "redux-form": "^8.1.0",
     "redux-promise": "^0.6.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "socket.io-client": "^2.2.0"
   },
   "optionalDependencies": {
     "@types/googlemaps": "3.30.16",

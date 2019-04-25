@@ -42,7 +42,7 @@ class Register extends React.Component {
           message: erro.message,
           type: "danger",
           icon: "tim-icons icon bell-55",
-          autoDismiss: 1.2
+          autoDismiss: 5
         };
         this.refs.notificationAlert.notificationAlert(options);
       });
@@ -75,12 +75,12 @@ class Register extends React.Component {
               <Col className="ml-auto" md="5">
                 <div className="info-area info-horizontal mt-5">
                   <div className="icon icon-warning">
-                    <i className="tim-icons icon-wifi" />
+                    <i className="tim-icons icon-settings-gear-63" />
                   </div>
                   <div className="description">
                     <h3 className="info-title">Estratégia</h3>
                     <p className="description">
-                      Escolha a melhor estratégia para você e tenha resultados
+                      Escolha a melhor estratégia para você e tenha resultados.
                     </p>
                   </div>
                 </div>
@@ -91,20 +91,19 @@ class Register extends React.Component {
                   <div className="description">
                     <h3 className="info-title">Backtest</h3>
                     <p className="description">
-                      Teste sua estratégia e análise se sua estratégia teria
-                      dado certo ou não
+                      Teste sua estratégia e analise se sua estratégia teria
+                      dado certo ou não.
                     </p>
                   </div>
                 </div>
                 <div className="info-area info-horizontal">
                   <div className="icon icon-info">
-                    <i className="tim-icons icon-trophy" />
+                    <i className="tim-icons icon-money-coins" />
                   </div>
                   <div className="description">
                     <h3 className="info-title">Compra e Venda</h3>
                     <p className="description">
-                      Realize operações manuais dentro da plataforma com
-                      segurança
+                      Realize operações manuais dentro da plataforma.
                     </p>
                   </div>
                 </div>
@@ -113,14 +112,16 @@ class Register extends React.Component {
                 onSubmit={handleSubmit(values => this.onSubmit(values))}
                 className="form"
               >
-                <Col className="mr-auto" md="7">
-                  <Card className="card-white">
+                <Col className="mr-auto" md="9">
+                  <Card className="card-default">
                     <CardHeader>
                       <CardImg
                         alt="..."
-                        src={require("../../assets/img/card-primary.png")}
+                        src={require("../../assets/img/card-info.png")}
                       />
-                      <CardTitle tag="h4">Cadastro</CardTitle>
+                      <CardTitle tag="h1" style={{ fontSize: "28px" }}>
+                        wolfbot
+                      </CardTitle>
                     </CardHeader>
                     <CardBody>
                       <InputGroup>
@@ -179,7 +180,7 @@ class Register extends React.Component {
                     <CardFooter>
                       <Button
                         className="btn-round"
-                        color="primary"
+                        color="info"
                         href="#pablo"
                         onClick={handleSubmit(value => this.onSubmit(value))}
                         size="lg"
