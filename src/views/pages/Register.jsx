@@ -117,7 +117,7 @@ class Register extends React.Component {
                     <CardHeader>
                       <CardImg
                         alt="..."
-                        src={require("../../assets/img/card-primary.png")}
+                        src={require("../../assets/img/card-info.png")}
                       />
                       <CardTitle tag="h1" style={{ fontSize: "28px" }}>
                         wolfbot
@@ -180,7 +180,7 @@ class Register extends React.Component {
                     <CardFooter>
                       <Button
                         className="btn-round"
-                        color="primary"
+                        color="info"
                         href="#pablo"
                         onClick={handleSubmit(value => this.onSubmit(value))}
                         size="lg"

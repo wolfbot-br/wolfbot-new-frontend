@@ -15,7 +15,7 @@ import { validateToken } from "../../views/pages/AuthRequests";
 
 import routes from "../../routes";
 
-import logo from "../../assets/img/react-logo.png";
+import logo from "../../assets/img/wolfbot-logo.png";
 
 var ps;
 
@@ -183,8 +183,8 @@ class Admin extends React.Component {
           routes={routes}
           activeColor={this.state.activeColor}
           logo={{
-            outterLink: "https://www.creative-tim.com/",
-            text: "Creative Tim",
+            outterLink: "http://localhost:3000/admin/dashboard",
+            text: "Wolfbot",
             imgSrc: logo
           }}
           closeSidebar={this.closeSidebar}

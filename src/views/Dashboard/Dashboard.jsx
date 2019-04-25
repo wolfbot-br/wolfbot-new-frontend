@@ -49,7 +49,6 @@ class Dashboard extends Component {
     return (
       <div className="content">
         <Row>
-          <h1 style={{ textAlign: "center" }}>{this.props.valueTeste}</h1>
           <Col lg={12}>
             <Totalizadores />
           </Col>

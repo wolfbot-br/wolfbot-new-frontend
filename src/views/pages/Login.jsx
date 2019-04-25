@@ -81,7 +81,7 @@ class Login extends React.Component {
                   <CardHeader>
                     <img
                       alt="..."
-                      src={require("../../assets/img/card-primary.png")}
+                      src={require("../../assets/img/card-info.png")}
                     />
                     <CardTitle
                       tag="h1"
@@ -122,7 +122,7 @@ class Login extends React.Component {
                     <Button
                       block
                       className="mb-3"
-                      color="primary"
+                      color="info"
                       type="submit"
                       size="lg"
                     >
@@ -131,7 +131,7 @@ class Login extends React.Component {
                     <div className="pull-left">
                       <h6>
                         <a
-                          className="link footer-link"
+                          className="link text-info info footer-link"
                           href="#pablo"
                           onClick={handleSubmit(value =>
                             this.criarUmaConta(value)
@@ -144,7 +144,7 @@ class Login extends React.Component {
                     <div className="pull-right">
                       <h6>
                         <a
-                          className="link footer-link"
+                          className="link text-info footer-link"
                           href="#pablo"
                           onClick={e => e.preventDefault()}
                         >

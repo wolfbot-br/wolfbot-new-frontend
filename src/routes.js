@@ -11,6 +11,7 @@ import Historico from "./views/Historico/Historico";
 import EmailSendActiveAccount from "./views/pages/EmailSendActiveAccount";
 import ActiveAccount from "./views/pages/ActiveAccount";
 import Page404 from "./views/pages/Page404";
+import DeletedAccount from "./views/pages/DeletedAccount";
 
 const routes = [
   // Auth Routes
@@ -56,10 +57,17 @@ const routes = [
     layout: "/auth",
     invisible: true
   },
+  {
+    path: "/deletedaccount",
+    name: "DeletedAccount",
+    component: DeletedAccount,
+    layout: "/auth",
+    invisible: true
+  },
   // Admin Routes
   {
     path: "/profile",
-    name: "Profile",
+    name: "Perfil",
     component: Profile,
     layout: "/admin",
     invisible: true

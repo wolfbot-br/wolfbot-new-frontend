@@ -16,4 +16,10 @@ const changePassword = response => {
   };
 };
 
-export { getUser, saveUser, changePassword };
+const deleteAccount = response => {
+  return dispatch => {
+    dispatch({ type: "DELETED_ACCOUNT", payload: response.data });
+  };
+};
+
+export { getUser, saveUser, changePassword, deleteAccount };

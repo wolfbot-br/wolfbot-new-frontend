@@ -41,4 +41,22 @@ const changePasswordProfile = async values => {
   }
 };
 
-export { getUserProfile, saveUserProfile, changePasswordProfile };
+const deleteAccountRequest = async values => {
+  const url = `${ambiente.URL.api}/profile/deleteAccount`;
+  try {
+    const deleteResult = await axios.post(url, values, {
+      headers: { authorization: USER_BOT.authenticatedUser.accessToken }
+    });
+    functions.removeLocalStorageItem("user_bot");
+    return deleteResult;
+  } catch (e) {
+    return e.response;
+  }
+};
+
+export {
+  getUserProfile,
+  saveUserProfile,
+  changePasswordProfile,
+  deleteAccountRequest
+};
