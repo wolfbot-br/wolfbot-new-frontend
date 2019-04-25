@@ -25,3 +25,9 @@ export function ligarRobo(statusRobo) {
     payload: !statusRobo
   };
 }
+
+export function atualizarDashboard(socketObject) {
+  return dispatch => {
+    dispatch({ type: "DASHBOARD_UPDATED", payload: socketObject });
+  };
+}

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col, Card, CardHeader, CardBody } from "reactstrap";
-
-import { reduxForm, Field } from "redux-form";
+import { reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";

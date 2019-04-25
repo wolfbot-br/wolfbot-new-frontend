@@ -1,7 +1,8 @@
 const URL = {
-    api: 'http://localhost:8080/api',
-    account: 'http://localhost:8080/account'
-}
+  api: "http://localhost:8080/api",
+  account: "http://localhost:8080/account",
+  ioHost: "http://localhost:8081"
+};
 
 // if (process.env.NODE_ENV === 'development') {
 //     URL.api = process.env.REACT_APP_URL_DEVELOPMENT_API
@@ -15,5 +16,5 @@ const URL = {
 // }
 
 export default {
-    URL
-}
+  URL
+};
