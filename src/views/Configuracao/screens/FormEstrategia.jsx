@@ -16,7 +16,7 @@ import {
     Button
 } from 'reactstrap'
 
-class FormConfiguracao extends Component {
+class FormEstrategia extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -161,4 +161,4 @@ class FormConfiguracao extends Component {
     }
 }
 
-export default FormConfiguracao;
+export default FormEstrategia;

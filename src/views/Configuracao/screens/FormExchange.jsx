@@ -15,12 +15,26 @@ import {
     Button
 } from 'reactstrap'
 
-class FormConfiguracao extends Component {
+class FormExchange extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            singleSelect: null,
+            exchange: '',
+            apiKey: '',
+            apiSecret: '',
         };
+    }
+
+    handleChange = e => {
+        const name = e.target.name;
+        const value = e.target.value;
+        this.setState({ [name]: value });
+    }
+
+    onSubmit = e => {
+        e.preventDefault();
+        console.log(this.state);
+        console.log(this.props)
     }
 
     render() {
@@ -32,9 +46,9 @@ class FormConfiguracao extends Component {
                         Configuração da exchange que será utilizada.
                     </p>
                 </CardHeader>
-                <CardBody>
-                    <Col xs="12">
-                        <Form action="/" className="form-horizontal">
+                <Form className="form-horizontal" onSubmit={this.onSubmit}>
+                    <CardBody>
+                        <Col xs="12">
                             <Row>
                                 <Label sm="2">Exchange</Label>
                                 <Col sm="10">
@@ -43,9 +57,9 @@ class FormConfiguracao extends Component {
                                             className="react-select info"
                                             classNamePrefix="react-select"
                                             name="singleSelect"
-                                            value={this.state.singleSelect}
+                                            value={this.state.exchange}
                                             onChange={value =>
-                                                this.setState({ singleSelect: value })
+                                                this.setState({ exchange: value })
                                             }
                                             options={[
                                                 { value: "1", label: "Bittrex" },
@@ -60,7 +74,13 @@ class FormConfiguracao extends Component {
                                 <Label sm="2">Api key</Label>
                                 <Col sm="10">
                                     <FormGroup>
-                                        <Input type="text" placeholder="chave da api" />
+                                        <Input
+                                            type="text"
+                                            placeholder="chave da api"
+                                            name="apiKey"
+                                            value={this.state.apiKey}
+                                            onChange={this.handleChange}
+                                        />
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -68,21 +88,30 @@ class FormConfiguracao extends Component {
                                 <Label sm="2">Api Secret</Label>
                                 <Col sm="10">
                                     <FormGroup>
-                                        <Input type="text" placeholder="chave secreta da api" />
+                                        <Input
+                                            type="text"
+                                            placeholder="chave secreta da api"
+                                            name="apiSecret"
+                                            value={this.state.apiSecret}
+                                            onChange={this.handleChange}
+                                        />
                                     </FormGroup>
                                 </Col>
                             </Row>
-                        </Form>
-                    </Col>
-                </CardBody>
-                <CardFooter>
-                    <Button className="btn-fill" color="primary" type="submit">
-                        Gravar
+                        </Col>
+                    </CardBody>
+                    <CardFooter>
+                        <Button
+                            className="btn-fill"
+                            color="primary"
+                            type="submit">
+                            Gravar
                     </Button>
-                </CardFooter>
+                    </CardFooter>
+                </Form>
             </Card>
         )
     }
 }
 
-export default FormConfiguracao;
+export default FormExchange;

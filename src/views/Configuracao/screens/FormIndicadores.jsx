@@ -15,7 +15,7 @@ import {
     Button
 } from 'reactstrap'
 
-class FormConfiguracao extends Component {
+class FormIndicadores extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -154,7 +154,7 @@ class FormConfiguracao extends Component {
                                     </Col>
                                 </Row>
                             </Col>
-                            
+
                         </Row>
                         <hr />
                         <Row>
@@ -259,4 +259,4 @@ class FormConfiguracao extends Component {
     }
 }
 
-export default FormConfiguracao;
+export default FormIndicadores;
