@@ -1,14 +1,7 @@
-<<<<<<< HEAD
 import axios from 'axios'
 // import { toastr } from 'react-redux-toastr'
 import ambiente from '../config-ambiente'
 import functions from '../helpers/functions'
-=======
-import axios from "axios";
-import { toastr } from "react-redux-toastr";
-import ambiente from "../config-ambiente";
-import functions from "../helpers/functions";
->>>>>>> feat(account/login): acessando local storage para controlar rotas
 
 const USER_BOT = functions.loadLocalStorage("user_bot");
 

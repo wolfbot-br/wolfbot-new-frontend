@@ -45,7 +45,7 @@ class Pricing extends React.Component {
                     <CardTitle tag="h1">pro</CardTitle>
                     <CardImg
                       alt="..."
-                      src={require("assets/img/card-primary.png")}
+                      src={require("../../assets/img/card-primary.png")}
                     />
                     <ListGroup>
                       <ListGroupItem>300 messages</ListGroupItem>
@@ -74,7 +74,7 @@ class Pricing extends React.Component {
                     <CardTitle tag="h1">basic</CardTitle>
                     <CardImg
                       alt="..."
-                      src={require("assets/img/card-success.png")}
+                      src={require("../../assets/img/card-success.png")}
                     />
                     <ListGroup>
                       <ListGroupItem>50 messages</ListGroupItem>
@@ -103,7 +103,7 @@ class Pricing extends React.Component {
                     <CardTitle tag="h1">mid</CardTitle>
                     <CardImg
                       alt="..."
-                      src={require("assets/img/card-warning.png")}
+                      src={require("../../assets/img/card-warning.png")}
                     />
                     <ListGroup>
                       <ListGroupItem>200 messages</ListGroupItem>
@@ -132,7 +132,7 @@ class Pricing extends React.Component {
                     <CardTitle tag="h1">trial</CardTitle>
                     <CardImg
                       alt="..."
-                      src={require("assets/img/card-danger.png")}
+                      src={require("../../assets/img/card-danger.png")}
                     />
                     <ListGroup>
                       <ListGroupItem>50 messages</ListGroupItem>

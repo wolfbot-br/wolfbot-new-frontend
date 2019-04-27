@@ -3,14 +3,7 @@ import classnames from "classnames";
 import { NavLink } from "react-router-dom";
 
 // reactstrap components
-import {
-  Collapse,
-  NavbarBrand,
-  Navbar,
-  NavItem,
-  Nav,
-  Container
-} from "reactstrap";
+import { Collapse, Navbar, NavItem, Nav, Container } from "reactstrap";
 
 class AuthNavbar extends React.Component {
   constructor(props) {
@@ -44,11 +37,11 @@ class AuthNavbar extends React.Component {
         expand="lg"
       >
         <Container fluid>
-          <div className="navbar-wrapper">
+          {/* <div className="navbar-wrapper">
             <NavbarBrand href="#pablo" onClick={e => e.preventDefault()}>
               {this.props.brandText}
             </NavbarBrand>
-          </div>
+          </div> */}
           <button
             aria-controls="navigation-index"
             aria-expanded={false}
@@ -65,18 +58,9 @@ class AuthNavbar extends React.Component {
           <Collapse isOpen={this.state.collapseOpen} navbar>
             <Nav navbar className="ml-auto">
               <NavItem>
-                <NavLink
-                  to="/admin/dashboard"
-                  className="nav-link text-primary"
-                >
-                  <i className="tim-icons icon-minimal-left" /> Back to
-                  Dashboard
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink to="/auth/register" className="nav-link">
-                  <i className="tim-icons icon-laptop" /> Register
-                </NavLink>
+                <a href="http://www.wolfbot.com.br" class="nav-link text-info">
+                  <i className="tim-icons icon-minimal-left" /> Site
+                </a>
               </NavItem>
               <NavItem>
                 <NavLink to="/auth/login" className="nav-link">
@@ -84,8 +68,18 @@ class AuthNavbar extends React.Component {
                 </NavLink>
               </NavItem>
               <NavItem>
+                <NavLink to="/auth/register" className="nav-link">
+                  <i className="tim-icons icon-laptop" /> Cadastro
+                </NavLink>
+              </NavItem>
+              <NavItem>
                 <NavLink to="/auth/pricing" className="nav-link">
-                  <i className="tim-icons icon-coins" /> Pricing
+                  <i className="tim-icons icon-coins" /> Preços
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink to="/auth/pricing" className="nav-link">
+                  <i className="tim-icons icon-align-center" /> Sobre
                 </NavLink>
               </NavItem>
             </Nav>

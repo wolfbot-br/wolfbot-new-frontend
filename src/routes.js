@@ -1,7 +1,7 @@
 import Login from "./views/pages/Login";
 import Register from "./views/pages/Register";
 import Pricing from "./views/pages/Pricing";
-import Profile from "./views/pages/User";
+import Profile from "./views/Perfil/User";
 import Dashboard from "./views/Dashboard/Dashboard";
 import Carteira from "./views/Carteira/Carteira";
 import Configuracao from "./views/Configuracao/Configuracao";
@@ -10,6 +10,8 @@ import Estatisticas from "./views/Estatisticas/Estatisticas";
 import Historico from "./views/Historico/Historico";
 import EmailSendActiveAccount from "./views/pages/EmailSendActiveAccount";
 import ActiveAccount from "./views/pages/ActiveAccount";
+import Page404 from "./views/pages/Page404";
+import DeletedAccount from "./views/pages/DeletedAccount";
 
 const routes = [
   // Auth Routes
@@ -48,10 +50,24 @@ const routes = [
     layout: "/auth",
     invisible: true
   },
+  {
+    path: "/page404",
+    name: "Page404",
+    component: Page404,
+    layout: "/auth",
+    invisible: true
+  },
+  {
+    path: "/deletedaccount",
+    name: "DeletedAccount",
+    component: DeletedAccount,
+    layout: "/auth",
+    invisible: true
+  },
   // Admin Routes
   {
     path: "/profile",
-    name: "Profile",
+    name: "Perfil",
     component: Profile,
     layout: "/admin",
     invisible: true

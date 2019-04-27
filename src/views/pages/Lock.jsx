@@ -31,7 +31,7 @@ class Lock extends React.Component {
             <Col className="ml-auto mr-auto" lg="4" md="6">
               <Card className="card-lock card-white text-center">
                 <CardHeader>
-                  <img alt="..." src={require("assets/img/emilyz.jpg")} />
+                  <img alt="..." src={require("../../assets/img/emilyz.jpg")} />
                 </CardHeader>
                 <CardBody>
                   <CardTitle tag="h4">Joe Gardner</CardTitle>

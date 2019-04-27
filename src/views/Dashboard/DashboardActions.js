@@ -1,23 +1,33 @@
-import axios from 'axios'
-import ambiente from '../config-ambiente'
-import functions from '../helpers/functions'
+import axios from "axios";
+import ambiente from "../../config";
+import functions from "../../utils/functions";
 
-const USER_BOT = functions.loadLocalStorage('user_bot')
+const USER_BOT = functions.loadLocalStorage("user_bot");
 
-export function ligarRobo (statusRobo) {
+export function ligarRobo(statusRobo) {
   if (statusRobo === false) {
-    axios.post(`${ambiente.URL.api}/bot/acionarRobo`,
-      { chave: 'teste', status: 'on' },
-      { headers: { authorization: USER_BOT.Token } })
+    axios.post(
+      `${ambiente.URL.api}/bot/acionarRobo`,
+      { chave: "teste", status: "on" },
+      { headers: { authorization: USER_BOT.Token } }
+    );
   }
   if (statusRobo === true) {
-    axios.post(`${ambiente.URL.api}/bot/acionarRobo?chave=teste&status=off`,
-      { chave: 'teste', status: 'on' },
-      { headers: { authorization: USER_BOT.Token } })
+    axios.post(
+      `${ambiente.URL.api}/bot/acionarRobo?chave=teste&status=off`,
+      { chave: "teste", status: "on" },
+      { headers: { authorization: USER_BOT.Token } }
+    );
   }
 
   return {
-    type: 'LIGAR_ROBO',
+    type: "LIGAR_ROBO",
     payload: !statusRobo
-  }
+  };
+}
+
+export function atualizarDashboard(socketObject) {
+  return dispatch => {
+    dispatch({ type: "DASHBOARD_UPDATED", payload: socketObject });
+  };
 }

@@ -9,12 +9,12 @@ import { Provider } from "react-redux";
 import reducers from "./reducers";
 import functions from "./utils/functions";
 
-import AuthLayout from "layouts/Auth/Auth.jsx";
-import AdminLayout from "layouts/Admin/Admin.jsx";
+import AuthLayout from "./layouts/Auth/Auth";
+import AdminLayout from "./layouts/Admin/Admin";
 
-import "assets/css/nucleo-icons.css";
-import "assets/scss/black-dashboard-pro-react.scss?v=1.0.0";
-import "assets/demo/demo.css";
+import "./assets/css/nucleo-icons.css";
+import "./assets/scss/black-dashboard-pro-react.scss?v=1.0.0";
+import "./assets/demo/demo.css";
 import "react-notification-alert/dist/animate.css";
 
 const devTools =

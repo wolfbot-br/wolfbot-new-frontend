@@ -1,7 +1,7 @@
 import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 // reactstrap components
 import {
@@ -134,7 +134,7 @@ class AdminNavbar extends React.Component {
             </button>
             <Collapse navbar isOpen={this.state.collapseOpen}>
               <Nav className="ml-auto" navbar>
-                <InputGroup className="search-bar" tag="li">
+                {/* <InputGroup className="search-bar" tag="li">
                   <Button
                     color="link"
                     data-target="#searchModal"
@@ -145,8 +145,8 @@ class AdminNavbar extends React.Component {
                     <i className="tim-icons icon-zoom-split" />
                     <span className="d-lg-none d-md-block">Search</span>
                   </Button>
-                </InputGroup>
-                <UncontrolledDropdown nav>
+                </InputGroup> */}
+                {/* <UncontrolledDropdown nav>
                   <DropdownToggle
                     caret
                     color="default"
@@ -184,7 +184,7 @@ class AdminNavbar extends React.Component {
                       </DropdownItem>
                     </NavLink>
                   </DropdownMenu>
-                </UncontrolledDropdown>
+                </UncontrolledDropdown> */}
                 <UncontrolledDropdown nav>
                   <DropdownToggle
                     caret
@@ -194,7 +194,10 @@ class AdminNavbar extends React.Component {
                     onClick={e => e.preventDefault()}
                   >
                     <div className="photo">
-                      <img alt="..." src={require("assets/img/mike.jpg")} />
+                      <img
+                        alt="..."
+                        src={require("../../assets/img/default-avatar.png")}
+                      />
                     </div>
                     <b className="caret d-none d-lg-block d-xl-block" />
                     <p className="d-lg-none">Log out</p>
@@ -202,7 +205,9 @@ class AdminNavbar extends React.Component {
                   <DropdownMenu className="dropdown-navbar" right tag="ul">
                     <NavLink tag="li">
                       <Link to="/admin/profile">
-                        <DropdownItem className="nav-item">Profile</DropdownItem>
+                        <DropdownItem className="nav-item">
+                          Meu Perfil
+                        </DropdownItem>
                       </Link>
                     </NavLink>
                     <DropdownItem divider tag="li" />
@@ -213,7 +218,7 @@ class AdminNavbar extends React.Component {
                           this.props.history.replace("/auth/login")
                         }
                       >
-                        Log out
+                        Sair
                       </DropdownItem>
                     </NavLink>
                   </DropdownMenu>

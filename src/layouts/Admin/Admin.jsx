@@ -6,16 +6,16 @@ import PerfectScrollbar from "perfect-scrollbar";
 import NotificationAlert from "react-notification-alert";
 
 // core components
-import AdminNavbar from "components/Navbars/AdminNavbar.jsx";
-import Footer from "components/Footer/Footer.jsx";
-import Sidebar from "components/Sidebar/Sidebar.jsx";
-import FixedPlugin from "components/FixedPlugin/FixedPlugin.jsx";
+import AdminNavbar from "../../components/Navbars/AdminNavbar";
+import Footer from "../../components/Footer/Footer";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import FixedPlugin from "../../components/FixedPlugin/FixedPlugin";
 
 import { validateToken } from "../../views/pages/AuthRequests";
 
-import routes from "routes.js";
+import routes from "../../routes";
 
-import logo from "assets/img/react-logo.png";
+import logo from "../../assets/img/wolfbot-logo.png";
 
 var ps;
 
@@ -183,8 +183,8 @@ class Admin extends React.Component {
           routes={routes}
           activeColor={this.state.activeColor}
           logo={{
-            outterLink: "https://www.creative-tim.com/",
-            text: "Creative Tim",
+            outterLink: "http://localhost:3000/admin/dashboard",
+            text: "Wolfbot",
             imgSrc: logo
           }}
           closeSidebar={this.closeSidebar}
