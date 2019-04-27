@@ -29,7 +29,7 @@ class FixedPlugin extends Component {
     return (
       <div className="fixed-plugin">
         <div className={this.state.classes}>
-          {/* <a
+          <a
             href="#pablo"
             onClick={e => {
               e.preventDefault();
@@ -37,8 +37,8 @@ class FixedPlugin extends Component {
             }}
           >
             <i className="fa fa-cog fa-2x" />
-          </a> */}
-          {/* <ul className="dropdown-menu show">
+          </a>
+          <ul className="dropdown-menu show">
             <li className="header-title">SIDEBAR BACKGROUND</li>
             <li className="adjustments-line">
               <div className="badge-colors text-center">
@@ -124,7 +124,7 @@ class FixedPlugin extends Component {
                 <span className="label-switch">DARK MODE</span>
               </div>
             </li>
-          </ul> */}
+          </ul>
         </div>
       </div>
     );
