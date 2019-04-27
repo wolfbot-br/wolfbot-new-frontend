@@ -1,5 +1,3 @@
-import functions from "../../utils/functions";
-
 const userKey = "user_bot";
 const INITIAL_STATE = {
   user: "",
@@ -14,7 +12,8 @@ const INITIAL_STATE = {
   passwordChanged: false,
   accountActive: false,
   emailIsActive: false,
-  codeActiveAccountInvalid: false
+  codeActiveAccountInvalid: false,
+  browser: ""
 };
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -31,7 +30,8 @@ export default (state = INITIAL_STATE, action) => {
           emailVerified,
           expirationTime,
           refreshToken,
-          uid
+          uid,
+          browser
         }
       } = action.payload;
       return {
@@ -41,7 +41,8 @@ export default (state = INITIAL_STATE, action) => {
         emailVerified,
         tokenExpirationTime: expirationTime,
         refreshToken,
-        accessToken
+        accessToken,
+        browser
       };
     case "ACCOUNT_ACTIVE":
       switch (action.payload) {

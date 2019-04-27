@@ -14,4 +14,20 @@ const removeLocalStorageItem = key => {
   localStorage.removeItem(key);
 };
 
-export default { loadLocalStorage, removeLocalStorageItem };
+const getBrowser = () => {
+  const isFirefox = typeof InstallTrigger !== "undefined";
+  const isSafari = navigator.userAgent.indexOf("Safari");
+  const isIE = /*@cc_on!@*/ false || !!document.documentMode;
+  const isEdge = !isIE && !!window.StyleMedia;
+
+  const isChrome =
+    !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+
+  if (isChrome) return "Google Chrome";
+  if (isFirefox) return "Firefox";
+  if (isIE) return "Internet Explorer";
+  if (isEdge) return "Microsoft Edge";
+  if (isSafari) return "Safari";
+};
+
+export default { loadLocalStorage, removeLocalStorageItem, getBrowser };

@@ -1,27 +1,11 @@
 import React, { Component } from "react";
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  CardText,
-  FormGroup,
-  Form,
-  Input,
-  Row,
-  Col,
-  Nav,
-  NavItem,
-  NavLink,
-  TabContent,
-  TabPane
-} from "reactstrap";
+import { Button, Card, CardHeader, CardBody, CardFooter } from "reactstrap";
 import NotificationAlert from "react-notification-alert";
 import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import ReactTable from "react-table";
+import { getAtividades } from "../../Perfil/PerfilActions";
 
 class Atividades extends Component {
   constructor(props) {
@@ -31,51 +15,13 @@ class Atividades extends Component {
 
   onSubmit(values) {}
 
+  componentWillMount() {
+    const { getAtividades } = this.props;
+    getAtividades();
+  }
+
   render() {
-    const data = [
-      {
-        ip: "179.159.58.72",
-        location: "São Paulo - Brasil",
-        so: "Windows 10",
-        browser: "Google Chrome",
-        date: "27/04/2019 13:09"
-      },
-      {
-        ip: "179.159.58.72",
-        location: "São Paulo - Brasil",
-        so: "Windows 10",
-        browser: "Google Chrome",
-        date: "27/04/2019 13:09"
-      },
-      {
-        ip: "179.159.58.72",
-        location: "São Paulo - Brasil",
-        so: "Windows 10",
-        browser: "Google Chrome",
-        date: "27/04/2019 13:09"
-      },
-      {
-        ip: "179.159.58.72",
-        location: "São Paulo - Brasil",
-        so: "Windows 10",
-        browser: "Google Chrome",
-        date: "27/04/2019 13:09"
-      },
-      {
-        ip: "179.159.58.72",
-        location: "São Paulo - Brasil",
-        so: "Windows 10",
-        browser: "Google Chrome",
-        date: "27/04/2019 13:09"
-      },
-      {
-        ip: "179.159.58.72",
-        location: "São Paulo - Brasil",
-        so: "Windows 10",
-        browser: "Google Chrome",
-        date: "27/04/2019 13:09"
-      }
-    ];
+    const data = this.props.atividades;
 
     const columns = [
       {
@@ -128,7 +74,7 @@ class Atividades extends Component {
             previousText="Anterior"
             nextText="Próximo"
             loadingText="Carregando..."
-            noDataText="Nenhuma linha"
+            noDataText="Nenhum registro"
             pageText="Página"
             ofText="do"
             rowsText="linhas"
@@ -144,8 +90,12 @@ class Atividades extends Component {
 }
 
 Atividades = reduxForm({ form: "dadosPessoaisForm" })(Atividades);
-const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ getAtividades }, dispatch);
+const mapStateToProps = state => ({
+  browser: state.auth.browser
+});
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Atividades);

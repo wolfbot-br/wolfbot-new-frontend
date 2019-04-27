@@ -30,7 +30,6 @@ const saveUserProfile = async values => {
 
 const changePasswordProfile = async values => {
   const url = `${ambiente.URL.api}/profile/changepassword`;
-  console.log(values);
   try {
     const result = await axios.post(url, values, {
       headers: { authorization: USER_BOT.authenticatedUser.accessToken }
