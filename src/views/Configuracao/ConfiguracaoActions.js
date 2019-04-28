@@ -1,25 +1,44 @@
 import axios from 'axios'
 import ambiente from '../../config'
-import functions from '../helpers/functions'
+import functions from '../../utils/functions'
 
 const USER_BOT = functions.loadLocalStorage('user_bot')
 
-export function salvarConfiguracao(values) {
+const getConfiguracao = async () => {
+  const token = USER_BOT.authenticatedUser.accessToken;
+  const url = `${ambiente.URL.api}/configuracao/buscar`;
+  try {
+    const configResult = await axios.get(url, { headers: { authorization: token } });
+    return configResult.data.configuracao;
+  } catch (error) {
+    return error.response;
+  }
+}
+
+const testConfiguracao = async () => {
+  const token = USER_BOT.authenticatedUser.accessToken;
+  const url = `${ambiente.URL.api}/exchanges/saldo`;
+  try {
+    const saldoResult = await axios.get(url, { headers: { authorization: token } });
+    return saldoResult;
+  } catch (error) {
+    return error.response;
+  }
+}
+
+const postConfiguracao = async (values) => {
+  const token = USER_BOT.authenticatedUser.accessToken;
   const url = `${ambiente.URL.api}/configuracao/salvar`
   try {
-    const configResult = axios.post(url, values, { headers: { authorization: USER_BOT.Token } })
+    const configResult = axios.post(url, values, { headers: { authorization: token } })
     return configResult
   } catch (error) {
     return error.response
   }
 }
 
-export function updateConfiguracao(values) {
-  const url = `${ambiente.URL.api}/configuracao/alterar/${USER_BOT.id}`
-  try {
-    const configResult = axios.post(url, values, { headers: { authorization: USER_BOT.Token } })
-    return configResult
-  } catch (error) {
-    return error.response
-  }
+export {
+  getConfiguracao,
+  postConfiguracao,
+  testConfiguracao,
 }

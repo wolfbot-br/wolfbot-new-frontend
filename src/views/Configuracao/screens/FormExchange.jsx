@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import Select from "react-select";
+import NotificationAlert from "react-notification-alert";
 import {
     Row,
     Col,
@@ -13,8 +14,13 @@ import {
     FormGroup,
     Input,
     Button
-} from 'reactstrap'
+} from 'reactstrap';
 
+import {
+    getConfiguracao,
+    testConfiguracao,
+    postConfiguracao,
+} from '../ConfiguracaoActions'
 class FormExchange extends Component {
     constructor(props) {
         super(props);
@@ -22,6 +28,7 @@ class FormExchange extends Component {
             exchange: '',
             apiKey: '',
             apiSecret: '',
+            alterState: false,
         };
     }
 
@@ -31,15 +38,78 @@ class FormExchange extends Component {
         this.setState({ [name]: value });
     }
 
-    onSubmit = e => {
+    handleState = () => {
+        this.setState({ alterState: !this.state.alterState })
+    }
+
+    async componentDidMount() {
+        const configuracao = await getConfiguracao();
+        if (configuracao) {
+            this.setState({
+                apiKey: configuracao.api_key,
+                apiSecret: configuracao.secret,
+            });
+            if (configuracao.exchange === 'bitfinex') {
+                this.setState({
+                    exchange: { value: "2", label: "bitfinex" }
+                });
+            } else if (configuracao.exchange === 'bittrex') {
+                this.setState({
+                    exchange: { value: "1", label: "bittrex" }
+                });
+            }
+            this.setState({ alterState: false });
+        } else {
+            this.setState({ alterState: true });
+        }
+    }
+
+    onSubmit = async e => {
         e.preventDefault();
-        console.log(this.state);
-        console.log(this.props)
+        const values = {
+            exchange: this.state.exchange.label,
+            api_key: this.state.apiKey,
+            secret: this.state.apiSecret,
+        }
+        await postConfiguracao(values);
+        const test = await testConfiguracao();
+        if (test.status === 200) {
+            const options = {
+                place: "tr",
+                message: "Exchange conectada!",
+                type: "success",
+                icon: "tim-icons icon-check-2",
+                autoDismiss: 4
+            };
+            this.refs.notificationAlert.notificationAlert(options);
+            const value = {
+                exchangeState: true,
+            }
+            await postConfiguracao(value);
+            this.setState({ alterState: false });
+        } else {
+            const options = {
+                place: "tr",
+                message: "Apikey ou secret inválido para a exchange selecionada!",
+                type: "danger",
+                icon: "tim-icons icon-simple-remove",
+                autoDismiss: 4
+            };
+            this.refs.notificationAlert.notificationAlert(options);
+            const value = {
+                exchangeState: false,
+            }
+            await postConfiguracao(value);
+            this.setState({ alterState: true });
+        }
     }
 
     render() {
         return (
             <Card>
+                <div className="rna-container">
+                    <NotificationAlert ref="notificationAlert" />
+                </div>
                 <CardHeader>
                     <CardTitle tag="h4">Configuração Exchange</CardTitle>
                     <p className="card-category">
@@ -56,14 +126,15 @@ class FormExchange extends Component {
                                         <Select
                                             className="react-select info"
                                             classNamePrefix="react-select"
+                                            isDisabled={this.state.alterState ? false : true}
                                             name="singleSelect"
                                             value={this.state.exchange}
                                             onChange={value =>
                                                 this.setState({ exchange: value })
                                             }
                                             options={[
-                                                { value: "1", label: "Bittrex" },
-                                                { value: "2", label: "Bitfinex" }
+                                                { value: "1", label: "bittrex" },
+                                                { value: "2", label: "bitfinex" }
                                             ]}
                                             placeholder="Escolha sua exchange"
                                         />
@@ -76,6 +147,7 @@ class FormExchange extends Component {
                                     <FormGroup>
                                         <Input
                                             type="text"
+                                            disabled={this.state.alterState ? false : true}
                                             placeholder="chave da api"
                                             name="apiKey"
                                             value={this.state.apiKey}
@@ -90,6 +162,7 @@ class FormExchange extends Component {
                                     <FormGroup>
                                         <Input
                                             type="text"
+                                            disabled={this.state.alterState ? false : true}
                                             placeholder="chave secreta da api"
                                             name="apiSecret"
                                             value={this.state.apiSecret}
@@ -104,9 +177,18 @@ class FormExchange extends Component {
                         <Button
                             className="btn-fill"
                             color="primary"
-                            type="submit">
+                            onClick={this.handleState}
+                        >
+                            Alterar
+                        </Button>
+                        <Button
+                            className="btn-fill"
+                            color="success"
+                            disabled={this.state.alterState ? false : true}
+                            type="submit"
+                        >
                             Gravar
-                    </Button>
+                        </Button>
                     </CardFooter>
                 </Form>
             </Card>
