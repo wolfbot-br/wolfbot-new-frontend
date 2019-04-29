@@ -46,8 +46,7 @@ class Login extends React.Component {
         this.refs.notificationAlert.notificationAlert(options);
       });
     } else {
-      const browser = functions.getBrowser();
-      login({ ...loginResult.data, browser });
+      login({ ...loginResult.data });
       this.props.history.replace("/admin/dashboard");
     }
   }

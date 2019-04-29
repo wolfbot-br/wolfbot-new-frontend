@@ -36,7 +36,7 @@ class Atividades extends Component {
       },
       {
         Header: "Sistema Operacional",
-        accessor: "so",
+        accessor: "osPlatform",
         headerClassName: "text-center"
       },
       {
@@ -81,6 +81,12 @@ class Atividades extends Component {
             // Accessibility Labels
             pageJumpText="pular para a página"
             rowsSelectorText="linhas por página"
+            defaultSorted={[
+              {
+                id: "date",
+                desc: true
+              }
+            ]}
           />
         </CardBody>
         <CardFooter />
@@ -93,7 +99,7 @@ Atividades = reduxForm({ form: "dadosPessoaisForm" })(Atividades);
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ getAtividades }, dispatch);
 const mapStateToProps = state => ({
-  browser: state.auth.browser
+  atividades: state.profile.atividades
 });
 export default connect(
   mapStateToProps,

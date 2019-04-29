@@ -35,9 +35,8 @@ const getAtividades = async () => {
     }
   });
 
-  console.log(response);
   return dispatch => {
-    dispatch({ type: "GET_ACTIVITIES", payload: "" });
+    dispatch({ type: "GET_ACTIVITIES", payload: response.data.data });
   };
 };
 

@@ -12,8 +12,7 @@ const INITIAL_STATE = {
   passwordChanged: false,
   accountActive: false,
   emailIsActive: false,
-  codeActiveAccountInvalid: false,
-  browser: ""
+  codeActiveAccountInvalid: false
 };
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -30,8 +29,7 @@ export default (state = INITIAL_STATE, action) => {
           emailVerified,
           expirationTime,
           refreshToken,
-          uid,
-          browser
+          uid
         }
       } = action.payload;
       return {
@@ -41,8 +39,7 @@ export default (state = INITIAL_STATE, action) => {
         emailVerified,
         tokenExpirationTime: expirationTime,
         refreshToken,
-        accessToken,
-        browser
+        accessToken
       };
     case "ACCOUNT_ACTIVE":
       switch (action.payload) {
