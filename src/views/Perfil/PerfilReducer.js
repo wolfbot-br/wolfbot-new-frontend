@@ -5,7 +5,8 @@ const INITIAL_STATE = {
   address: "",
   city: "",
   country: "",
-  about: ""
+  about: "",
+  atividades: []
 };
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -25,6 +26,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state };
     case "PASSWORD_CHANGED":
       return { ...state };
+    case "GET_ACTIVITIES":
+      return { ...state, atividades: action.payload };
     default:
       return state;
   }

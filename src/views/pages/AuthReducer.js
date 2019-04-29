@@ -1,5 +1,3 @@
-import functions from "../../utils/functions";
-
 const userKey = "user_bot";
 const INITIAL_STATE = {
   user: "",

@@ -8,6 +8,7 @@ import { login } from "./authActions";
 import { loginRequest } from "./AuthRequests";
 import bgImagem from "../../assets/img/bg-login.jpg";
 import Input from "../../components/Input/Input";
+import functions from "../../utils/functions";
 
 import {
   Button,
@@ -45,7 +46,7 @@ class Login extends React.Component {
         this.refs.notificationAlert.notificationAlert(options);
       });
     } else {
-      login(loginResult.data);
+      login({ ...loginResult.data });
       this.props.history.replace("/admin/dashboard");
     }
   }

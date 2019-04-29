@@ -36,7 +36,7 @@ class User extends Component {
       <>
         <div className="content">
           <Row>
-            <Col md="8">
+            <Col md="10">
               <Nav className="nav-pills-info" pills>
                 <NavItem>
                   <NavLink

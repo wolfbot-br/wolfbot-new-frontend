@@ -1,3 +1,9 @@
+import axios from "axios";
+import ambiente from "../../config";
+import functions from "../../utils/functions";
+
+const USER_BOT = functions.loadLocalStorage("user_bot");
+
 const getUser = response => {
   return dispatch => {
     dispatch({ type: "GET_USER_PROFILE", payload: response.data });
@@ -22,4 +28,16 @@ const deleteAccount = response => {
   };
 };
 
-export { getUser, saveUser, changePassword, deleteAccount };
+const getAtividades = async () => {
+  const response = await axios.get(`${ambiente.URL.api}/profile/activities`, {
+    headers: {
+      Authorization: USER_BOT.authenticatedUser.accessToken
+    }
+  });
+
+  return dispatch => {
+    dispatch({ type: "GET_ACTIVITIES", payload: response.data.data });
+  };
+};
+
+export { getUser, saveUser, changePassword, deleteAccount, getAtividades };
