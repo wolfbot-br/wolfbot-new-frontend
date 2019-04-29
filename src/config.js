@@ -1,6 +1,6 @@
 const URL = {
-  api: "http://localhost:8081/api",
-  account: "http://localhost:8081/account",
+  api: "http://localhost:8080/api",
+  account: "http://localhost:8080/account",
   ioHost: "http://localhost:8081"
 };
 
