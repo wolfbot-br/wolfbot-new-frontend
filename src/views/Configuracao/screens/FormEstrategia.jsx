@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import Select from "react-select";
 import Switch from "react-bootstrap-switch";
+import MaskedInput from 'react-text-mask';
+import CurrencyFormat from 'react-currency-format';
+
 import {
     Row,
     Col,
@@ -22,7 +25,43 @@ class FormEstrategia extends Component {
         this.state = {
             candleSelect: null,
             multipleSelectTargetCurrency: null,
+            alterState: false,
+            baseCurrency: 'USD',
+            targetCurrency: [],
+            purchaseQuantity: '',
+            profit: '',
+            stop: '',
+            sellForIndicator: '',
+            maxOrdersOpen: '',
+            candleSize: '',
         };
+    }
+
+    handleChange = e => {
+        const name = e.target.name;
+        const value = e.target.value;
+        this.setState({ [name]: value });
+    }
+
+    handleState = () => {
+        this.setState({ alterState: !this.state.alterState })
+    }
+
+    onSubmit = e => {
+        e.preventDefault();
+        const currencies = this.state.multipleSelectTargetCurrency;
+        const arrayCurrencies = currencies.map(item => item.label);
+        const values = {
+            base_currency: this.state.baseCurrency,
+            target_currency: arrayCurrencies,
+            purchase_quantity: this.state.purchaseQuantity,
+            profit: this.state.profit,
+            stop: this.state.stop,
+            sellForIndicator: this.state.sellForIndicator,
+            maxOrdersOpen: this.state.maxOrdersOpen,
+            candle_size: this.state.candleSize
+        }
+        console.log(values)
     }
 
     render() {
@@ -34,9 +73,9 @@ class FormEstrategia extends Component {
                         Configuração da Estratégia que será utilizada.
                     </p>
                 </CardHeader>
-                <CardBody>
-                    <Col xs="12">
-                        <Form action="/" className="form-horizontal" method="get">
+                <Form className="form-horizontal" onSubmit={this.onSubmit}>
+                    <CardBody>
+                        <Col xs="12">
                             <Row>
                                 <Label sm="2">Moeda base</Label>
                                 <Col sm="10">
@@ -56,7 +95,7 @@ class FormEstrategia extends Component {
                                             className="react-select info"
                                             classNamePrefix="react-select"
                                             placeholder="moedas à negociar"
-                                            name="multipleSelect"
+                                            name="multipleSelectTargetCurrency"
                                             closeMenuOnSelect={false}
                                             isMulti
                                             value={this.state.multipleSelectTargetCurrency}
@@ -69,13 +108,12 @@ class FormEstrategia extends Component {
                                                     label: " Escolha as moedas",
                                                     isDisabled: true
                                                 },
-                                                { value: "2", label: "BTC " },
-                                                { value: "3", label: "ETC" },
-                                                { value: "4", label: "ETH" },
-                                                { value: "5", label: "LTC" },
-                                                { value: "6", label: "ADA " },
-                                                { value: "7", label: "XRP" },
-                                                { value: "8", label: "IOTA " },
+                                                { value: "1", label: "BTC " },
+                                                { value: "2", label: "ETC" },
+                                                { value: "3", label: "ETH" },
+                                                { value: "4", label: "LTC" },
+                                                { value: "5", label: "ADA " },
+                                                { value: "6", label: "XRP" },
                                             ]}
                                         />
                                     </FormGroup>
@@ -85,7 +123,17 @@ class FormEstrategia extends Component {
                                 <Label sm="2">Valor por ordem</Label>
                                 <Col sm="10">
                                     <FormGroup>
-                                        <Input type="number" />
+                                        <CurrencyFormat
+                                            prefix={'$'}
+                                            placeholder="$0.00"
+                                            decimalScale={2}
+                                            thousandSeparator={true}
+                                            type="text"
+                                            name="purchaseQuantity"
+                                            value={this.state.purchaseQuantity}
+                                            onChange={this.handleChange}
+                                            customInput={Input}
+                                        />
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -148,14 +196,26 @@ class FormEstrategia extends Component {
                                     </FormGroup>
                                 </Col>
                             </Row>
-                        </Form>
-                    </Col>
-                </CardBody>
-                <CardFooter>
-                    <Button className="btn-fill" color="primary" type="submit">
-                        Gravar
-                    </Button>
-                </CardFooter>
+                        </Col>
+                    </CardBody>
+                    <CardFooter>
+                        <Button
+                            className="btn-fill"
+                            color="primary"
+                            onClick={this.handleState}
+                        >
+                            Alterar
+                        </Button>
+                        <Button
+                            className="btn-fill"
+                            color="success"
+                            disabled={this.state.alterState ? false : true}
+                            type="submit"
+                        >
+                            Gravar
+                        </Button>
+                    </CardFooter>
+                </Form>
             </Card>
         )
     }
