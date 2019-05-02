@@ -11,7 +11,7 @@ const getConfiguracao = async () => {
     const configResult = await axios.get(url, { headers: { authorization: token } });
     return configResult.data.configuracao;
   } catch (error) {
-    return error.response;
+    return error.response.status;
   }
 }
 

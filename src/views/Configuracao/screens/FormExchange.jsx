@@ -44,10 +44,13 @@ class FormExchange extends Component {
 
     async componentDidMount() {
         const configuracao = await getConfiguracao();
-        if (configuracao) {
+        if (configuracao === 404 || configuracao === 400) {
+            this.setState({ alterState: true });
+        } else {
             this.setState({
-                apiKey: configuracao.api_key,
-                apiSecret: configuracao.secret,
+                apiKey: configuracao.api_key || '',
+                apiSecret: configuracao.secret || '',
+                alterState: false
             });
             if (configuracao.exchange === 'bitfinex') {
                 this.setState({
@@ -58,9 +61,6 @@ class FormExchange extends Component {
                     exchange: { value: "1", label: "bittrex" }
                 });
             }
-            this.setState({ alterState: false });
-        } else {
-            this.setState({ alterState: true });
         }
     }
 
