@@ -4,11 +4,6 @@ import NotificationAlert from "react-notification-alert";
 import {
     Row,
     Col,
-    Card,
-    CardHeader,
-    CardTitle,
-    CardBody,
-    CardFooter,
     Label,
     Form,
     FormGroup,
@@ -29,6 +24,7 @@ class FormExchange extends Component {
             apiKey: '',
             apiSecret: '',
             alterState: false,
+            onSubmited: false,
         };
     }
 
@@ -86,7 +82,10 @@ class FormExchange extends Component {
                 exchangeState: true,
             }
             await postConfiguracao(value);
-            this.setState({ alterState: false });
+            this.setState({
+                alterState: false,
+                onSubmited: true
+            });
         } else {
             const options = {
                 place: "tr",
@@ -104,21 +103,29 @@ class FormExchange extends Component {
         }
     }
 
+    isValidated = () => {
+        if (this.state.apiKey !== ''
+            && this.state.apiSecret !== ''
+            && this.state.exchange !== ''
+            && this.state.onSubmited === true) {
+            return true;
+        } else {
+            return true
+        }
+    };
+
     render() {
         return (
-            <Card>
+            <>
                 <div className="rna-container">
                     <NotificationAlert ref="notificationAlert" />
                 </div>
-                <CardHeader>
-                    <CardTitle tag="h4">Configuração Exchange</CardTitle>
-                    <p className="card-category">
-                        Configuração da exchange que será utilizada.
-                    </p>
-                </CardHeader>
+                <h5 className="info-text">
+                    Configuração
+                </h5>
                 <Form className="form-horizontal" onSubmit={this.onSubmit}>
-                    <CardBody>
-                        <Col xs="12">
+                    <Row className="justify-content-center mt-5">
+                        <Col xs="10">
                             <Row>
                                 <Label sm="2">Exchange</Label>
                                 <Col sm="10">
@@ -172,26 +179,29 @@ class FormExchange extends Component {
                                 </Col>
                             </Row>
                         </Col>
-                    </CardBody>
-                    <CardFooter>
-                        <Button
-                            className="btn-fill"
-                            color="primary"
-                            onClick={this.handleState}
-                        >
-                            Alterar
-                        </Button>
-                        <Button
-                            className="btn-fill"
-                            color="success"
-                            disabled={this.state.alterState ? false : true}
-                            type="submit"
-                        >
-                            Gravar
-                        </Button>
-                    </CardFooter>
+                    </Row>
+                    <Row className="mt-4">
+                        <Col className="text-center">
+                            <Button
+                                className="btn-fill"
+                                color="primary"
+                                onClick={this.handleState}
+                                disabled={this.state.alterState ? true : false}
+                            >
+                                Alterar
+                            </Button>
+                            <Button
+                                className="btn-fill"
+                                color="success"
+                                disabled={this.state.alterState ? false : true}
+                                type="submit"
+                            >
+                                Gravar
+                            </Button>
+                        </Col>
+                    </Row>
                 </Form>
-            </Card>
+            </>
         )
     }
 }

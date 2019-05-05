@@ -1,103 +1,65 @@
-import React, { Component } from 'react';
+import React from "react";
+// react plugin used to create a form with multiple steps
+import ReactWizard from "react-bootstrap-wizard";
 
 // reactstrap components
-import {
-  Row,
-  Col,
-  Nav,
-  NavItem,
-  NavLink,
-  TabContent,
-  TabPane
-} from "reactstrap";
+import { Col } from "reactstrap";
 
-import FormExchange from './screens/FormExchange';
-import FormEstrategia from './screens/FormEstrategia';
-import FormIndicadores from './screens/FormIndicadores';
+// wizard steps
+import Step1 from "./screens/FormExchange.jsx";
+import Step2 from "./screens/FormEstrategia.jsx";
+import Step3 from "./screens/FormIndicadores.jsx";
 
-class Configuracao extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      horizontalTabs: "exchange"
-    };
+var steps = [
+  {
+    stepName: "Exchange",
+    stepIcon: "tim-icons icon-single-02",
+    component: Step1
+  },
+  {
+    stepName: "Estratégia",
+    stepIcon: "tim-icons icon-settings-gear-63",
+    component: Step2
+  },
+  {
+    stepName: "indicadores",
+    stepIcon: "tim-icons icon-delivery-fast",
+    component: Step3
   }
+];
 
-  changeActiveTab = (e, tabState, tadName) => {
-    e.preventDefault();
-    this.setState({
-      [tabState]: tadName
-    });
+class Configuracao extends React.Component {
+
+  finishButtonClick = async (allStepStates) => {
+
   };
-
   render() {
     return (
-      <div className="content">
-        <Row>
-          <Col xs="12">
-            <Nav className="nav-pills-info" pills>
-              <NavItem>
-                <NavLink
-                  data-toggle="tab"
-                  href="#"
-                  className={
-                    this.state.horizontalTabs === "exchange" ? "active" : ""
-                  }
-                  onClick={e =>
-                    this.changeActiveTab(e, "horizontalTabs", "exchange")
-                  }
-                >
-                  Exchange
-              </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink
-                  data-toggle="tab"
-                  href="#"
-                  className={
-                    this.state.horizontalTabs === "estrategia" ? "active" : ""
-                  }
-                  onClick={e =>
-                    this.changeActiveTab(e, "horizontalTabs", "estrategia")
-                  }
-                >
-                  Estratégia
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink
-                  data-toggle="tab"
-                  href="#"
-                  className={
-                    this.state.horizontalTabs === "indicador" ? "active" : ""
-                  }
-                  onClick={e =>
-                    this.changeActiveTab(e, "horizontalTabs", "indicador")
-                  }
-                >
-                  Indicadores
-                </NavLink>
-              </NavItem>
-            </Nav>
-            <TabContent
-              className="tab-space"
-              activeTab={this.state.horizontalTabs}
-            >
-              <TabPane tabId="exchange">
-                <FormExchange />
-              </TabPane>
-              <TabPane tabId="estrategia">
-                <FormEstrategia />
-              </TabPane>
-              <TabPane tabId="indicador">
-                <FormIndicadores />
-              </TabPane>
-            </TabContent>
+      <>
+        <div className="content">
+          <Col className="mr-auto ml-auto" md="10">
+            <ReactWizard
+              steps={steps}
+              navSteps
+              validate
+              title="Configuração do bot"
+              description="Configuração necessária para utilização do bot."
+              headerTextCenter
+              finishButtonClasses="btn-wd btn-info"
+              finishButtonText="Finalizar"
+              nextButtonClasses="btn-wd btn-info"
+              nextButtonText="Próximo"
+              previousButtonClasses="btn-wd"
+              previousButtonText="Anterior"
+              finishButtonClick={this.finishButtonClick}
+              progressbar
+              color="blue"
+            />
           </Col>
-        </Row>
-      </div>
-    )
+        </div>
+      </>
+    );
   }
 }
 
-export default Configuracao
+export default Configuracao;

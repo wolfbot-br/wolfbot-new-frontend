@@ -2,14 +2,10 @@ import React, { Component } from 'react'
 import Select from "react-select";
 import Switch from "react-bootstrap-switch";
 import MaskedInput from 'react-text-mask';
+import NotificationAlert from "react-notification-alert";
 import {
     Row,
     Col,
-    Card,
-    CardHeader,
-    CardTitle,
-    CardBody,
-    CardFooter,
     Label,
     Form,
     FormGroup,
@@ -35,6 +31,7 @@ class FormEstrategia extends Component {
             stop: '',
             sellForIndicator: false,
             maxOrdersOpen: '',
+            onSubmited: false,
         };
     }
 
@@ -56,25 +53,60 @@ class FormEstrategia extends Component {
 
     async componentDidMount() {
         const configuracao = await getConfiguracao();
-        if (configuracao === 404 || configuracao === 400) {
-            this.setState({ alterState: true });
-        } else {
-            this.setState({
-                candleSize: {
-                    value: configuracao.candle_size || ''
-                },
-                multipleSelectTargetCurrency: configuracao.target_currency || '',
-                purchaseQuantity: configuracao.purchase_quantity || '',
-                profit: configuracao.profit || '',
-                stop: configuracao.stop || '',
-                sellForIndicator: configuracao.sellForIndicator || false,
-                maxOrdersOpen: configuracao.maxOrdersOpen || '',
-                alterState: false
-            });
+        const candle = configuracao.candle_size;
+        const target = configuracao.target_currency;
+        let arraytarget = [];
+        switch (candle) {
+            case '5m':
+                this.setState({
+                    candleSize: { value: '5m', label: '5 minutos' }
+                });
+                break;
+            case '10m':
+                this.setState({
+                    candleSize: { value: '10m', label: '10 minutos' }
+                });
+                break;
+            case '15m':
+                this.setState({
+                    candleSize: { value: '15m', label: '15 minutos' }
+                });
+                break;
+            case '30m':
+                this.setState({
+                    candleSize: { value: '30m', label: '30 minutos' }
+                });
+                break;
+            case '1h':
+                this.setState({
+                    candleSize: { value: '1h', label: '1 hora' }
+                });
+                break;
+            default:
+                break;
         }
+        if (target !== null) {
+            if (target.length > 0) {
+                arraytarget = target.map(item => {
+                    return {
+                        value: item,
+                        label: item
+                    }
+                });
+            }
+        }
+        this.setState({
+            multipleSelectTargetCurrency: arraytarget || '',
+            purchaseQuantity: configuracao.purchase_quantity || '',
+            profit: configuracao.profit || '',
+            stop: configuracao.stop || '',
+            sellForIndicator: configuracao.sellForIndicator || false,
+            maxOrdersOpen: configuracao.maxOrdersOpen || '',
+            alterState: false
+        });
     }
 
-    onSubmit = e => {
+    onSubmit = async e => {
         e.preventDefault();
         const currencies = this.state.multipleSelectTargetCurrency;
         const arrayCurrencies = currencies.map(item => item.label);
@@ -86,22 +118,59 @@ class FormEstrategia extends Component {
             stop: this.state.stop,
             sellForIndicator: this.state.sellForIndicator,
             maxOrdersOpen: this.state.maxOrdersOpen,
-            candle_size: this.state.candleSize.value
+            candle_size: this.state.candleSize.value,
+            strategyState: true
         }
         console.log(values)
+        await postConfiguracao(values);
+        const options = {
+            place: "tr",
+            message: "Estratégia gravada com sucesso!",
+            type: "success",
+            icon: "tim-icons icon-check-2",
+            autoDismiss: 4
+        };
+        this.refs.notificationAlert.notificationAlert(options);
+        this.setState({
+            alterState: false,
+            onSubmited: true
+        });
     }
+
+    isValidated = () => {
+        if (this.state.apiKey !== ''
+            && this.state.candleSize !== null
+            && this.state.maxOrdersOpen !== ''
+            && this.state.multipleSelectTargetCurrency !== null
+            && this.state.profit !== ''
+            && this.state.purchaseQuantity !== ''
+            && this.state.sellForIndicator !== ''
+            && this.state.onSubmited === true) {
+            return true;
+        } else {
+            const options = {
+                place: "tr",
+                message: "Todos os campos precisam ser preenchidos e o formulário enviado!",
+                type: "danger",
+                icon: "tim-icons icon-simple-remove",
+                autoDismiss: 4
+            };
+            this.refs.notificationAlert.notificationAlert(options);
+            return true
+        }
+    };
 
     render() {
         return (
-            <Card>
-                <CardHeader>
-                    <CardTitle tag="h4">Configuração Estratégia</CardTitle>
-                    <p className="card-category">
-                        Configuração da Estratégia que será utilizada.
-                    </p>
-                </CardHeader>
+            <>
+                <div className="rna-container">
+                    <NotificationAlert ref="notificationAlert" />
+                </div>
+                <h5 className="info-text">
+                    Estratégia
+                </h5>
                 <Form className="form-horizontal" onSubmit={this.onSubmit}>
-                    <CardBody>
+                    <Row className="justify-content-center mt-5">
                         <Col xs="12">
                             <Row>
                                 <Label sm="2">Moeda base</Label>
@@ -123,6 +192,7 @@ class FormEstrategia extends Component {
                                             classNamePrefix="react-select"
                                             placeholder="moedas à negociar"
                                             name="multipleSelectTargetCurrency"
+                                            isDisabled={this.state.alterState ? false : true}
                                             closeMenuOnSelect={false}
                                             isMulti
                                             value={this.state.multipleSelectTargetCurrency}
@@ -135,12 +205,12 @@ class FormEstrategia extends Component {
                                                     label: " Escolha as moedas",
                                                     isDisabled: true
                                                 },
-                                                { value: "1", label: "BTC " },
-                                                { value: "2", label: "ETC" },
-                                                { value: "3", label: "ETH" },
-                                                { value: "4", label: "LTC" },
-                                                { value: "5", label: "ADA " },
-                                                { value: "6", label: "XRP" },
+                                                { value: "BTC", label: "BTC " },
+                                                { value: "ETC", label: "ETC" },
+                                                { value: "ETH", label: "ETH" },
+                                                { value: "LTC", label: "LTC" },
+                                                { value: "ADA", label: "ADA " },
+                                                { value: "XRP", label: "XRP" },
                                             ]}
                                         />
                                     </FormGroup>
@@ -155,6 +225,7 @@ class FormEstrategia extends Component {
                                             name="purchaseQuantity"
                                             placeholder="valor mínimo para compra $20 valor máximo $999"
                                             type="text"
+                                            disabled={this.state.alterState ? false : true}
                                             guide={false}
                                             value={this.state.purchaseQuantity}
                                             onChange={this.handleChange}
@@ -172,6 +243,7 @@ class FormEstrategia extends Component {
                                             name="profit"
                                             placeholder="exemplos de percentual - 0.01 = 1%, 0.10 = 10%, 1.00 = 100%"
                                             type="text"
+                                            disabled={this.state.alterState ? false : true}
                                             guide={false}
                                             value={this.state.profit}
                                             onChange={this.handleChange}
@@ -189,6 +261,7 @@ class FormEstrategia extends Component {
                                             name="stop"
                                             placeholder="exemplos de percentual - 0.01 = 1%, 0.10 = 10%, 1.00 = 100%"
                                             type="text"
+                                            disabled={this.state.alterState ? false : true}
                                             guide={false}
                                             value={this.state.stop}
                                             onChange={this.handleChange}
@@ -203,6 +276,7 @@ class FormEstrategia extends Component {
                                     <FormGroup style={{ paddingTop: 6 }}>
                                         <Switch
                                             name="sellForIndicator"
+                                            disabled={this.state.alterState ? false : true}
                                             value={this.state.sellForIndicator}
                                             onChange={this.handleSwitch}
                                         />
@@ -218,6 +292,7 @@ class FormEstrategia extends Component {
                                             name="maxOrdersOpen"
                                             placeholder="Máximo de ordens abertas por moeda"
                                             type="text"
+                                            disabled={this.state.alterState ? false : true}
                                             guide={false}
                                             value={this.state.maxOrdersOpen}
                                             onChange={this.handleChange}
@@ -234,6 +309,7 @@ class FormEstrategia extends Component {
                                             className="react-select info"
                                             classNamePrefix="react-select"
                                             name="candleSelect"
+                                            isDisabled={this.state.alterState ? false : true}
                                             value={this.state.candleSize}
                                             onChange={value =>
                                                 this.setState({ candleSize: value })
@@ -250,26 +326,29 @@ class FormEstrategia extends Component {
                                 </Col>
                             </Row>
                         </Col>
-                    </CardBody>
-                    <CardFooter>
-                        <Button
-                            className="btn-fill"
-                            color="primary"
-                            onClick={this.handleState}
-                        >
-                            Alterar
-                        </Button>
-                        <Button
-                            className="btn-fill"
-                            color="success"
-                            disabled={this.state.alterState ? false : true}
-                            type="submit"
-                        >
-                            Gravar
-                        </Button>
-                    </CardFooter>
+                    </Row>
+                    <Row className="mt-4">
+                        <Col className="text-center">
+                            <Button
+                                className="btn-fill"
+                                color="primary"
+                                onClick={this.handleState}
+                                disabled={this.state.alterState ? true : false}
+                            >
+                                Alterar
+                            </Button>
+                            <Button
+                                className="btn-fill"
+                                color="success"
+                                disabled={this.state.alterState ? false : true}
+                                type="submit"
+                            >
+                                Gravar
+                            </Button>
+                        </Col>
+                    </Row>
                 </Form>
-            </Card>
+            </>
         )
     }
 }
