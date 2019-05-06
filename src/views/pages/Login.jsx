@@ -86,7 +86,11 @@ class Login extends React.Component {
                     />
                     <CardTitle
                       tag="h1"
-                      style={{ fontSize: "41px", textAlign: "center" }}
+                      style={{
+                        fontSize: "41px",
+                        textAlign: "center",
+                        color: "#FFFFFF"
+                      }}
                     >
                       WOLFBOT
                     </CardTitle>

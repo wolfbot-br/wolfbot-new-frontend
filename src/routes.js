@@ -12,9 +12,17 @@ import EmailSendActiveAccount from "./views/pages/EmailSendActiveAccount";
 import ActiveAccount from "./views/pages/ActiveAccount";
 import Page404 from "./views/pages/Page404";
 import DeletedAccount from "./views/pages/DeletedAccount";
+import Home from "./views/Home/Home";
 
 const routes = [
   // Auth Routes
+  {
+    path: "/index",
+    name: "Home",
+    component: Home,
+    layout: "/home",
+    invisible: true
+  },
   {
     path: "/login",
     name: "Login",

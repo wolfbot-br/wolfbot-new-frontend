@@ -11,6 +11,7 @@ import functions from "./utils/functions";
 
 import AuthLayout from "./layouts/Auth/Auth";
 import AdminLayout from "./layouts/Admin/Admin";
+import HomeLayout from "./layouts/Home/Home";
 
 import "./assets/css/nucleo-icons.css";
 import "./assets/scss/black-dashboard-pro-react.scss?v=1.0.0";
@@ -25,6 +26,10 @@ const hist = createBrowserHistory();
 const manageRoute = props => {
   const userLocalStorage = functions.loadLocalStorage("user_bot");
   const { path } = props.match;
+
+  if (path === "/home") {
+    return <HomeLayout {...props} />;
+  }
 
   if (path === "/auth") {
     functions.removeLocalStorageItem("user_bot");
@@ -48,7 +53,8 @@ ReactDOM.render(
       <Switch>
         <Route path="/auth" render={props => manageRoute(props)} />
         <Route path="/admin" render={props => manageRoute(props)} />
-        <Redirect from="/" to="/auth/login" />
+        <Route path="/home" render={props => manageRoute(props)} />
+        <Redirect from="/" to="/home/index" />
       </Switch>
     </Router>
   </Provider>,

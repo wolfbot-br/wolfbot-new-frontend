@@ -13,11 +13,7 @@ class Footer extends React.Component {
         <Container fluid={this.props.fluid ? true : false}>
           <ul className="nav">
             <li className="nav-item">
-              <a
-                className="nav-link"
-                href="http://www.wolfbot.com.br"
-                target="_blank"
-              >
+              <a className="nav-link" href="/" target="_blank">
                 Site
               </a>
             </li>{" "}
@@ -34,7 +30,7 @@ class Footer extends React.Component {
           <div className="copyright">
             © {new Date().getFullYear()} Wolfbot - Todos os direitos reservados{" "}
             <i className="tim-icons icon-bulb-63" />
-            <a href="http://www.wolfbot.com.br" target="_blank" />{" "}
+            <a href="/" target="_blank" />{" "}
           </div>
         </Container>
       </footer>

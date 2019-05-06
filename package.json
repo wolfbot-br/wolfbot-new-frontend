@@ -67,5 +67,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "jquery": "^3.4.1"
+  }
 }

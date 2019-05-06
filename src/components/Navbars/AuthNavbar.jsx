@@ -58,12 +58,9 @@ class AuthNavbar extends React.Component {
           <Collapse isOpen={this.state.collapseOpen} navbar>
             <Nav navbar className="ml-auto">
               <NavItem>
-                <a
-                  href="http://www.wolfbot.com.br"
-                  className="nav-link text-info"
-                >
+                <NavLink to="/" className="nav-link">
                   <i className="tim-icons icon-minimal-left" /> Site
-                </a>
+                </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink to="/auth/login" className="nav-link">
