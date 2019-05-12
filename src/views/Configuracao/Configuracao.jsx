@@ -31,7 +31,7 @@ var steps = [
 class Configuracao extends React.Component {
 
   finishButtonClick = async (allStepStates) => {
-
+    this.props.history.replace("/admin/dashboard");
   };
   render() {
     return (

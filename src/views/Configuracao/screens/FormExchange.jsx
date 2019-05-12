@@ -110,7 +110,7 @@ class FormExchange extends Component {
             && this.state.onSubmited === true) {
             return true;
         } else {
-            return true
+            return false
         }
     };
 
