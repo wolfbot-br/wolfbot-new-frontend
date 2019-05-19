@@ -204,7 +204,7 @@ class FormEstrategia extends Component {
                           label: " Escolha as moedas",
                           isDisabled: true
                         },
-                        { value: "BTC", label: "BTC " },
+                        { value: "BTC", label: "BTC" },
                         { value: "ETC", label: "ETC" },
                         { value: "ETH", label: "ETH" },
                         { value: "LTC", label: "LTC" },
