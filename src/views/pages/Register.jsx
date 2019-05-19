@@ -181,7 +181,7 @@ class Register extends React.Component {
                       <Button
                         className="btn-round"
                         color="info"
-                        href="#pablo"
+                        type="submit"
                         onClick={handleSubmit(value => this.onSubmit(value))}
                         size="lg"
                       >

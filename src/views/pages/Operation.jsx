@@ -10,7 +10,8 @@ import Input from "../../components/Input/Input";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { verifyActiveAccount } from "./authActions";
+import { verifyActiveAccount, changePassword } from "./authActions";
+import { changePasswordLogin } from "./AuthRequests";
 
 import {
   Button,
@@ -41,6 +42,29 @@ class Operation extends React.Component {
   }
   componentWillMount() {
     this.props.verifyActiveAccount(this.code);
+  }
+
+  async onSubmit(values) {
+    const { changePassword } = this.props;
+    const result = await changePasswordLogin({
+      ...values,
+      code: this.props.code
+    });
+    if (!result.data.success) {
+      result.data.errors.forEach(erro => {
+        const options = {
+          place: "tr",
+          message: erro.message,
+          type: "danger",
+          icon: "tim-icons icon-bell-55",
+          autoDismiss: 3
+        };
+        this.refs.notificationAlert.notificationAlert(options);
+      });
+    } else {
+      changePassword();
+      this.props.history.replace("/auth/passwordchanged");
+    }
   }
 
   render() {
@@ -159,7 +183,7 @@ class Operation extends React.Component {
                               component={Input}
                               placeholder="Confirme a senha"
                               type="password"
-                              name="password_confirm"
+                              name="passwordConfirm"
                             />
                           </InputGroup>
                         </CardBody>
@@ -168,7 +192,7 @@ class Operation extends React.Component {
                             <Button
                               className="btn-round"
                               color="info"
-                              href="#pablo"
+                              type="submit"
                               onClick={handleSubmit(value =>
                                 this.onSubmit(value)
                               )}
@@ -226,10 +250,11 @@ const mapStateToProps = state => ({
   emailIsActive: state.auth.emailIsActive,
   codeActiveAccountInvalid: state.auth.codeActiveAccountInvalid,
   operation: state.auth.operation,
-  changePassword: state.auth.operation
+  changePassword: state.auth.operation,
+  code: state.auth.code
 });
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ verifyActiveAccount }, dispatch);
+  bindActionCreators({ verifyActiveAccount, changePassword }, dispatch);
 export default connect(
   mapStateToProps,
   mapDispatchToProps

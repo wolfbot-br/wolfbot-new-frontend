@@ -10,7 +10,8 @@ const INITIAL_STATE = {
   emailIsActive: false, // se email já está ativo ou não
   codeActiveAccountInvalid: false, // se o código está inválido
   changePassword: false, // se a troca da senha pode ser feita corretamente
-  operation: ""
+  operation: "",
+  code: ""
 };
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -41,7 +42,7 @@ export default (state = INITIAL_STATE, action) => {
       };
 
     case "ACCOUNT_ACTIVE":
-      switch (action.payload) {
+      switch (action.payload.value) {
         case 1:
           return {
             ...state,
@@ -49,7 +50,8 @@ export default (state = INITIAL_STATE, action) => {
             codeActiveAccountInvalid: false,
             changePassword: false,
             emailIsActive: false,
-            operation: "EMAIL_ACTIVATION"
+            operation: "EMAIL_ACTIVATION",
+            code: action.payload.code
           };
 
         case 2:
@@ -59,7 +61,8 @@ export default (state = INITIAL_STATE, action) => {
             codeActiveAccountInvalid: false,
             changePassword: false,
             emailIsActive: true,
-            operation: "EMAIL_ACTIVATION"
+            operation: "EMAIL_ACTIVATION",
+            code: action.payload.code
           };
 
         default:
@@ -80,7 +83,8 @@ export default (state = INITIAL_STATE, action) => {
         accountActive: false,
         codeActiveAccountInvalid: false,
         emailIsActive: false,
-        operation: "PASSWORD_RESET"
+        operation: "PASSWORD_RESET",
+        code: action.payload.code
       };
 
     case "ALL_ERRORS_ACTIVE":
