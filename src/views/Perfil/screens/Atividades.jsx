@@ -81,12 +81,6 @@ class Atividades extends Component {
             // Accessibility Labels
             pageJumpText="pular para a página"
             rowsSelectorText="linhas por página"
-            defaultSorted={[
-              {
-                id: "date",
-                desc: true
-              }
-            ]}
           />
         </CardBody>
         <CardFooter />

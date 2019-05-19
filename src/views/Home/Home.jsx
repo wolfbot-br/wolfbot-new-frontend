@@ -9,7 +9,7 @@ import "../../assets/css/open-sans.css";
 import "../../assets/css/landing-page.css";
 
 import bg3 from "../../assets/img/bg-login.jpg";
-import iphone3 from "../../assets/img/template/iphone3.png";
+import home5 from "../../assets/img/template/home5.png";
 import bittrex from "../../assets/img/logos/bittrex.png";
 import bitfinex from "../../assets/img/logos/bitfinex.png";
 
@@ -33,11 +33,11 @@ class Home extends Component {
             </div>
             <div className="container">
               <div className="row">
-                <div className="col-md-5 hidden-xs">
+                <div className="col-md-6 hidden-xs">
                   <div className="parallax-image">
                     <img
                       className="phone"
-                      src={iphone3}
+                      src={home5}
                       style={{ marginTop: "20px" }}
                     />
                   </div>
@@ -47,7 +47,7 @@ class Home extends Component {
                     <h2 sty>wolfbot</h2>
                     <br />
                     <h5>
-                      plataforma capaz de realizar transações de forma
+                      Plataforma capaz de realizar transações de forma
                       automática para seus usuários através da configuração de
                       estratégias predefinidas com o objetivo de se beneficiar
                       da volatilidade do mercado para obter lucros.
@@ -62,10 +62,12 @@ class Home extends Component {
             style={{ backgroundColor: "#fffff" }}
           >
             <div className="container text-center">
-              <h4 className="header-text">Integração com várias exchanges</h4>
+              <h4 className="header-text">
+                Integração com duas das principais exchanges do mercado
+              </h4>
               <p style={{ color: "#000000" }}>
-                as principais exchanges do mercado estão disponíveis para
-                integração com a plataforma Wolfbot.
+                A Bittrex e a Bitfinex estão disponíveis para integração com a
+                plataforma Wolfbot.
                 <br />
               </p>
               <div className="logos">
@@ -149,7 +151,7 @@ class Home extends Component {
                 <img className="parallax-background-image" src={bg3} />
               </div>
               <div className="info">
-                <h1 style={{ color: "#FFFFFF" }}>Cadastre-se Agora</h1>
+                <h1 style={{ color: "#FFFFFF" }}>Cadastre-se Agora!</h1>
                 <p style={{ color: "#FFFFFF" }}>
                   E automatize seu processo de trade!
                 </p>

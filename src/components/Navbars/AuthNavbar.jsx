@@ -74,11 +74,6 @@ class AuthNavbar extends React.Component {
               </NavItem>
               <NavItem>
                 <NavLink to="/auth/pricing" className="nav-link">
-                  <i className="tim-icons icon-coins" /> Preços
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink to="/auth/pricing" className="nav-link">
                   <i className="tim-icons icon-align-center" /> Sobre
                 </NavLink>
               </NavItem>
