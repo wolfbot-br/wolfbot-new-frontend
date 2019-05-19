@@ -4,30 +4,36 @@ import functions from "../../utils/functions";
 
 const USER_BOT = functions.loadLocalStorage("user_bot");
 
-export function ligarRobo(statusRobo) {
-  if (statusRobo === false) {
-    axios.post(
-      `${ambiente.URL.api}/bot/acionarRobo`,
-      { chave: "teste", status: "on" },
-      { headers: { authorization: USER_BOT.Token } }
-    );
+const startOrStopBot = async (values) => {
+  const token = USER_BOT.authenticatedUser.accessToken;
+  const url = `${ambiente.URL.api}/bot/acionarRobo`;
+  try {
+    const configResult = await axios.post(url, values, { headers: { authorization: token } });
+    return configResult;
+  } catch (error) {
+    return error.response;
   }
-  if (statusRobo === true) {
-    axios.post(
-      `${ambiente.URL.api}/bot/acionarRobo?chave=teste&status=off`,
-      { chave: "teste", status: "on" },
-      { headers: { authorization: USER_BOT.Token } }
-    );
-  }
-
-  return {
-    type: "LIGAR_ROBO",
-    payload: !statusRobo
-  };
 }
 
-export function atualizarDashboard(socketObject) {
+const getStatusBot = async () => {
+  const token = USER_BOT.authenticatedUser.accessToken;
+  const url = `${ambiente.URL.api}/configuracao/buscar`;
+  try {
+    const configResult = await axios.get(url, { headers: { authorization: token } });
+    return configResult;
+  } catch (error) {
+    return error.response;
+  }
+}
+
+const atualizarDashboard = (socketObject) => {
   return dispatch => {
     dispatch({ type: "DASHBOARD_UPDATED", payload: socketObject });
   };
+}
+
+export {
+  getStatusBot,
+  startOrStopBot,
+  atualizarDashboard,
 }

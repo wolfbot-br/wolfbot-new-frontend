@@ -102,7 +102,7 @@ class FormIndicadores extends Component {
             status: this.state.macdState,
             short_period: this.state.macdShortPeriod,
             long_period: this.state.macdLongPeriod,
-            signal_period: this.state.macdSignalperiod,
+            signal_period: this.state.macdSignalPeriod,
           },
           cci: {
             status: this.state.cciState,
