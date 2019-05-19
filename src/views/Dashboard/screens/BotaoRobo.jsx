@@ -1,8 +1,58 @@
 import React, { Component } from 'react'
 import { Row, Col, CardHeader, CardTitle, CardBody, Card } from 'reactstrap'
 import Switch from "react-bootstrap-switch";
+import { getStatusBot, startOrStopBot } from '../DashboardActions';
 
 class BotaoRobo extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      statusBot: false,
+      statusBuy: false,
+      statusSell: false,
+      alterState: true
+    };
+  }
+
+  handleSwitch = async e => {
+    const name = e.props.name;
+    const value = e.props.value;
+    this.setState({ [name]: !value });
+    if (name === 'statusBot') {
+      const values = {
+        status_bot: this.state.statusBot,
+        status_buy: this.state.statusBuy,
+        status_sell: this.state.statusSell,
+      }
+      const result = await startOrStopBot(values);
+      console.log(result)
+      if (this.state.statusBot === true) {
+        this.setState({ alterState: false });
+      } else {
+        this.setState({ alterState: true });
+      }
+    }
+  }
+
+  componentDidMount = async () => {
+    const result = await getStatusBot();
+    if (result.status === 200) {
+      const config = result.data.configuracao;
+      const statusBot = config.status ? config.status : null;
+      if (statusBot !== null) {
+        this.setState({
+          statusBot: statusBot.status_bot,
+          statusBuy: statusBot.status_buy,
+          statusSell: statusBot.status_sell,
+        });
+        if (this.state.statusBot === true) {
+          this.setState({ alterState: false });
+        } else {
+          this.setState({ alterState: true });
+        }
+      }
+    }
+  }
   render() {
     return (
       <Card className="card-stats card">
@@ -25,9 +75,9 @@ class BotaoRobo extends Component {
             </Col>
             <Col xs='4' style={{ paddingTop: 4, paddingLeft: 0 }} >
               <Switch
-                defaultValue={false}
-                offColor=""
-                onColor=""
+                name="statusBot"
+                value={this.state.statusBot}
+                onChange={this.handleSwitch}
               />
             </Col>
           </Row>
@@ -45,9 +95,10 @@ class BotaoRobo extends Component {
             </Col>
             <Col xs='4' style={{ paddingTop: 4, paddingLeft: 0, marginTop: 10 }} >
               <Switch
-                defaultValue={false}
-                offColor=""
-                onColor=""
+                name="statusBuy"
+                disabled={this.state.alterState ? false : true}
+                value={this.state.statusBuy}
+                onChange={this.handleSwitch}
               />
             </Col>
           </Row>
@@ -65,9 +116,10 @@ class BotaoRobo extends Component {
             </Col>
             <Col xs='4' style={{ paddingTop: 4, paddingLeft: 0, marginTop: 10 }} >
               <Switch
-                defaultValue={false}
-                offColor=""
-                onColor=""
+                name="statusSell"
+                disabled={this.state.alterState ? false : true}
+                value={this.state.statusSell}
+                onChange={this.handleSwitch}
               />
             </Col>
           </Row>
