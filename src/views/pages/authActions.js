@@ -33,17 +33,10 @@ const verifyActiveAccount = async code => {
   };
 };
 
-const passwordRecovery = email => {
-  alert("Não implementado");
-  // return dispatch => {
-  //   axios.post(`${api.ACCOUNT_WOLFBOT_URL}/passwordrecovery`, email)
-  //     .then(resp => {
-  //       dispatch({ type: 'PASSWORD_RECOVERY', payload: resp.data.valid }
-  //         , toastr.success('Sucesso', 'O Email para redefinição de senha foi enviado!')
-  //       )
-  //     })
-  //     .catch(e => toastr.error('Erro', e.response.data.errors.message))
-  // }
+const passwordRecovery = data => {
+  return dispatch => {
+    dispatch({ type: "EMAIL_SEND_PASSWORD_RECOVERY", payload: data });
+  };
 };
 const loadChangePasswordPage = parameter => {
   alert("Não implementado");

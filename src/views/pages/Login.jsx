@@ -33,7 +33,8 @@ class Login extends React.Component {
   // login
   async onSubmit(values) {
     const { login } = this.props;
-    const loginResult = await loginRequest(values);
+    const browser = functions.getBrowser();
+    const loginResult = await loginRequest({ ...values, browser });
     if (!loginResult.data.success) {
       loginResult.data.errors.forEach(erro => {
         const options = {
@@ -51,8 +52,12 @@ class Login extends React.Component {
     }
   }
 
-  criarUmaConta(values) {
+  criarUmaConta() {
     this.props.history.replace("/auth/register");
+  }
+
+  esqueciSenha() {
+    this.props.history.replace("/auth/passwordrecovery");
   }
 
   componentDidMount() {
@@ -151,7 +156,9 @@ class Login extends React.Component {
                         <a
                           className="link text-info footer-link"
                           href="#pablo"
-                          onClick={e => e.preventDefault()}
+                          onClick={handleSubmit(value =>
+                            this.esqueciSenha(value)
+                          )}
                         >
                           Esqueci a senha!
                         </a>

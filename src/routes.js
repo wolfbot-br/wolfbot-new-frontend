@@ -13,6 +13,8 @@ import ActiveAccount from "./views/pages/ActiveAccount";
 import Page404 from "./views/pages/Page404";
 import DeletedAccount from "./views/pages/DeletedAccount";
 import Home from "./views/Home/Home";
+import PasswordRecovery from "./views/pages/PasswordRecovery";
+import EmailSendPasswordRecovery from "./views/pages/EmailSendPasswordRecovery";
 
 const routes = [
   // Auth Routes
@@ -38,6 +40,13 @@ const routes = [
     invisible: true
   },
   {
+    path: "/passwordrecovery",
+    name: "PasswordRecovery",
+    component: PasswordRecovery,
+    layout: "/auth",
+    invisible: true
+  },
+  {
     path: "/pricing",
     name: "Pricing",
     component: Pricing,
@@ -48,6 +57,13 @@ const routes = [
     path: "/emailsendactiveaccount",
     name: "EmailSendActiveAccount",
     component: EmailSendActiveAccount,
+    layout: "/auth",
+    invisible: true
+  },
+  {
+    path: "/emailsendpasswordrecovery",
+    name: "EmailSendPasswordRecovery",
+    component: EmailSendPasswordRecovery,
     layout: "/auth",
     invisible: true
   },
