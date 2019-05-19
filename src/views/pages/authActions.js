@@ -20,15 +20,25 @@ const verifyActiveAccount = async code => {
       const response = await axios.get(`${ambiente.URL.account}/active`, {
         headers: { code: code }
       });
-      if (response.status === 200)
-        dispatch({ type: "ACCOUNT_ACTIVE", payload: 1 });
+      if (response.data.mode === "EMAIL_ACTIVATION") {
+        if (response.status === 200)
+          dispatch({ type: "ACCOUNT_ACTIVE", payload: 1 });
+      }
+      if (response.data.mode === "PASSWORD_RESET") {
+        if (response.status === 200)
+          dispatch({ type: "CHANGE_PASSWORD", payload: 1 });
+      }
     } catch (error) {
       if (
         error.response.data.errors[0].messages ===
         "Email já foi verificado pelo usuário"
       )
         dispatch({ type: "ACCOUNT_ACTIVE", payload: 2 });
-      else dispatch({ type: "ACCOUNT_ACTIVE", payload: 3 });
+      else
+        dispatch({
+          type: "ALL_ERRORS_ACTIVE",
+          payload: { operation: error.response.data.mode }
+        });
     }
   };
 };

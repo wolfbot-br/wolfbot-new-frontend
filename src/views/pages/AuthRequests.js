@@ -45,4 +45,20 @@ const passwordRecoveryRequest = async values => {
   }
 };
 
-export { loginRequest, validateToken, signupRequest, passwordRecoveryRequest };
+const changePasswordLogin = async values => {
+  const url = `${ambiente.URL.account}/changepassword`;
+  try {
+    const result = await axios.post(url, values);
+    return result;
+  } catch (e) {
+    return e.response;
+  }
+};
+
+export {
+  loginRequest,
+  validateToken,
+  signupRequest,
+  passwordRecoveryRequest,
+  changePasswordLogin
+};

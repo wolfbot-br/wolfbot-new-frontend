@@ -55,7 +55,7 @@ class DeletedAccount extends React.Component {
                       <Row className="justify-content-center">
                         <p className="pageCardText text-muted">
                           Criar uma conta?
-                          <Link to="/login">
+                          <Link to="/auth/register">
                             <Button color="link" className="px-0">
                               Cadastro
                             </Button>

@@ -9,7 +9,7 @@ import Backtest from "./views/Backtest/Backtest";
 import Estatisticas from "./views/Estatisticas/Estatisticas";
 import Historico from "./views/Historico/Historico";
 import EmailSendActiveAccount from "./views/pages/EmailSendActiveAccount";
-import ActiveAccount from "./views/pages/ActiveAccount";
+import Operation from "./views/pages/Operation";
 import Page404 from "./views/pages/Page404";
 import DeletedAccount from "./views/pages/DeletedAccount";
 import Home from "./views/Home/Home";
@@ -68,9 +68,9 @@ const routes = [
     invisible: true
   },
   {
-    path: "/activeaccount",
-    name: "ActiveAccount",
-    component: ActiveAccount,
+    path: "/operation",
+    name: "Operation",
+    component: Operation,
     layout: "/auth",
     invisible: true
   },

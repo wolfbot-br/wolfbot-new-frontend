@@ -62,7 +62,7 @@ class EmailSendActiveAccount extends React.Component {
                       <Row className="justify-content-center">
                         <p className="pageCardText text-muted">
                           Entrar em sua conta?
-                          <Link to="/login">
+                          <Link to="/auth/login">
                             <Button color="link" className="px-0">
                               Login
                             </Button>

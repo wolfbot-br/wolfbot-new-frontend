@@ -104,9 +104,9 @@ class PasswordRecovery extends React.Component {
                       <CardFooter className="pageCardFooter p-4">
                         <Row className="justify-content-center">
                           <Button
+                            type="submit"
                             className="btn-round"
                             color="info"
-                            href="#pablo"
                             onClick={handleSubmit(value =>
                               this.onSubmit(value)
                             )}

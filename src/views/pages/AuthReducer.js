@@ -6,13 +6,11 @@ const INITIAL_STATE = {
   tokenExpirationTime: null,
   refreshToken: null,
   accessToken: "",
-  passwordRecovery: false,
-  changePasswordPermition: true,
-  changePasswordHash: "",
-  passwordChanged: false,
-  accountActive: false,
-  emailIsActive: false,
-  codeActiveAccountInvalid: false
+  accountActive: false, // se a conta foi ativada corretamente
+  emailIsActive: false, // se email já está ativo ou não
+  codeActiveAccountInvalid: false, // se o código está inválido
+  changePassword: false, // se a troca da senha pode ser feita corretamente
+  operation: ""
 };
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -41,6 +39,7 @@ export default (state = INITIAL_STATE, action) => {
         refreshToken,
         accessToken
       };
+
     case "ACCOUNT_ACTIVE":
       switch (action.payload) {
         case 1:
@@ -48,57 +47,52 @@ export default (state = INITIAL_STATE, action) => {
             ...state,
             accountActive: true,
             codeActiveAccountInvalid: false,
-            emailIsActive: false
+            changePassword: false,
+            emailIsActive: false,
+            operation: "EMAIL_ACTIVATION"
           };
+
         case 2:
           return {
             ...state,
             accountActive: false,
             codeActiveAccountInvalid: false,
-            emailIsActive: true
+            changePassword: false,
+            emailIsActive: true,
+            operation: "EMAIL_ACTIVATION"
           };
-        case 3:
-          return {
-            ...state,
-            accountActive: false,
-            codeActiveAccountInvalid: true,
-            emailIsActive: false
-          };
+
         default:
           return {
             ...state,
             accountActive: false,
             codeActiveAccountInvalid: true,
-            emailIsActive: false
+            changePassword: false,
+            emailIsActive: false,
+            operation: "ALL"
           };
       }
-    case "PASSWORD_RECOVERY":
-      if (action.payload) {
-        return { ...state, passwordRecovery: action.payload };
-      }
-      break;
-    case "CHANGE_PASSWORD_CONFIRM":
-      if (action.payload.success) {
-        return {
-          ...state,
-          changePasswordPermition: true,
-          changePasswordHash: action.payload.hash
-        };
-      } else {
-        return {
-          ...state,
-          changePasswordPermition: false,
-          changePasswordHash: null
-        };
-      }
-    case "CHANGE_PASSWORD_DENIED":
+
+    case "CHANGE_PASSWORD":
       return {
         ...state,
-        changePasswordPermition: false,
-        changePasswordHash: null
+        changePassword: true,
+        accountActive: false,
+        codeActiveAccountInvalid: false,
+        emailIsActive: false,
+        operation: "PASSWORD_RESET"
       };
-    case "PASSWORD_CHANGED":
-      return { ...state, passwordChanged: true };
+
+    case "ALL_ERRORS_ACTIVE":
+      return {
+        ...state,
+        accountActive: false,
+        codeActiveAccountInvalid: true,
+        emailIsActive: false,
+        changePassword: false,
+        operation: "ALL"
+      };
+
     default:
       return state;
   }
