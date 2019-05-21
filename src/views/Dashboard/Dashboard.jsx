@@ -46,16 +46,22 @@ class Dashboard extends Component {
   }
 
   render() {
+    const totalizers = {
+      dayResult: this.props.dayResult,
+      overallResult: this.props.overallResult,
+      totalizerOpenOrders: this.props.totalizerOpenOrders,
+      totalizerClosedOrders: this.props.totalizerClosedOrders
+    };
     return (
       <div className="content">
         <Row>
           <Col lg={12}>
-            <Totalizadores />
+            <Totalizadores totalizers={totalizers} />
           </Col>
         </Row>
         <Row>
           <Col lg={9}>
-            <ResumoOperacoes />
+            <ResumoOperacoes operationsSummary={this.props.operationsSummary} />
           </Col>
           <Col lg={3}>
             <BotaoRobo />
@@ -75,7 +81,12 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators({ atualizarDashboard }, dispatch);
 const mapStateToProps = state => ({
   dashboard_reload: state.dashboard.dashboard_reload,
-  valueTeste: state.dashboard.valueTeste
+  valueTeste: state.dashboard.valueTeste,
+  dayResult: state.dashboard.dayResult,
+  overallResult: state.dashboard.overallResult,
+  totalizerOpenOrders: state.dashboard.totalizerOpenOrders,
+  totalizerClosedOrders: state.dashboard.totalizerClosedOrders,
+  operationsSummary: state.dashboard.operationsSummary
 });
 export default connect(
   mapStateToProps,

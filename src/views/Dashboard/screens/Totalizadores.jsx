@@ -1,7 +1,8 @@
-import React from 'react'
-import { Row, Col, Card, CardBody, CardTitle, CardFooter } from 'reactstrap'
+import React from "react";
+import { Row, Col, Card, CardBody, CardTitle, CardFooter } from "reactstrap";
 
-const Totalizadores = () => {
+const Totalizadores = props => {
+  const { totalizers } = props;
   return (
     <Row>
       <Col lg="3" md="6">
@@ -16,7 +17,7 @@ const Totalizadores = () => {
               <Col xs="7">
                 <div className="numbers">
                   <p className="card-category">Resultado do dia</p>
-                  <CardTitle tag="h3">$ 23.00</CardTitle>
+                  <CardTitle tag="h3">{totalizers.dayResult}</CardTitle>
                 </div>
               </Col>
             </Row>
@@ -24,8 +25,9 @@ const Totalizadores = () => {
           <CardFooter>
             <hr />
             <div className="stats">
-              <i className="tim-icons icon-sound-wave" /> Totalizador de operações do dia
-                  </div>
+              <i className="tim-icons icon-sound-wave" /> Totalizador de
+              operações do dia
+            </div>
           </CardFooter>
         </Card>
       </Col>
@@ -41,7 +43,7 @@ const Totalizadores = () => {
               <Col xs="7">
                 <div className="numbers">
                   <p className="card-category">Resultado geral</p>
-                  <CardTitle tag="h3">$ 346.00</CardTitle>
+                  <CardTitle tag="h3">{totalizers.overallResult}</CardTitle>
                 </div>
               </Col>
             </Row>
@@ -49,8 +51,9 @@ const Totalizadores = () => {
           <CardFooter>
             <hr />
             <div className="stats">
-              <i className="tim-icons icon-sound-wave" /> Totalizador de operações gerais
-                  </div>
+              <i className="tim-icons icon-sound-wave" /> Totalizador de
+              operações gerais
+            </div>
           </CardFooter>
         </Card>
       </Col>
@@ -66,7 +69,9 @@ const Totalizadores = () => {
               <Col xs="7">
                 <div className="numbers">
                   <p className="card-category">Ordens abertas</p>
-                  <CardTitle tag="h3">34</CardTitle>
+                  <CardTitle tag="h3">
+                    {totalizers.totalizerOpenOrders}
+                  </CardTitle>
                 </div>
               </Col>
             </Row>
@@ -74,8 +79,9 @@ const Totalizadores = () => {
           <CardFooter>
             <hr />
             <div className="stats">
-              <i className="tim-icons icon-sound-wave" /> Totalizador de ordens abertas
-                  </div>
+              <i className="tim-icons icon-sound-wave" /> Totalizador de ordens
+              abertas
+            </div>
           </CardFooter>
         </Card>
       </Col>
@@ -91,7 +97,9 @@ const Totalizadores = () => {
               <Col xs="7">
                 <div className="numbers">
                   <p className="card-category">Ordens fechadas</p>
-                  <CardTitle tag="h3">234</CardTitle>
+                  <CardTitle tag="h3">
+                    {totalizers.totalizerClosedOrders}
+                  </CardTitle>
                 </div>
               </Col>
             </Row>
@@ -99,13 +107,14 @@ const Totalizadores = () => {
           <CardFooter>
             <hr />
             <div className="stats">
-              <i className="tim-icons icon-sound-wave" /> Totalizador de ordens finalizadas
-                  </div>
+              <i className="tim-icons icon-sound-wave" /> Totalizador de ordens
+              finalizadas
+            </div>
           </CardFooter>
         </Card>
       </Col>
     </Row>
-  )
-}
+  );
+};
 
-export default Totalizadores
+export default Totalizadores;

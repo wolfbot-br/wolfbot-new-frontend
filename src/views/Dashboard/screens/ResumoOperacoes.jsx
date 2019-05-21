@@ -1,71 +1,73 @@
-import React from 'react';
-import { Row, Col, Card, CardHeader, CardBody, CardTitle, CardFooter } from 'reactstrap';
+import React from "react";
+import {
+  Row,
+  Col,
+  Card,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  CardFooter
+} from "reactstrap";
 
-const ResumoOperacoes = () => {
+const ResumoOperacoes = props => {
+  const { operationsSummary } = props;
   return (
     <Card className="card-stats card">
       <CardHeader>
         <CardTitle>
-          <i className='tim-icons icon-notes text-success' /> Resumo de Operaçoes
+          <i className="tim-icons icon-notes text-success" /> Resumo de
+          Operaçoes
         </CardTitle>
       </CardHeader>
       <CardBody>
         <Row>
-          <Col xs="4" >
+          <Col xs="4">
             <CardTitle className="text-center">
               Valor total investido(USD):
             </CardTitle>
           </Col>
           <Col xs="2">
-            <CardTitle>
-              $ 345.00
-            </CardTitle>
+            <CardTitle>{operationsSummary.totalAmountInvested}</CardTitle>
           </Col>
-          <Col xs="4" >
+          <Col xs="4">
             <CardTitle className="text-center">
               Retorno do investimento(USD):
             </CardTitle>
           </Col>
           <Col xs="2">
-            <CardTitle>
-              $ 678.00
-            </CardTitle>
+            <CardTitle>{operationsSummary.returnOfInvestiment}</CardTitle>
           </Col>
         </Row>
         <Row>
-          <Col xs="4" >
+          <Col xs="4">
             <CardTitle className="text-center">
               Lucro / Perda total(USD):
             </CardTitle>
           </Col>
           <Col xs="2">
-            <CardTitle>
-              $ 100.00
-            </CardTitle>
+            <CardTitle>{operationsSummary.totalLossProfitValue}</CardTitle>
           </Col>
-          <Col xs="4" >
+          <Col xs="4">
             <CardTitle className="text-center">
               Lucro / Perda total(%):
             </CardTitle>
           </Col>
           <Col xs="2">
-            <CardTitle>
-              $ 678.00
-            </CardTitle>
+            <CardTitle>{operationsSummary.totalLossProfitPercentage}</CardTitle>
           </Col>
         </Row>
       </CardBody>
       <CardFooter>
         <hr />
         <Row>
-          <Col xs="12" >
+          <Col xs="12">
             <CardTitle tag="h3" className="text-center">
               USD Total em Ativos na Exchange
             </CardTitle>
           </Col>
         </Row>
         <Row>
-          <Col xs="12" >
+          <Col xs="12">
             <CardTitle tag="h3" className="text-center text-success">
               $ 657.98
             </CardTitle>
@@ -73,7 +75,7 @@ const ResumoOperacoes = () => {
         </Row>
       </CardFooter>
     </Card>
-  )
-}
+  );
+};
 
-export default ResumoOperacoes
+export default ResumoOperacoes;
