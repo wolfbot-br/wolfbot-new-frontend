@@ -29,7 +29,7 @@ class Dashboard extends Component {
       );
 
       socket.on("updates", async receive => {
-        atualizarDashboard(receive.payload);
+        atualizarDashboard(receive);
       });
     }
   }

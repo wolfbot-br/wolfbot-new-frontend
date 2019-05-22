@@ -18,7 +18,24 @@ export default (state = INITIAL_STATE, action) => {
     case "LIGAR_ROBO":
       return { ...state, roboLigado: action.payload };
     case "DASHBOARD_UPDATED":
-      return { ...state, valueTeste: state.valueTeste + action.payload };
+      const dataDashboard = {
+        dayResult: action.payload.dayResult
+          ? action.payload.dayResult + state.dayResult
+          : state.dayResult,
+        overallResult: action.payload.overallResult
+          ? action.payload.overallResult
+          : state.overallResult,
+        totalizerOpenOrders: action.payload.totalizerOpenOrders
+          ? action.payload.totalizerOpenOrders
+          : state.totalizerOpenOrders,
+        totalizerClosedOrders: action.payload.totalizerClosedOrders
+          ? action.payload.totalizerClosedOrders
+          : state.totalizerClosedOrders,
+        operationsSummary: action.payload.operationsSummary
+          ? action.payload.operationsSummary
+          : state.operationsSummary
+      };
+      return { ...state, ...dataDashboard };
     default:
       return state;
   }
