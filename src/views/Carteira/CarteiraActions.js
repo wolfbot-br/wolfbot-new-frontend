@@ -7,7 +7,7 @@ export async function getSaldo(USER_BOT) {
       type: 'SALDO_NOT_FETCHED'
     }
   } else {
-    const request = await axios.get(`${ambiente.URL.api}/exchanges/saldo?user_id=${USER_BOT.id}`,
+    const request = await axios.get(`${ambiente.URL.api}/exchanges/saldo?user_uid=${USER_BOT.id}`,
       { headers: { authorization: USER_BOT.Token } })
 
     return {
