@@ -8,6 +8,7 @@ import ResumoOperacoes from "./screens/ResumoOperacoes";
 import Totalizadores from "./screens/Totalizadores";
 import TablePosicoes from "./screens/TablePosicoes";
 import BotaoRobo from "./screens/BotaoRobo";
+import Logs from "./screens/Logs";
 
 import functions from "../../utils/functions";
 import config from "../../config";
@@ -68,10 +69,18 @@ class Dashboard extends Component {
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col lg={8}>
             <TablePosicoes />
           </Col>
+          <Col lg={4}>
+            <Logs />
+          </Col>
         </Row>
+        {/* <Row>
+          <Col>
+            <Logs />
+          </Col>
+        </Row> */}
       </div>
     );
   }
