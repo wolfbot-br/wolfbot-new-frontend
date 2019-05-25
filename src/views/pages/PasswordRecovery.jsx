@@ -56,8 +56,19 @@ class PasswordRecovery extends React.Component {
         this.refs.notificationAlert.notificationAlert(options);
       });
     } else {
+      const options = {
+        place: "tc",
+        message: "Aguarde! Email sendo enviado.",
+        type: "success",
+        icon: "tim-icons icon-bell-55",
+        autoDismiss: 5,
+        closeButton: false
+      };
+      this.refs.notificationAlert.notificationAlert(options);
       passwordRecovery(values);
-      this.props.history.replace("/auth/emailsendpasswordrecovery");
+      setTimeout(() => {
+        this.props.history.replace("/auth/emailsendpasswordrecovery");
+      }, 2000);
     }
   }
 

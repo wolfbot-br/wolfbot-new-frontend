@@ -23,6 +23,7 @@ import {
   Container,
   Col
 } from "reactstrap";
+import Loading from "react-loading";
 
 class Login extends React.Component {
   constructor(props) {
@@ -47,8 +48,20 @@ class Login extends React.Component {
         this.refs.notificationAlert.notificationAlert(options);
       });
     } else {
+      const options = {
+        place: "tc",
+        message: "Login realizado com sucesso! Carregando...",
+        type: "success",
+        icon: "tim-icons icon-bell-55",
+        autoDismiss: 5,
+        closeButton: false
+      };
+      this.refs.notificationAlert.notificationAlert(options);
+
       login({ ...loginResult.data });
-      this.props.history.replace("/admin/dashboard");
+      setTimeout(() => {
+        this.props.history.replace("/admin/dashboard");
+      }, 2000);
     }
   }
 

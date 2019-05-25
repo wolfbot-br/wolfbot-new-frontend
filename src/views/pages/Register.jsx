@@ -47,8 +47,19 @@ class Register extends React.Component {
         this.refs.notificationAlert.notificationAlert(options);
       });
     } else {
+      const options = {
+        place: "tc",
+        message: "Cadastro realizado com sucesso! Carregando...",
+        type: "success",
+        icon: "tim-icons icon-bell-55",
+        autoDismiss: 5,
+        closeButton: false
+      };
+      this.refs.notificationAlert.notificationAlert(options);
       signup(values);
-      this.props.history.replace("/auth/emailsendactiveaccount");
+      setTimeout(() => {
+        this.props.history.replace("/auth/emailsendactiveaccount");
+      }, 2000);
     }
   }
 

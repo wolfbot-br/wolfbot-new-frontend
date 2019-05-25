@@ -88,20 +88,6 @@ class TablePosicoes extends Component {
         Header: "Tempo",
         accessor: "tempo",
         headerClassName: "text-center"
-      },
-      {
-        Header: "Ação",
-        Cell: row => (
-          <div>
-            <Button className="btn-simple btn-success btn-sm mr-1 margin-right: 1rem">
-              Vender
-            </Button>
-            <Button className="btn-simple btn-info btn-sm">Info</Button>
-          </div>
-        ),
-        headerClassName: "text-center",
-        sortable: false,
-        filterable: false
       }
     ];
 
