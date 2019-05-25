@@ -95,11 +95,6 @@ class Logs extends Component {
         Header: "Tempo",
         accessor: "tempo",
         headerClassName: "text-center"
-      },
-      {
-        Header: "Ação",
-        acessor: "acao",
-        headerClassName: "text-center"
       }
     ];
     return (

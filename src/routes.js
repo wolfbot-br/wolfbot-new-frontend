@@ -16,6 +16,7 @@ import Home from "./views/Home/Home";
 import PasswordRecovery from "./views/pages/PasswordRecovery";
 import EmailSendPasswordRecovery from "./views/pages/EmailSendPasswordRecovery";
 import Sobre from "./views/Sobre/Sobre";
+import Ajuda from "./views/Ajuda/Ajuda";
 
 const routes = [
   // Auth Routes
@@ -145,6 +146,13 @@ const routes = [
     icon: "tim-icons icon-single-copy-04",
     component: Historico,
     layout: "/admin"
+  },
+  {
+    path: "/ajuda",
+    name: "Ajuda",
+    component: Ajuda,
+    layout: "/admin",
+    icon: "tim-icons icon-book-bookmark"
   }
 ];
 
