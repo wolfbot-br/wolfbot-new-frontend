@@ -9,7 +9,7 @@ import {
   Row
 } from "reactstrap";
 import bgImagem from "../../assets/img/bg-login.jpg";
-
+import logo from "../../assets/img/wolfbot-logo.png";
 class Page404 extends Component {
   render() {
     return (
@@ -36,28 +36,12 @@ class Page404 extends Component {
                       </p>
                     </CardBody>
                     <CardFooter className="pageCardFooter p-4">
-                      <Row className="justify-content-center">
-                        {/* <InputGroup className="input-prepend">
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText>
-                            <i className="fa fa-search" />
-                          </InputGroupText>
-                        </InputGroupAddon>
-                        <Input
-                          size="16"
-                          type="text"
-                          placeholder="O que você está procurando?"
-                        />
-                        <InputGroupAddon addonType="append">
-                          <Button color="info">Buscar</Button>
-                        </InputGroupAddon>
-                      </InputGroup> */}
-                      </Row>
+                      <Row className="justify-content-center" />
                     </CardFooter>
                     <CardFooter className="pageCardFooter p-4">
                       <Row className="justify-content-center">
                         <img
-                          src="dist/img/template/logo-icon.svg"
+                          src={logo}
                           width="30px"
                           height="30px"
                           style={{ display: "block", margin: "10px auto" }}

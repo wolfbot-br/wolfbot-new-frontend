@@ -13,6 +13,8 @@ import { bindActionCreators } from "redux";
 import { verifyActiveAccount, changePassword } from "./authActions";
 import { changePasswordLogin } from "./AuthRequests";
 
+import logo from "../../assets/img/wolfbot-logo.png";
+
 import {
   Button,
   Card,
@@ -118,7 +120,7 @@ class Operation extends React.Component {
                       <CardFooter className="pageCardFooter p-4">
                         <Row className="justify-content-center">
                           <img
-                            src="dist/img/template/logo-icon.svg"
+                            src={logo}
                             width="30px"
                             height="30px"
                             style={{ display: "block", margin: "10px auto" }}
@@ -215,7 +217,7 @@ class Operation extends React.Component {
                         <CardFooter className="pageCardFooter p-4">
                           <Row className="justify-content-center">
                             <img
-                              src="dist/img/template/logo-icon.svg"
+                              src={logo}
                               width="30px"
                               height="30px"
                               style={{ display: "block", margin: "10px auto" }}

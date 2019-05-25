@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import { passwordRecovery } from "./authActions";
 import Input from "../../components/Input/Input";
 
+import logo from "../../assets/img/wolfbot-logo.png";
+
 import { passwordRecoveryRequest } from "./AuthRequests";
 
 import {
@@ -129,7 +131,7 @@ class PasswordRecovery extends React.Component {
                       <CardFooter className="pageCardFooter p-4">
                         <Row className="justify-content-center">
                           <img
-                            src="dist/img/template/logo-icon.svg"
+                            src={logo}
                             width="30px"
                             height="30px"
                             style={{ display: "block", margin: "10px auto" }}

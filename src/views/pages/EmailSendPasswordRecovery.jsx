@@ -15,6 +15,8 @@ import {
   Row
 } from "reactstrap";
 
+import logo from "../../assets/img/wolfbot-logo.png";
+
 class EmailSendActiveAccount extends React.Component {
   constructor(props) {
     super(props);
@@ -73,7 +75,7 @@ class EmailSendActiveAccount extends React.Component {
                     <CardFooter className="pageCardFooter p-4">
                       <Row className="justify-content-center">
                         <img
-                          src="dist/img/template/logo-icon.svg"
+                          src={logo}
                           width="30px"
                           height="30px"
                           style={{ display: "block", margin: "10px auto" }}
