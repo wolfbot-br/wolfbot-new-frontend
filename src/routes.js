@@ -15,6 +15,7 @@ import DeletedAccount from "./views/pages/DeletedAccount";
 import Home from "./views/Home/Home";
 import PasswordRecovery from "./views/pages/PasswordRecovery";
 import EmailSendPasswordRecovery from "./views/pages/EmailSendPasswordRecovery";
+import Sobre from "./views/Sobre/Sobre";
 
 const routes = [
   // Auth Routes
@@ -22,6 +23,13 @@ const routes = [
     path: "/index",
     name: "Home",
     component: Home,
+    layout: "/home",
+    invisible: true
+  },
+  {
+    path: "/sobre",
+    name: "Sobre",
+    component: Sobre,
     layout: "/home",
     invisible: true
   },

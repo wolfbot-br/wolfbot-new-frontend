@@ -18,11 +18,7 @@ class Footer extends React.Component {
               </a>
             </li>{" "}
             <li className="nav-item">
-              <a
-                className="nav-link"
-                href="http://localhost:3000/auth/pricing"
-                target="_blank"
-              >
+              <a className="nav-link" href="/home/sobre">
                 Sobre
               </a>
             </li>{" "}

@@ -2,6 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
+import { reduxForm } from "redux-form";
+
+import { entrarEmContato } from "./homeActions";
+
+import { entrarEmContatoRequest } from "./homeRequests";
+
 import "../../assets/css/font-awesome.min.css";
 import "../../assets/css/pe-icon-7-stroke.css";
 import "../../assets/css/open-sans.css";
@@ -17,6 +23,26 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+  }
+
+  async onSubmit(values) {
+    const { entrarEmContato } = this.props;
+    const result = await entrarEmContatoRequest(values);
+    if (!result.data.success) {
+      result.data.errors.forEach(erro => {
+        const options = {
+          place: "tr",
+          message: erro.message,
+          type: "danger",
+          icon: "tim-icons icon-bell-55",
+          autoDismiss: 3
+        };
+        this.refs.notificationAlert.notificationAlert(options);
+      });
+    } else {
+      entrarEmContato(values);
+      this.props.history.replace("/auth/emailsendpasswordrecovery");
+    }
   }
 
   componentWillMount() {}
@@ -48,7 +74,7 @@ class Home extends Component {
                     <br />
                     <h5>
                       Plataforma capaz de realizar transações de forma
-                      automática para seus usuários através da configuração de
+                      automática para seus usuários através da configuração e
                       estratégias predefinidas com o objetivo de se beneficiar
                       da volatilidade do mercado para obter lucros.
                     </h5>
@@ -104,10 +130,11 @@ class Home extends Component {
                         Dashboard de Gerenciamento
                       </h4>
                       <p style={{ color: "#000000" }}>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Dolorem omnis dignissimos neque reiciendis quos? Animi
-                        nam velit eos nobis? Aspernatur, similique quidem maxime
-                        nostrum esse quasi officia modi nesciunt veritatis.
+                        Dashboard para visualizar os resultados obtidos na
+                        utilização da plataforma, visualizar em tempo real a
+                        situação do robô no processo de monitoramento além de
+                        acionar e também definir se é o melhor momento para
+                        apenas comprar ou apenas vender.
                       </p>
                     </div>
                   </div>
@@ -119,11 +146,11 @@ class Home extends Component {
                     </div>
                     <h4 style={{ color: "#000000" }}>Bot de Monitoramento</h4>
                     <p style={{ color: "#000000" }}>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Non exercitationem sed tenetur voluptatibus vero libero,
-                      necessitatibus consequuntur pariatur similique iure,
-                      consequatur excepturi eius voluptate saepe quaerat
-                      perspiciatis minima sunt alias!
+                      O Bot de monitoramento foi programado para executar ordens
+                      de compra e venda de forma automática, e possui a
+                      capacidade para analisar o melhor momento para executar
+                      uma operação e fazendo tudo isso com base na estratégia
+                      que você achar melhor para trabalhar.
                     </p>
                   </div>
                 </div>
@@ -134,11 +161,9 @@ class Home extends Component {
                     </div>
                     <h4 style={{ color: "#000000" }}>Ambiente de Backtest</h4>
                     <p style={{ color: "#000000" }}>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Officiis possimus ad repudiandae, dicta odit earum
-                      voluptates omnis ratione veniam tempora nobis. Unde
-                      repudiandae consequuntur sed recusandae quisquam inventore
-                      reprehenderit itaque.
+                      Teste um modelo de predição utilizando dados históricos, e
+                      analise como a sua estratégia teria de comportado em um
+                      determinado período do passado.
                     </p>
                   </div>
                 </div>
@@ -170,7 +195,9 @@ class Home extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
+Home = reduxForm({ form: "homeForm" })(Home);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ entrarEmContato }, dispatch);
 export default connect(
   null,
   mapDispatchToProps
