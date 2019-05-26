@@ -66,7 +66,7 @@ class Dashboard extends Component {
 
     const arrayOpenOrders = this.props.openOrdersTableResult.map(item => ({
       ...item,
-      amount: Number(item.amount).toFixed(2),
+      amount: Number(item.amount).toFixed(8),
       cost: Number(item.cost).toFixed(2)
     }));
 
@@ -110,7 +110,8 @@ const mapStateToProps = state => ({
   operationsSummaryResult: state.dashboard.operationsSummaryResult,
   overallResult: state.dashboard.overallResult,
   totalizerResult: state.dashboard.totalizerResult,
-  totalAssets: state.dashboard.totalAssets
+  totalAssets: state.dashboard.totalAssets,
+  logs: state.dashboard.logs
 });
 export default connect(
   mapStateToProps,

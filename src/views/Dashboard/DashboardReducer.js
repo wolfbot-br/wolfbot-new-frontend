@@ -52,7 +52,8 @@ export default (state = INITIAL_STATE, action) => {
         overallResult: action.payload.overallResult,
         totalizerResult: action.payload.totalizerResult,
         totalAssets: action.payload.totalAssets,
-        dayResult: action.payload.dayResult
+        dayResult: action.payload.dayResult,
+        logs: action.payload.logs
       };
 
     default:

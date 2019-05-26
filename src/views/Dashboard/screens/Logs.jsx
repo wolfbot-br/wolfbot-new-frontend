@@ -11,6 +11,11 @@ class Logs extends Component {
   render() {
     const columns = [
       {
+        Header: "Data",
+        accessor: "date",
+        headerClassName: "text-center"
+      },
+      {
         Header: "Ação",
         accessor: "logAction",
         headerClassName: "text-center"

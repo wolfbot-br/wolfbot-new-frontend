@@ -111,17 +111,9 @@ class Sobre extends React.Component {
                     </CardHeader>
                     <CardBody>
                       <InputGroup>
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText>
-                            <i className="tim-icons icon-email-85" />
-                          </InputGroupText>
-                        </InputGroupAddon>
-                        <Field
-                          component={Input}
-                          placeholder="Mensagem"
-                          type="textarea"
-                          name="message"
-                        />
+                        <p>
+                          Envie um email para: <b>wolfbotbr@gmail.com</b>
+                        </p>
                       </InputGroup>
                     </CardBody>
                     <CardFooter>
