@@ -129,13 +129,13 @@ class Admin extends React.Component {
     this.setState({ activeColor: color });
   };
   handleMiniClick = () => {
-    let notifyMessage = "Sidebar mini ";
+    let notifyMessage = "Menu lateral compactado ";
     if (document.body.classList.contains("sidebar-mini")) {
       this.setState({ sidebarMini: false });
-      notifyMessage += "deactivated...";
+      notifyMessage += "desativado...";
     } else {
       this.setState({ sidebarMini: true });
-      notifyMessage += "activated...";
+      notifyMessage += "ativado...";
     }
     let options = {};
     options = {

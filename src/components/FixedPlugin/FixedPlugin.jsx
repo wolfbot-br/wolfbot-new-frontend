@@ -39,7 +39,7 @@ class FixedPlugin extends Component {
             <i className="fa fa-cog fa-2x" />
           </a>
           <ul className="dropdown-menu show">
-            <li className="header-title">SIDEBAR BACKGROUND</li>
+            <li className="header-title">Escolha o tema do menu lateral</li>
             <li className="adjustments-line">
               <div className="badge-colors text-center">
                 <span
@@ -99,29 +99,29 @@ class FixedPlugin extends Component {
                 />
               </div>
             </li>
-            <li className="header-title">SIDEBAR MINI</li>
+            <li className="header-title">Menu lateral compacto</li>
             <li className="adjustments-line">
               <div className="togglebutton switch-sidebar-mini">
-                <span className="label-switch">OFF</span>
+                <span className="label-switch">NÃO</span>
                 <Switch
                   onChange={this.props.handleMiniClick}
                   value={this.props.sidebarMini}
                   onText=""
                   offText=""
                 />
-                <span className="label-switch">ON</span>
+                <span className="label-switch">SIM</span>
               </div>
             </li>
             <li className="adjustments-line">
               <div className="togglebutton switch-change-color mt-3">
-                <span className="label-switch">LIGHT MODE</span>
+                <span className="label-switch">TEMA CLARO</span>
                 <Switch
                   onChange={this.handleActiveMode}
                   value={this.state.darkMode}
                   onText=""
                   offText=""
                 />
-                <span className="label-switch">DARK MODE</span>
+                <span className="label-switch">TEMA ESCURO</span>
               </div>
             </li>
           </ul>

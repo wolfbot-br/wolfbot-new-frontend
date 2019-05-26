@@ -65,6 +65,7 @@ class Logs extends Component {
             showPaginationTop={false}
             showPaginationBottom={false}
             className="-striped -highlight"
+            noDataText="Nenhuma linha"
           />
         </CardBody>
       </Card>

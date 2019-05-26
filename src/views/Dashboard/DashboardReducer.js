@@ -1,9 +1,7 @@
 const INITIAL_STATE = {
   dashboard_reload: 0,
   dayResult: 0,
-  openOrdersTableResult: {
-    arrayOpenOrders: []
-  },
+  openOrdersTableResult: [],
   operationsSummaryResult: {
     totalInvested: "0",
     investimentReturn: "0",

@@ -64,7 +64,11 @@ class Dashboard extends Component {
       totalAssets: Number(this.props.totalAssets).toFixed(2)
     };
 
-    const arrayOpenOrders = this.props.openOrdersTableResult.arrayOpenOrders;
+    const arrayOpenOrders = this.props.openOrdersTableResult.map(item => ({
+      ...item,
+      amount: Number(item.amount).toFixed(2),
+      cost: Number(item.cost).toFixed(2)
+    }));
 
     return (
       <div className="content">
@@ -85,11 +89,7 @@ class Dashboard extends Component {
           <Col>
             <TablePosicoes arrayOpenOrders={arrayOpenOrders} />
           </Col>
-          {/* <Col lg={4}>
-            <Logs />
-          </Col> */}
         </Row>
-
         <Row>
           <Col>
             <Logs logs={this.props.logs} />
