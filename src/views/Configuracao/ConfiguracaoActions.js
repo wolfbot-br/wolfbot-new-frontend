@@ -9,9 +9,9 @@ const getConfiguracao = async () => {
   const url = `${ambiente.URL.api}/configuracao/buscar`;
   try {
     const configResult = await axios.get(url, { headers: { authorization: token } });
-    return configResult.data.configuracao;
+    return configResult;
   } catch (error) {
-    return error.response.status;
+    return error.response;
   }
 }
 
