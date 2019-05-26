@@ -1,5 +1,4 @@
 const INITIAL_STATE = {
-  roboLigado: false,
   dashboard_reload: 0,
   dayResult: 0,
   openOrdersTableResult: {
@@ -22,8 +21,6 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case "LIGAR_ROBO":
-      return { ...state, roboLigado: action.payload };
     case "DASHBOARD_UPDATED":
       console.log(action.payload.logs);
       if (!action.payload.logs) {

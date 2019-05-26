@@ -1,18 +1,21 @@
-import React, { Component } from 'react'
-import { Row, Card } from 'reactstrap'
+import React, { Component } from 'react';
+import { Row, Col } from 'reactstrap';
+import TableHistorico from './screens/TableHistorico'
 
 
 class Historico extends Component {
   constructor(props) {
     super(props)
+    this.state = {}
   }
 
   render() {
     return (
       <div className='content'>
         <Row>
-          <Card>
-          </Card>
+          <Col>
+            <TableHistorico />
+          </Col>
         </Row>
       </div>
     )

@@ -1,18 +1,20 @@
 import axios from 'axios'
 import ambiente from '../../config'
+import functions from '../../utils/functions'
 
-export async function getSaldo(USER_BOT) {
-  if (USER_BOT.id === undefined) {
-    return {
-      type: 'SALDO_NOT_FETCHED'
-    }
-  } else {
-    const request = await axios.get(`${ambiente.URL.api}/exchanges/saldo?user_uid=${USER_BOT.id}`,
-      { headers: { authorization: USER_BOT.Token } })
+const USER_BOT = functions.loadLocalStorage('user_bot')
 
-    return {
-      type: 'SALDO_FETCHED',
-      payload: request
-    }
+const getBalance = async () => {
+  const token = USER_BOT.authenticatedUser.accessToken;
+  const url = `${ambiente.URL.api}/exchange/balance`;
+  try {
+    const balanceResult = await axios.get(url, { headers: { authorization: token } });
+    return balanceResult;
+  } catch (error) {
+    return error.response;
   }
+}
+
+export {
+  getBalance,
 }

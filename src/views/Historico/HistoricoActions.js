@@ -1,30 +1,20 @@
 import axios from 'axios'
-import { toastr } from 'react-redux-toastr'
-import ambiente from '../config-ambiente'
-import functions from '../helpers/functions'
+import ambiente from '../../config'
+import functions from '../../utils/functions'
 
-export function listarHistorico () {
-  const USER_BOT = functions.loadLocalStorage('user_bot')
-  return dispatch => {
-    axios.get(`${ambiente.URL.api}/historicos`,
-      { headers: { authorization: USER_BOT.Token } })
-      .then(resp => {
-        const historicos = resp.data.data
-        dispatch({ type: 'LISTAR_HISTORICO', payload: historicos })
-      })
-      .catch(e => toastr.error('Erro', e.response.data.errors.message))
-  }
-};
+const USER_BOT = functions.loadLocalStorage('user_bot')
 
-export function buscarHistorico (values) {
-  const USER_BOT = functions.loadLocalStorage('user_bot')
-  return dispatch => {
-    axios.get(`${ambiente.URL.api}/historicos`,
-      { headers: { authorization: USER_BOT.Token } })
-      .then(resp => {
-        const historicos = resp.data.data
-        dispatch({ type: 'LISTAR_HISTORICO', payload: historicos })
-      })
-      .catch(e => toastr.error('Erro', e.response.data.errors.message))
+const getHistocic = async () => {
+  const token = USER_BOT.authenticatedUser.accessToken;
+  const url = `${ambiente.URL.api}/order/historic`;
+  try {
+    const orderResult = await axios.get(url, { headers: { authorization: token } });
+    return orderResult;
+  } catch (error) {
+    return error.response;
   }
+}
+
+export {
+  getHistocic,
 }
