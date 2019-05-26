@@ -1,49 +1,78 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { Col } from 'reactstrap'
-import { buscarHistorico } from '../../../_actions/HistoricoActions'
-import Tabela from '../../../components/ui/Tabela'
-
+import React, { Component } from 'react';
+import { Card, CardHeader, CardBody } from 'reactstrap';
+import ReactTable from "react-table";
+import { getHistocic } from '../HistoricoActions';
+import moment from 'moment';
 class TableHistorico extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
+    this.state = {
+      operations: [],
+    }
   }
-  render () {
-    const { reset, handleSubmit } = this.props
+
+  async componentDidMount() {
+    const orders = await getHistocic();
+    if (orders.status === 200) {
+      const { ordersResult } = orders.data;
+      if (ordersResult) {
+        const operationsResult = ordersResult.map((item) => {
+          return {
+            date: moment(item.date).format('DD-MM-YYYY - HH:MM:SS'),
+            amount: item.amount,
+            cost: `$${item.cost.toFixed(2)}`,
+            currency: item.currency,
+            type_operation: item.type_operation === 'buy' ? 'compra' : 'venda'
+          }
+        });
+        this.setState({ operations: operationsResult });
+      }
+    }
+  }
+
+  render() {
     const columns = [{
       Header: 'Data da Operação',
-      accessor: 'dataOperacao'
+      accessor: 'date',
+      headerClassName: "text-center"
     }, {
       Header: 'Quantidade',
-      accessor: 'quantidade'
+      accessor: 'amount',
+      headerClassName: "text-center"
     }, {
       Header: 'Custo',
-      accessor: 'custo'
-    }, {
-      Header: 'Ação Realizada',
-      accessor: 'acao'
+      accessor: 'cost',
+      headerClassName: "text-center"
     }, {
       Header: 'Moeda',
-      accessor: 'moeda'
+      accessor: 'currency',
+      headerClassName: "text-center"
     }, {
       Header: 'Tipo de Operação',
-      accessor: 'tipoOperacao'
+      accessor: 'type_operation',
+      headerClassName: "text-center"
     }]
     return (
-      <Col xs='12' lg='12' sm='12'>
-        <Tabela
-          dados={this.props.historicos}
-          colunas={columns}
-          pageSizeDefault={10}
-        />
-      </Col>
+      <Card>
+        <CardHeader>
+          <i className="tim-icons icon-wallet-43 text-success" />
+          Histórico das operações
+        </CardHeader>
+        <CardBody className="text-center">
+          <ReactTable
+            data={this.state.operations}
+            noDataText="Nenhuma operação realizada até o momento!"
+            filterable
+            resizable={false}
+            columns={columns}
+            defaultPageSize={10}
+            showPaginationBottom
+            className="-striped -highlight"
+          />
+        </CardBody>
+      </Card>
     )
   }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch)
-const mapStateToProps = state => ({
-  historicos: state.historico.historicos
-})
-export default connect(mapStateToProps, mapDispatchToProps)(TableHistorico)
+export default TableHistorico;

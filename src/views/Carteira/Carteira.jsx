@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'reactstrap'
-
 import Ativos from './screens/Ativos'
-import CompraManual from './screens/CompraManual'
 
 class Carteira extends Component {
   constructor(props) {
@@ -18,8 +16,6 @@ class Carteira extends Component {
           <Col>
             <Ativos />
           </Col>
-        </Row>
-        <Row>
         </Row>
       </div>
     )

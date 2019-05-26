@@ -16,12 +16,15 @@ class TablePosicoes extends Component {
     if (balance.status === 200) {
       const arrayBalance = []
       const objBalance = balance.data.saldo.total;
-      Object.keys(objBalance).forEach((item) => {
-        if (objBalance[item] > 0) {
-          arrayBalance.push({ currency: item, amount: objBalance[item] });
-        }
-      });
-      this.setState({ balance: arrayBalance });
+      console.log(objBalance)
+      if (objBalance !== null && objBalance !== undefined) {
+        Object.keys(objBalance).forEach((item) => {
+          if (objBalance[item] > 0) {
+            arrayBalance.push({ currency: item, amount: objBalance[item] });
+          }
+        });
+        this.setState({ balance: arrayBalance });
+      }
     }
   }
 
@@ -48,6 +51,7 @@ class TablePosicoes extends Component {
         <CardBody className="text-center">
           <ReactTable
             data={this.state.balance}
+            noDataText="Nenhum saldo para apresentar até o momento!"
             filterable
             resizable={false}
             columns={columns}
