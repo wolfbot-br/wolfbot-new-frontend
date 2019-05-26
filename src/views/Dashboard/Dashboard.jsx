@@ -95,7 +95,8 @@ const mapStateToProps = state => ({
   overallResult: state.dashboard.overallResult,
   totalizerOpenOrders: state.dashboard.totalizerOpenOrders,
   totalizerClosedOrders: state.dashboard.totalizerClosedOrders,
-  operationsSummary: state.dashboard.operationsSummary
+  operationsSummary: state.dashboard.operationsSummary,
+  openOrdersTable: state.dashboard.openOrdersTable
 });
 export default connect(
   mapStateToProps,
