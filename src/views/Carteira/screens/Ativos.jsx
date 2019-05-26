@@ -57,6 +57,16 @@ class TablePosicoes extends Component {
             columns={columns}
             defaultPageSize={5}
             showPaginationBottom
+            // Text
+            previousText="Anterior"
+            nextText="Próximo"
+            loadingText="Carregando..."
+            pageText="Página"
+            ofText="do"
+            rowsText="linhas"
+            // Accessibility Labels
+            pageJumpText="pular para a página"
+            rowsSelectorText="linhas por página"
             className="-striped -highlight"
           />
         </CardBody>

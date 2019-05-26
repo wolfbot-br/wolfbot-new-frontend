@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Card, CardBody } from "reactstrap";
+import { CardHeader, Card, CardBody } from "reactstrap";
 import ReactTable from "react-table";
 
 class TablePosicoes extends Component {
@@ -28,29 +28,32 @@ class TablePosicoes extends Component {
         headerClassName: "text-center"
       },
       {
-        Header: "Dias",
+        Header: "Tempo Aberto",
         accessor: "timeOpen",
         headerClassName: "text-center"
       }
     ];
 
     return (
-      <Card className="text-center">
-        <CardBody>
+      <Card>
+        <CardHeader>
+          <i className="tim-icons icon-paper text-success" />{" "}
+          Operações abertas
+        </CardHeader>
+        <CardBody className="text-center">
           <ReactTable
             data={data}
             filterable
             resizable={false}
             columns={columns}
             defaultPageSize={5}
-            showPaginationTop
-            showPaginationBottom={false}
+            showPaginationBottom
             className="-striped -highlight"
             // Text
             previousText="Anterior"
             nextText="Próximo"
             loadingText="Carregando..."
-            noDataText="Nenhuma linha"
+            noDataText="Nenhuma ordem aberta até o momento!"
             pageText="Página"
             ofText="do"
             rowsText="linhas"
