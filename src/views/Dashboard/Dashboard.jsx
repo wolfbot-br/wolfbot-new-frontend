@@ -69,18 +69,19 @@ class Dashboard extends Component {
           </Col>
         </Row>
         <Row>
-          <Col lg={8}>
+          <Col>
+            <Logs logs={this.props.logs} />
+          </Col>
+          {/* <Col lg={4}>
+            <Logs />
+          </Col> */}
+        </Row>
+
+        <Row>
+          <Col>
             <TablePosicoes />
           </Col>
-          <Col lg={4}>
-            <Logs />
-          </Col>
         </Row>
-        {/* <Row>
-          <Col>
-            <Logs />
-          </Col>
-        </Row> */}
       </div>
     );
   }
@@ -96,7 +97,8 @@ const mapStateToProps = state => ({
   totalizerOpenOrders: state.dashboard.totalizerOpenOrders,
   totalizerClosedOrders: state.dashboard.totalizerClosedOrders,
   operationsSummary: state.dashboard.operationsSummary,
-  openOrdersTable: state.dashboard.openOrdersTable
+  openOrdersTable: state.dashboard.openOrdersTable,
+  logs: state.dashboard.logs
 });
 export default connect(
   mapStateToProps,
