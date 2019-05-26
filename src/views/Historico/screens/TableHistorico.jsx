@@ -55,7 +55,7 @@ class TableHistorico extends Component {
     return (
       <Card>
         <CardHeader>
-          <i className="tim-icons icon-wallet-43 text-success" />
+          <i className="tim-icons icon-laptop text-success" />{" "}
           Histórico das operações
         </CardHeader>
         <CardBody className="text-center">
@@ -67,6 +67,16 @@ class TableHistorico extends Component {
             columns={columns}
             defaultPageSize={10}
             showPaginationBottom
+            // Text
+            previousText="Anterior"
+            nextText="Próximo"
+            loadingText="Carregando..."
+            pageText="Página"
+            ofText="do"
+            rowsText="linhas"
+            // Accessibility Labels
+            pageJumpText="pular para a página"
+            rowsSelectorText="linhas por página"
             className="-striped -highlight"
           />
         </CardBody>
