@@ -10,12 +10,14 @@ import {
   TabContent,
   TabPane
 } from "reactstrap";
+import Configurando from "./screens/Configurando";
+import AjudaRobo from "./screens/AjudaRobo";
 
 class Ajuda extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      horizontalTabs: "dados_pessoais"
+      horizontalTabs: "1"
     };
   }
 
@@ -44,7 +46,7 @@ class Ajuda extends Component {
                       this.changeActiveTab(e, "horizontalTabs", "1")
                     }
                   >
-                    Ajuda 1
+                    Configurando com a Exchange e definindo a estratégia
                   </NavLink>
                 </NavItem>
                 <NavItem>
@@ -58,10 +60,10 @@ class Ajuda extends Component {
                       this.changeActiveTab(e, "horizontalTabs", "2")
                     }
                   >
-                    Ajuda 2
+                    Iniciando o robô
                   </NavLink>
                 </NavItem>
-                <NavItem>
+                {/* <NavItem>
                   <NavLink
                     data-toggle="tab"
                     href="#"
@@ -88,14 +90,18 @@ class Ajuda extends Component {
                   >
                     Ajuda 4
                   </NavLink>
-                </NavItem>
+                </NavItem> */}
               </Nav>
               <TabContent
                 className="tab-space"
                 activeTab={this.state.horizontalTabs}
               >
-                <TabPane tabId="1" />
-                <TabPane tabId="2" />
+                <TabPane tabId="1">
+                  <Configurando />
+                </TabPane>
+                <TabPane tabId="2">
+                  <AjudaRobo />
+                </TabPane>
                 <TabPane tabId="3" />
                 <TabPane tabId="4" />
               </TabContent>
