@@ -38,7 +38,7 @@ class BotaoRobo extends Component {
     const result = await getStatusBot();
     if (result.status === 200) {
       const config = result.data.configuracao;
-      const statusBot = config.status ? config.status : null;
+      const statusBot = config ? config.status : null;
       if (statusBot !== null) {
         this.setState({
           statusBot: statusBot.status_bot,
