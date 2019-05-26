@@ -2,15 +2,21 @@ const INITIAL_STATE = {
   roboLigado: false,
   dashboard_reload: 0,
   dayResult: 0,
-  overallResult: 0,
-  totalizerOpenOrders: 0,
-  totalizerClosedOrders: 0,
-  operationsSummary: {
-    totalAmountInvested: 0,
-    totalLossProfitValue: 0,
-    returnOfInvestiment: 0,
-    totalLossProfitPercentage: 0
+  openOrdersTableResult: {
+    arrayOpenOrders: []
   },
+  operationsSummaryResult: {
+    totalInvested: "0",
+    investimentReturn: "0",
+    profit: "0",
+    profitPercentual: "0"
+  },
+  overallResult: "0",
+  totalizerResult: {
+    openOrders: "0",
+    closeOrders: "0"
+  },
+  totalAssets: "0",
   logs: []
 };
 
@@ -42,6 +48,18 @@ export default (state = INITIAL_STATE, action) => {
       } else {
         return { ...state, logs: [...state.logs, action.payload.logs] };
       }
+
+    case "GET_DASHBOARD":
+      return {
+        ...state,
+        openOrdersTableResult: action.payload.openOrdersTableResult,
+        operationsSummaryResult: action.payload.operationsSummaryResult,
+        overallResult: action.payload.overallResult,
+        totalizerResult: action.payload.totalizerResult,
+        totalAssets: action.payload.totalAssets,
+        dayResult: action.payload.dayResult
+      };
+
     default:
       return state;
   }

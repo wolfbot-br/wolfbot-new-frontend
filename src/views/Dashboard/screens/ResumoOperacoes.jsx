@@ -27,7 +27,7 @@ const ResumoOperacoes = props => {
             </CardTitle>
           </Col>
           <Col xs="2">
-            <CardTitle>{operationsSummary.totalAmountInvested}</CardTitle>
+            <CardTitle>{operationsSummary.totalInvested}</CardTitle>
           </Col>
           <Col xs="4">
             <CardTitle className="text-center">
@@ -35,7 +35,7 @@ const ResumoOperacoes = props => {
             </CardTitle>
           </Col>
           <Col xs="2">
-            <CardTitle>{operationsSummary.returnOfInvestiment}</CardTitle>
+            <CardTitle>{operationsSummary.investimentReturn}</CardTitle>
           </Col>
         </Row>
         <Row>
@@ -45,7 +45,7 @@ const ResumoOperacoes = props => {
             </CardTitle>
           </Col>
           <Col xs="2">
-            <CardTitle>{operationsSummary.totalLossProfitValue}</CardTitle>
+            <CardTitle>{operationsSummary.profit}</CardTitle>
           </Col>
           <Col xs="4">
             <CardTitle className="text-center">
@@ -53,7 +53,7 @@ const ResumoOperacoes = props => {
             </CardTitle>
           </Col>
           <Col xs="2">
-            <CardTitle>{operationsSummary.totalLossProfitPercentage}</CardTitle>
+            <CardTitle>{operationsSummary.profitPercentual}</CardTitle>
           </Col>
         </Row>
       </CardBody>
@@ -69,7 +69,7 @@ const ResumoOperacoes = props => {
         <Row>
           <Col xs="12">
             <CardTitle tag="h3" className="text-center text-success">
-              $ 657.98
+              $ {operationsSummary.totalAssets}
             </CardTitle>
           </Col>
         </Row>

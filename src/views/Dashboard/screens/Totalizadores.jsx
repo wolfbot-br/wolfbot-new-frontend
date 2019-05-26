@@ -69,9 +69,7 @@ const Totalizadores = props => {
               <Col xs="7">
                 <div className="numbers">
                   <p className="card-category">Ordens abertas</p>
-                  <CardTitle tag="h3">
-                    {totalizers.totalizerOpenOrders}
-                  </CardTitle>
+                  <CardTitle tag="h3">{totalizers.openOrders}</CardTitle>
                 </div>
               </Col>
             </Row>
@@ -97,9 +95,7 @@ const Totalizadores = props => {
               <Col xs="7">
                 <div className="numbers">
                   <p className="card-category">Ordens fechadas</p>
-                  <CardTitle tag="h3">
-                    {totalizers.totalizerClosedOrders}
-                  </CardTitle>
+                  <CardTitle tag="h3">{totalizers.closeOrders}</CardTitle>
                 </div>
               </Col>
             </Row>

@@ -12,7 +12,7 @@ import Logs from "./screens/Logs";
 
 import functions from "../../utils/functions";
 import config from "../../config";
-import { atualizarDashboard } from "./DashboardActions";
+import { atualizarDashboard, getDashboardData } from "./DashboardActions";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class Dashboard extends Component {
     this.state = {};
   }
 
-  componentWillMount() {
+  async componentWillMount() {
     const { atualizarDashboard } = this.props;
     const USER_BOT = functions.loadLocalStorage("user_bot");
 
@@ -32,6 +32,8 @@ class Dashboard extends Component {
       socket.on("updates", async receive => {
         atualizarDashboard(receive);
       });
+
+      await this.props.getDashboardData(USER_BOT.authenticatedUser.accessToken);
     }
   }
 
@@ -48,11 +50,22 @@ class Dashboard extends Component {
 
   render() {
     const totalizers = {
-      dayResult: this.props.dayResult,
-      overallResult: this.props.overallResult,
-      totalizerOpenOrders: this.props.totalizerOpenOrders,
-      totalizerClosedOrders: this.props.totalizerClosedOrders
+      dayResult: Number(this.props.dayResult).toFixed(2),
+      overallResult: Number(this.props.overallResult).toFixed(2),
+      openOrders: this.props.totalizerResult.openOrders,
+      closeOrders: this.props.totalizerResult.closeOrders
     };
+
+    const operationsSummary = {
+      totalInvested: this.props.operationsSummaryResult.totalInvested,
+      investimentReturn: this.props.operationsSummaryResult.investimentReturn,
+      profit: this.props.operationsSummaryResult.profit,
+      profitPercentual: this.props.operationsSummaryResult.profitPercentual,
+      totalAssets: Number(this.props.totalAssets).toFixed(2)
+    };
+
+    const arrayOpenOrders = this.props.openOrdersTableResult.arrayOpenOrders;
+
     return (
       <div className="content">
         <Row>
@@ -62,7 +75,7 @@ class Dashboard extends Component {
         </Row>
         <Row>
           <Col lg={9}>
-            <ResumoOperacoes operationsSummary={this.props.operationsSummary} />
+            <ResumoOperacoes operationsSummary={operationsSummary} />
           </Col>
           <Col lg={3}>
             <BotaoRobo />
@@ -70,7 +83,7 @@ class Dashboard extends Component {
         </Row>
         <Row>
           <Col>
-            <Logs logs={this.props.logs} />
+            <TablePosicoes arrayOpenOrders={arrayOpenOrders} />
           </Col>
           {/* <Col lg={4}>
             <Logs />
@@ -79,7 +92,7 @@ class Dashboard extends Component {
 
         <Row>
           <Col>
-            <TablePosicoes />
+            <Logs logs={this.props.logs} />
           </Col>
         </Row>
       </div>
@@ -88,16 +101,16 @@ class Dashboard extends Component {
 }
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ atualizarDashboard }, dispatch);
+  bindActionCreators({ atualizarDashboard, getDashboardData }, dispatch);
 const mapStateToProps = state => ({
   dashboard_reload: state.dashboard.dashboard_reload,
   valueTeste: state.dashboard.valueTeste,
   dayResult: state.dashboard.dayResult,
+  openOrdersTableResult: state.dashboard.openOrdersTableResult,
+  operationsSummaryResult: state.dashboard.operationsSummaryResult,
   overallResult: state.dashboard.overallResult,
-  totalizerOpenOrders: state.dashboard.totalizerOpenOrders,
-  totalizerClosedOrders: state.dashboard.totalizerClosedOrders,
-  operationsSummary: state.dashboard.operationsSummary,
-  logs: state.dashboard.logs
+  totalizerResult: state.dashboard.totalizerResult,
+  totalAssets: state.dashboard.totalAssets
 });
 export default connect(
   mapStateToProps,
