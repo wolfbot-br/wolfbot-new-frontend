@@ -1,68 +1,58 @@
 import React, { Component } from "react";
-import { Button, Card, CardBody, CardHeader, CardTitle } from "reactstrap";
+import { Card, CardBody, CardHeader, CardTitle } from "reactstrap";
 import ReactTable from "react-table";
+import { getBalance } from '../CarteiraActions';
 
 class TablePosicoes extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      balance: []
+    };
+  }
+
+  async componentDidMount() {
+    const balance = await getBalance();
+    if (balance.status === 200) {
+      const arrayBalance = []
+      const objBalance = balance.data.saldo.total;
+      Object.keys(objBalance).forEach((item) => {
+        if (objBalance[item] > 0) {
+          arrayBalance.push({ currency: item, amount: objBalance[item] });
+        }
+      });
+      this.setState({ balance: arrayBalance });
+    }
   }
 
   render() {
-    const data = [
-      { moeda: "BTC", quantidade: 0.342564 },
-      { moeda: "XMR", quantidade: 0.564734 },
-      { moeda: "DASH", quantidade: 0.67853409 },
-      { moeda: "ETC", quantidade: 0.56789054 },
-      { moeda: "ETH", quantidade: 0.79043217 },
-      { moeda: "XMR", quantidade: 0.87654908 },
-      { moeda: "BTC", quantidade: 0.14563278 },
-      { moeda: "BTC", quantidade: 0.9087689 }
-    ];
-
     const columns = [
       {
         Header: "Moeda",
-        accessor: "moeda",
+        accessor: "currency",
         headerClassName: "text-center"
       },
       {
         Header: "Quantidade",
-        accessor: "quantidade",
+        accessor: "amount",
         headerClassName: "text-center"
       },
-      {
-        Header: "Ação",
-        Cell: row => (
-          <div>
-            <Button className="btn-simple btn-success btn-sm mr-1 margin-right: 1rem">
-              Vender Tudo
-            </Button>
-          </div>
-        ),
-        headerClassName: "text-center",
-        sortable: false,
-        filterable: false
-      }
     ];
 
     return (
       <Card>
         <CardHeader>
-          <CardTitle>
-            <i className="tim-icons icon-wallet-43 text-success" /> Carteira de
-            Ativos
-          </CardTitle>
+          <i className="tim-icons icon-wallet-43 text-success" /> Carteira de
+          Ativos
         </CardHeader>
         <CardBody className="text-center">
           <ReactTable
-            data={data}
+            data={this.state.balance}
             filterable
             resizable={false}
             columns={columns}
             defaultPageSize={5}
-            showPaginationTop
-            showPaginationBottom={false}
+            showPaginationBottom
             className="-striped -highlight"
           />
         </CardBody>
