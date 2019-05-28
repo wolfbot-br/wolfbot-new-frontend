@@ -53,8 +53,9 @@ class FormEstrategia extends Component {
 
   async componentDidMount() {
     const configuracao = await getConfiguracao();
-    const candle = configuracao.candle_size;
-    const target = configuracao.target_currency;
+    console.log(configuracao)
+    const candle = configuracao.data.configuracao.candle_size;
+    const target = configuracao.data.configuracao.target_currency;
     let arraytarget = [];
     switch (candle) {
       case '5m':
@@ -97,11 +98,11 @@ class FormEstrategia extends Component {
     }
     this.setState({
       multipleSelectTargetCurrency: arraytarget || '',
-      purchaseQuantity: configuracao.purchase_quantity || '',
-      profit: configuracao.profit || '',
-      stop: configuracao.stop || '',
-      sellForIndicator: configuracao.sellForIndicator || false,
-      maxOrdersOpen: configuracao.maxOrdersOpen || '',
+      purchaseQuantity: configuracao.data.configuracao.purchase_quantity || '',
+      profit: configuracao.data.configuracao.profit || '',
+      stop: configuracao.data.configuracao.stop || '',
+      sellForIndicator: configuracao.data.configuracao.sellForIndicator || false,
+      maxOrdersOpen: configuracao.data.configuracao.maxOrdersOpen || '',
       alterState: false
     });
   }

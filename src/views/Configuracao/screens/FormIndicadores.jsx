@@ -64,24 +64,24 @@ class FormIndicadores extends Component {
 
   async componentDidMount() {
     const configuracao = await getConfiguracao();
-    if (configuracao.indicatorState !== null && configuracao.indicatorState !== undefined) {
+    if (configuracao.data.configuracao.indicatorState !== null && configuracao.data.configuracao.indicatorState !== undefined) {
       this.setState({
-        emaState: configuracao.strategy.indicators.ema.status,
-        emaShortPeriod: configuracao.strategy.indicators.ema.short_period,
-        emaLongPeriod: configuracao.strategy.indicators.ema.long_period,
-        macdState: configuracao.strategy.indicators.macd.status,
-        macdShortPeriod: configuracao.strategy.indicators.macd.short_period,
-        macdLongPeriod: configuracao.strategy.indicators.macd.long_period,
-        macdSignalPeriod: configuracao.strategy.indicators.macd.signal_period,
-        stochState: configuracao.strategy.indicators.stoch.status,
-        stochKperiod: configuracao.strategy.indicators.stoch.k_period,
-        stochKslowPeriod: configuracao.strategy.indicators.stoch.k_slow_period,
-        stochDperiod: configuracao.strategy.indicators.stoch.d_period,
-        cciState: configuracao.strategy.indicators.cci.status,
-        cciPeriod: configuracao.strategy.indicators.cci.period,
-        bbandsState: configuracao.strategy.indicators.bbands.status,
-        bbandsPeriod: configuracao.strategy.indicators.bbands.period,
-        bbandsStddevPeriod: configuracao.strategy.indicators.bbands.stddev_period,
+        emaState: configuracao.data.configuracao.strategy.indicators.ema.status,
+        emaShortPeriod: configuracao.data.configuracao.strategy.indicators.ema.short_period,
+        emaLongPeriod: configuracao.data.configuracao.strategy.indicators.ema.long_period,
+        macdState: configuracao.data.configuracao.strategy.indicators.macd.status,
+        macdShortPeriod: configuracao.data.configuracao.strategy.indicators.macd.short_period,
+        macdLongPeriod: configuracao.data.configuracao.strategy.indicators.macd.long_period,
+        macdSignalPeriod: configuracao.data.configuracao.strategy.indicators.macd.signal_period,
+        stochState: configuracao.data.configuracao.strategy.indicators.stoch.status,
+        stochKperiod: configuracao.data.configuracao.strategy.indicators.stoch.k_period,
+        stochKslowPeriod: configuracao.data.configuracao.strategy.indicators.stoch.k_slow_period,
+        stochDperiod: configuracao.data.configuracao.strategy.indicators.stoch.d_period,
+        cciState: configuracao.data.configuracao.strategy.indicators.cci.status,
+        cciPeriod: configuracao.data.configuracao.strategy.indicators.cci.period,
+        bbandsState: configuracao.data.configuracao.strategy.indicators.bbands.status,
+        bbandsPeriod: configuracao.data.configuracao.strategy.indicators.bbands.period,
+        bbandsStddevPeriod: configuracao.data.configuracao.strategy.indicators.bbands.stddev_period,
       });
     }
 

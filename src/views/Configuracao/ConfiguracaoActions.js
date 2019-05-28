@@ -17,7 +17,7 @@ const getConfiguracao = async () => {
 
 const testConfiguracao = async () => {
   const token = USER_BOT.authenticatedUser.accessToken;
-  const url = `${ambiente.URL.api}/exchanges/saldo`;
+  const url = `${ambiente.URL.api}/exchange/balance`;
   try {
     const saldoResult = await axios.get(url, { headers: { authorization: token } });
     return saldoResult;
