@@ -335,7 +335,7 @@ class FormEstrategia extends Component {
                 disabled={this.state.alterState ? true : false}
               >
                 Alterar
-                            </Button>
+              </Button>
               <Button
                 className="btn-fill"
                 color="success"
@@ -343,7 +343,7 @@ class FormEstrategia extends Component {
                 type="submit"
               >
                 Gravar
-                            </Button>
+              </Button>
             </Col>
           </Row>
         </Form>

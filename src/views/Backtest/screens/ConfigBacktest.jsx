@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import Switch from "react-bootstrap-switch";
+import MaskedInput from 'react-text-mask';
 import {
   Row,
   Col,
@@ -14,7 +15,8 @@ import {
   Label,
   Button,
   Input
-} from 'reactstrap'
+} from 'reactstrap';
+import { postBacktest } from '../BacktestAction';
 
 class ConfigBacktest extends Component {
   constructor(props) {
@@ -23,36 +25,34 @@ class ConfigBacktest extends Component {
       exchangeSelect: '',
       currencySelect: '',
       candleSelect: '',
+      sellForIndicator: false,
       profit: '',
       stop: '',
-      base_currency: 'USD',
       date: '',
+      name: 'EMA',
 
-      emaName: 'EMA',
-      emaState: false,
-      emaShortPeriod: 0,
-      emaLongPeriod: 0,
+      emaState: true,
+      emaPeriod: 9,
 
-      macdName: 'MACD',
       macdState: false,
-      macdShortPeriod: 0,
-      macdLongPeriod: 0,
-      macdSignalPeriod: 0,
+      macdShortPeriod: 12,
+      macdLongPeriod: 26,
+      macdSignalPeriod: 9,
 
-      cciName: 'CCI',
-      cciState: false,
-      cciPeriod: 0,
-
-      bbandsName: 'BBANDS',
-      bbandsState: false,
-      bbandsPeriod: 0,
-      bbandsStddevPeriod: 0,
-
-      stochName: 'STOCH',
       stochState: false,
-      stochKperiod: 0,
-      stochKslowPeriod: 0,
-      stochDperiod: 0,
+      stochKperiod: 10,
+      stochKslowPeriod: 15,
+      stochDperiod: 8,
+
+      cciState: false,
+      cciPeriod: 10,
+
+      bbandsState: false,
+      bbandsPeriod: 4,
+      bbandsStddevPeriod: 5,
+
+      alterState: false,
+      onSubmited: false,
     };
   }
 
@@ -61,62 +61,84 @@ class ConfigBacktest extends Component {
     const value = e.target.value;
     this.setState({ [name]: value })
   }
-  handleSwitch = (elem, state) => {
-    const name = elem.props.name;
-    const value = elem.props.value;
+  handleSwitch = e => {
+    const name = e.props.name;
+    const value = e.props.value;
     this.setState({ [name]: !value });
+    if (name === 'emaState' && this.state.emaState === true) {
+      this.setState({
+        name: 'EMA',
+        macdState: false,
+        cciState: false,
+        stochState: false,
+        bbandsState: false,
+      });
+    }
+    if (name === 'macdState' && this.state.macdState === true) {
+      this.setState({
+        name: 'MACD',
+        emaState: false,
+        cciState: false,
+        stochState: false,
+        bbandsState: false,
+      });
+    }
+    if (name === 'cciState' && this.state.cciState === true) {
+      this.setState({
+        name: 'CCI',
+        macdState: false,
+        emaState: false,
+        stochState: false,
+        bbandsState: false,
+      });
+    }
+    if (name === 'stochState' && this.state.stochState === true) {
+      this.setState({
+        name: 'STOCH',
+        macdState: false,
+        cciState: false,
+        emaState: false,
+        bbandsState: false,
+      });
+    }
+    if (name === 'bbandsState' && this.state.bbandsState === true) {
+      this.setState({
+        name: 'BBANDS',
+        macdState: false,
+        cciState: false,
+        stochState: false,
+        emaState: false,
+      });
+    }
   }
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
     const values = {
       exchange: this.state.exchangeSelect.value,
-      target_currency: this.state.currencySelect.value,
       candle_size: this.state.candleSelect.value,
-      indicators: [
-        this.state.emaState
-          ? {
-            name: this.state.emaName,
-            short_period: this.state.emaShortPeriod,
-            long_period: this.state.emaLongPeriod,
-          }
-          : null,
-        this.state.macdState
-          ? {
-            name: this.state.macdName,
-            short_period: this.state.macdShortPeriod,
-            long_period: this.state.macdLongPeriod,
-            signal_period: this.state.macdSignalPeriod,
-          }
-          : null,
-        this.state.cciState
-          ? {
-            name: this.state.cciName,
-            period: this.state.cciPeriod,
-          }
-          : null,
-        this.state.bbandsState
-          ? {
-            name: this.state.bbandsName,
-            period: this.state.bbandsPeriod,
-            stddev_period: this.state.bbandsStddevPeriod,
-          }
-          : null,
-        this.state.stochState
-          ? {
-            name: this.state.stochName,
-            k_period: this.state.stochKperiod,
-            k_slow_period: this.state.stochKslowPeriod,
-            d_period: this.state.stochDperiod,
-          }
-          : null,
-      ],
+      indicator: {
+        name: this.state.name,
+        macd_long_period: this.state.macdLongPeriod,
+        macd_short_period: this.state.macdShortPeriod,
+        macd_signal_period: this.state.macdSignalPeriod,
+        ema_period: this.state.emaPeriod,
+        stoch_k_period: this.state.stochKperiod,
+        stoch_k_slow_period: this.state.stochKslowPeriod,
+        stoch_d_period: this.state.stochDperiod,
+        cci_period: this.state.cciPeriod,
+        bbands_period: this.state.bbandsPeriod,
+        bbands_stddev_period: this.state.bbandsStddevPeriod,
+      },
+      sellForIndicator: this.state.sellForIndicator,
       profit: this.state.profit,
       stop: this.state.stop,
-      base_currency: this.state.base_currency,
+      base_currency: 'USD',
+      target_currency: this.state.currencySelect.value,
       date: this.state.date
     }
-    console.log(values)
+    const resultBacktest = await postBacktest(values);
+    console.log(resultBacktest)
   }
   render() {
     return (
@@ -127,7 +149,7 @@ class ConfigBacktest extends Component {
             Configuração de estratégia para teste.
                     </p>
         </CardHeader>
-        <Form action="/" className="form-horizontal" method="get" onSubmit={this.onSubmit}>
+        <Form className="form-horizontal" onSubmit={this.onSubmit}>
           <CardBody>
             <Col xs="12">
               <Row>
@@ -143,8 +165,7 @@ class ConfigBacktest extends Component {
                         exchangeSelect: value
                       })}
                       options={[
-                        { value: "Bittrex", label: "Bittrex" },
-                        { value: "Bitfinex", label: "Bitfinex" }
+                        { value: "bittrex", label: "Bittrex" },
                       ]}
                       placeholder="Escolha sua exchange"
                     />
@@ -203,9 +224,7 @@ class ConfigBacktest extends Component {
                   <FormGroup style={{ paddingTop: 6 }}>
                     <Switch
                       value={this.state.emaState}
-                      onChange={
-                        (elem) => this.handleSwitch(elem)
-                      }
+                      onChange={this.handleSwitch}
                       name="emaState"
                     />
                   </FormGroup>
@@ -214,13 +233,19 @@ class ConfigBacktest extends Component {
                   this.state.emaState === true
                     ? (
                       <Row>
-                        <Label sm="2">short period</Label>
-                        <Col sm="3">
-                          <Input type="number" placeholder="short period" />
-                        </Col>
-                        <Label sm="2">long period</Label>
-                        <Col sm="3">
-                          <Input type="number" placeholder="long period" />
+                        <Col sm="6">
+                          <FormGroup>
+                            <MaskedInput
+                              mask={[/[1-9]/, /\d/, /\d/]}
+                              name="emaPeriod"
+                              placeholder="period"
+                              type="text"
+                              guide={false}
+                              value={this.state.emaPeriod}
+                              onChange={this.handleChange}
+                              render={(ref, props) => (<Input innerRef={ref} {...props} />)}
+                            />
+                          </FormGroup>
                         </Col>
                       </Row>
                     )
@@ -233,9 +258,7 @@ class ConfigBacktest extends Component {
                   <FormGroup style={{ paddingTop: 6 }}>
                     <Switch
                       value={this.state.macdState}
-                      onChange={
-                        (elem) => this.handleSwitch(elem)
-                      }
+                      onChange={this.handleSwitch}
                       name="macdState"
                     />
                   </FormGroup>
@@ -244,17 +267,47 @@ class ConfigBacktest extends Component {
                   this.state.macdState === true
                     ? (
                       <Row>
-                        <Label sm="2">short period</Label>
                         <Col sm="2">
-                          <Input type="number" placeholder="short period" />
+                          <FormGroup>
+                            <MaskedInput
+                              mask={[/[1-9]/, /\d/, /\d/]}
+                              name="macdShortPeriod"
+                              placeholder="short period"
+                              type="text"
+                              guide={false}
+                              value={this.state.macdShortPeriod}
+                              onChange={this.handleChange}
+                              render={(ref, props) => (<Input innerRef={ref} {...props} />)}
+                            />
+                          </FormGroup>
                         </Col>
-                        <Label sm="2">long period</Label>
                         <Col sm="2">
-                          <Input type="number" placeholder="long period" />
+                          <FormGroup>
+                            <MaskedInput
+                              mask={[/[1-9]/, /\d/, /\d/]}
+                              name="macdLongPeriod"
+                              placeholder="long period"
+                              type="text"
+                              guide={false}
+                              value={this.state.macdLongPeriod}
+                              onChange={this.handleChange}
+                              render={(ref, props) => (<Input innerRef={ref} {...props} />)}
+                            />
+                          </FormGroup>
                         </Col>
-                        <Label sm="2">signal period</Label>
                         <Col sm="2">
-                          <Input type="number" placeholder="long period" />
+                          <FormGroup>
+                            <MaskedInput
+                              mask={[/[1-9]/, /\d/, /\d/]}
+                              name="macdSignalPeriod"
+                              placeholder="signal period"
+                              type="text"
+                              guide={false}
+                              value={this.state.macdSignalPeriod}
+                              onChange={this.handleChange}
+                              render={(ref, props) => (<Input innerRef={ref} {...props} />)}
+                            />
+                          </FormGroup>
                         </Col>
                       </Row>
                     )
@@ -267,9 +320,7 @@ class ConfigBacktest extends Component {
                   <FormGroup style={{ paddingTop: 6 }}>
                     <Switch
                       value={this.state.cciState}
-                      onChange={
-                        (elem) => this.handleSwitch(elem)
-                      }
+                      onChange={this.handleSwitch}
                       name="cciState"
                     />
                   </FormGroup>
@@ -278,9 +329,19 @@ class ConfigBacktest extends Component {
                   this.state.cciState === true
                     ? (
                       <Row>
-                        <Label sm="2">period</Label>
-                        <Col sm="3">
-                          <Input type="number" placeholder="short period" />
+                        <Col md="6">
+                          <FormGroup>
+                            <MaskedInput
+                              mask={[/[1-9]/, /\d/, /\d/]}
+                              name="cciPeriod"
+                              placeholder="period"
+                              type="text"
+                              guide={false}
+                              value={this.state.cciPeriod}
+                              onChange={this.handleChange}
+                              render={(ref, props) => (<Input innerRef={ref} {...props} />)}
+                            />
+                          </FormGroup>
                         </Col>
                       </Row>
                     )
@@ -293,9 +354,7 @@ class ConfigBacktest extends Component {
                   <FormGroup style={{ paddingTop: 6 }}>
                     <Switch
                       value={this.state.bbandsState}
-                      onChange={
-                        (elem) => this.handleSwitch(elem)
-                      }
+                      onChange={this.handleSwitch}
                       name="bbandsState"
                     />
                   </FormGroup>
@@ -304,13 +363,33 @@ class ConfigBacktest extends Component {
                   this.state.bbandsState === true
                     ? (
                       <Row>
-                        <Label sm="2">period</Label>
                         <Col sm="3">
-                          <Input type="number" placeholder="short period" />
+                          <FormGroup>
+                            <MaskedInput
+                              mask={[/[1-9]/, /\d/, /\d/]}
+                              name="bbandsPeriod"
+                              placeholder="period"
+                              type="text"
+                              guide={false}
+                              value={this.state.bbandsPeriod}
+                              onChange={this.handleChange}
+                              render={(ref, props) => (<Input innerRef={ref} {...props} />)}
+                            />
+                          </FormGroup>
                         </Col>
-                        <Label sm="2">stddev period</Label>
                         <Col sm="3">
-                          <Input type="number" placeholder="long period" />
+                          <FormGroup>
+                            <MaskedInput
+                              mask={[/[1-9]/, /\d/, /\d/]}
+                              name="bbandsStddevPeriod"
+                              placeholder="stddev period"
+                              type="text"
+                              guide={false}
+                              value={this.state.bbandsStddevPeriod}
+                              onChange={this.handleChange}
+                              render={(ref, props) => (<Input innerRef={ref} {...props} />)}
+                            />
+                          </FormGroup>
                         </Col>
                       </Row>
                     )
@@ -323,9 +402,7 @@ class ConfigBacktest extends Component {
                   <FormGroup style={{ paddingTop: 6 }}>
                     <Switch
                       value={this.state.stochState}
-                      onChange={
-                        (elem) => this.handleSwitch(elem)
-                      }
+                      onChange={this.handleSwitch}
                       name="stochState"
                     />
                   </FormGroup>
@@ -334,17 +411,47 @@ class ConfigBacktest extends Component {
                   this.state.stochState === true
                     ? (
                       <Row>
-                        <Label sm="2">k period</Label>
                         <Col sm="2">
-                          <Input type="number" placeholder="short period" />
+                          <FormGroup>
+                            <MaskedInput
+                              mask={[/[1-9]/, /\d/, /\d/]}
+                              name="stochKperiod"
+                              placeholder="K period"
+                              type="text"
+                              guide={false}
+                              value={this.state.stochKperiod}
+                              onChange={this.handleChange}
+                              render={(ref, props) => (<Input innerRef={ref} {...props} />)}
+                            />
+                          </FormGroup>
                         </Col>
-                        <Label sm="2">k slow period</Label>
                         <Col sm="2">
-                          <Input type="number" placeholder="long period" />
+                          <FormGroup>
+                            <MaskedInput
+                              mask={[/[1-9]/, /\d/, /\d/]}
+                              name="stochKslowPeriod"
+                              placeholder="K slow period"
+                              type="text"
+                              guide={false}
+                              value={this.state.stochKslowPeriod}
+                              onChange={this.handleChange}
+                              render={(ref, props) => (<Input innerRef={ref} {...props} />)}
+                            />
+                          </FormGroup>
                         </Col>
-                        <Label sm="2">d period</Label>
                         <Col sm="2">
-                          <Input type="number" placeholder="long period" />
+                          <FormGroup>
+                            <MaskedInput
+                              mask={[/[1-9]/, /\d/, /\d/]}
+                              name="stochDperiod"
+                              placeholder="D period"
+                              type="text"
+                              guide={false}
+                              value={this.state.stochDperiod}
+                              onChange={this.handleChange}
+                              render={(ref, props) => (<Input innerRef={ref} {...props} />)}
+                            />
+                          </FormGroup>
                         </Col>
                       </Row>
                     )
@@ -355,7 +462,16 @@ class ConfigBacktest extends Component {
                 <Label sm="2">Lucro</Label>
                 <Col sm="10">
                   <FormGroup>
-                    <Input type="number" />
+                    <MaskedInput
+                      mask={[/[0-1]/, '.', /[0-9]/, /[0-9]/]}
+                      name="profit"
+                      placeholder="exemplos de percentual - 0.01 = 1%, 0.10 = 10%, 1.00 = 100%"
+                      type="text"
+                      guide={false}
+                      value={this.state.profit}
+                      onChange={this.handleChange}
+                      render={(ref, props) => (<Input innerRef={ref} {...props} />)}
+                    />
                   </FormGroup>
                 </Col>
               </Row>
@@ -363,7 +479,28 @@ class ConfigBacktest extends Component {
                 <Label sm="2">Stop-Loss</Label>
                 <Col sm="10">
                   <FormGroup>
-                    <Input type="number" />
+                    <MaskedInput
+                      mask={[/[0-1]/, '.', /[0-9]/, /[0-9]/]}
+                      name="stop"
+                      placeholder="exemplos de percentual - 0.01 = 1%, 0.10 = 10%, 1.00 = 100%"
+                      type="text"
+                      guide={false}
+                      value={this.state.stop}
+                      onChange={this.handleChange}
+                      render={(ref, props) => (<Input innerRef={ref} {...props} />)}
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row>
+                <Label sm="2">Vender Pelo Indicador</Label>
+                <Col sm="1">
+                  <FormGroup style={{ paddingTop: 6 }}>
+                    <Switch
+                      value={this.state.sellForIndicator}
+                      onChange={this.handleSwitch}
+                      name="sellForIndicator"
+                    />
                   </FormGroup>
                 </Col>
               </Row>
@@ -371,7 +508,12 @@ class ConfigBacktest extends Component {
                 <Label sm="2">Datade início</Label>
                 <Col sm="10">
                   <FormGroup>
-                    <Input type="date" />
+                    <Input
+                      type="date"
+                      name="date"
+                      value={this.state.date}
+                      onChange={this.handleChange}
+                    />
                   </FormGroup>
                 </Col>
               </Row>
@@ -380,7 +522,7 @@ class ConfigBacktest extends Component {
           <CardFooter>
             <Button className="btn-fill" color="primary" type="submit">
               Testar
-                    </Button>
+            </Button>
           </CardFooter>
         </Form>
       </Card>

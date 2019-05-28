@@ -1,23 +1,20 @@
 import axios from 'axios'
-// import { toastr } from 'react-redux-toastr'
-import ambiente from '../config-ambiente'
-import functions from '../helpers/functions'
+import ambiente from '../../config'
+import functions from '../../utils/functions'
 
-const USER_BOT = functions.loadLocalStorage("user_bot");
+const USER_BOT = functions.loadLocalStorage('user_bot')
 
-export function testarStrategy(values) {
-  const url = `${ambiente.URL.api}/backtest/testarConfiguracao`
-  return dispatch => {
-    axios
-      .post(url, values, { headers: { authorization: USER_BOT.Token } })
-      .then(resp =>
-        dispatch({ type: "RESULT_FETCHED", payload: resp.data.data })
-      )
-      .catch(e => {
-        // for (var i = 0; i < e.response.data.errors.length; i++) {
-        //   toastr.error('Erro', e.response.data.errors[i].message)
-        //   console.log(e.response.data.errors[i].message)
-        // }
-      })
+const postBacktest = async (values) => {
+  const token = USER_BOT.authenticatedUser.accessToken;
+  const url = `${ambiente.URL.api}/backtest/testConfiguration`;
+  try {
+    const backtestResult = await axios.post(url, values, { headers: { authorization: token } });
+    return backtestResult;
+  } catch (error) {
+    return error.response;
   }
+}
+
+export {
+  postBacktest,
 }
