@@ -16,10 +16,12 @@ class TableHistorico extends Component {
     if (orders.status === 200) {
       const { ordersResult } = orders.data;
       if (ordersResult) {
+        console.log(ordersResult)
         const operationsResult = ordersResult.map((item) => {
           return {
             date: moment(item.date).format('DD-MM-YYYY - HH:MM:SS'),
             amount: item.amount,
+            price: `$${item.price.toFixed(2)}`,
             cost: `$${item.cost.toFixed(2)}`,
             currency: item.currency,
             type_operation: item.type_operation === 'buy' ? 'compra' : 'venda'
@@ -42,6 +44,10 @@ class TableHistorico extends Component {
     }, {
       Header: 'Custo',
       accessor: 'cost',
+      headerClassName: "text-center"
+    }, {
+      Header: 'Preço',
+      accessor: 'price',
       headerClassName: "text-center"
     }, {
       Header: 'Moeda',

@@ -138,7 +138,10 @@ class ConfigBacktest extends Component {
       date: this.state.date
     }
     const resultBacktest = await postBacktest(values);
-    console.log(resultBacktest)
+    if (resultBacktest.status === 200) {
+      console.log(resultBacktest.data)
+      this.props = resultBacktest.data
+    }
   }
   render() {
     return (
