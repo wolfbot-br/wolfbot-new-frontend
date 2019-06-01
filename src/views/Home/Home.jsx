@@ -70,13 +70,16 @@ class Home extends Component {
                 </div>
                 <div className="col-md-6 col-md-offset-1">
                   <div className="description">
-                    <h2 sty>wolfbot</h2>
+                    <h2>
+                      <strong>WOLFBOT</strong>
+                    </h2>
                     <br />
                     <h5>
-                      Plataforma capaz de realizar transações de forma
-                      automática para seus usuários através da configuração e
-                      estratégias predefinidas com o objetivo de se beneficiar
-                      da volatilidade do mercado para obter lucros.
+                      Plataforma que possibilita realizar transações de
+                      criptomoedas de forma automática para seus usuários
+                      através de configurações e estratégias que o usuário
+                      definir, sempre com o objetivo de realizar o melhor
+                      negócio.
                     </h5>
                   </div>
                 </div>

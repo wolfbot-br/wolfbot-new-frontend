@@ -117,15 +117,6 @@ class Sobre extends React.Component {
                       </InputGroup>
                     </CardBody>
                     <CardFooter>
-                      <Button
-                        className="btn-round"
-                        color="info"
-                        type="submit"
-                        onClick={handleSubmit(value => this.onSubmit(value))}
-                        size="lg"
-                      >
-                        Enviar
-                      </Button>
                     </CardFooter>
                   </Card>
                 </Col>

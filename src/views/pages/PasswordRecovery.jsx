@@ -143,7 +143,7 @@ class PasswordRecovery extends React.Component {
                         <Row className="justify-content-center">
                           <img
                             src={logo}
-                            width="30px"
+                            width="50px"
                             height="30px"
                             style={{ display: "block", margin: "10px auto" }}
                           />
