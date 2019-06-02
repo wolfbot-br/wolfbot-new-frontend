@@ -26,7 +26,6 @@ const override = css`
     display: block;
     margin: 0 auto;
     border-color: red;
-    margin-top: 200px;
     margin-bottom: 200px;
     margin-left: auto;
     margin-right: auto;
@@ -196,8 +195,10 @@ class ConfigBacktest extends Component {
           <CardBody>
             {this.state.loading ? (
               <>
-                <h4>Aguarde, Carregando resultados...</h4>
-                <Row>
+                <Row className="justify-content-center" style={{ marginTop: '200px' }}>
+                  <Col md="12" style={{ textAlign: 'center' }}>
+                    <h4>Aguarde, Carregando resultados...</h4>
+                  </Col>
                   <ClipLoader
                     css={override}
                     sizeUnit={"px"}
@@ -248,9 +249,10 @@ class ConfigBacktest extends Component {
                               { value: "ETC", label: "ETC" },
                               { value: "XRP", label: "XRP" },
                               { value: "LTC", label: "LTC" },
-                              { value: "IOTA", label: "IOTA" },
-                              { value: "DASH", label: "DASH" },
-                              { value: "XMR", label: "XMR" },
+                              { value: "BCH", label: "BCH" },
+                              { value: "ZEC", label: "ZEC" },
+                              { value: "TRX", label: "TRX" },
+                              { value: "BSV", label: "BSV" },
                             ]}
                             placeholder="Escolha a moeda que será alvo do teste"
                           />
@@ -270,8 +272,8 @@ class ConfigBacktest extends Component {
                               candleSelect: value
                             })}
                             options={[
+                              { value: "1m", label: "1 minuto" },
                               { value: "5m", label: "5 minutos" },
-                              { value: "15m", label: "15 minutos" },
                               { value: "30m", label: "30 minutos" },
                               { value: "1h", label: "1 hora" }
                             ]}

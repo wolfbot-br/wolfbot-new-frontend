@@ -210,9 +210,10 @@ class FormEstrategia extends Component {
                         { value: "ETC", label: "ETC" },
                         { value: "XRP", label: "XRP" },
                         { value: "LTC", label: "LTC" },
-                        { value: "IOTA", label: "IOTA" },
-                        { value: "DASH", label: "DASH" },
-                        { value: "XMR", label: "XMR" },
+                        { value: "BCH", label: "BCH" },
+                        { value: "ZEC", label: "ZEC" },
+                        { value: "TRX", label: "TRX" },
+                        { value: "BSV", label: "BSV" },
                       ]}
                     />
                   </FormGroup>
@@ -317,8 +318,8 @@ class FormEstrategia extends Component {
                         this.setState({ candleSize: value })
                       }
                       options={[
+                        { value: "1m", label: "1 minuto" },
                         { value: "5m", label: "5 minutos" },
-                        { value: "15m", label: "15 minutos" },
                         { value: "30m", label: "30 minutos" },
                         { value: "1h", label: "1 hora" }
                       ]}
