@@ -42,6 +42,7 @@ class ConfigBacktest extends Component {
       profit: '',
       stop: '',
       date: '',
+      quantity: '',
       loading: false,
 
       emaState: true,
@@ -148,6 +149,7 @@ class ConfigBacktest extends Component {
         sellForIndicator: this.state.sellForIndicator,
         profit: this.state.profit,
         stop: this.state.stop,
+        quantity: this.state.quantity,
         base_currency: 'USD',
         target_currency: this.state.currencySelect.value,
         date: this.state.date
@@ -188,7 +190,7 @@ class ConfigBacktest extends Component {
         <CardHeader>
           <CardTitle tag="h4">Configuração de Estratégia</CardTitle>
           <p className="card-category">
-            Configuração de estratégia para teste(o cálculo é feito no período dos ultimos 40 dias).
+            Configuração de estratégia para teste.
           </p>
         </CardHeader>
         <Form className="form-horizontal" onSubmit={this.onSubmit}>
@@ -556,14 +558,19 @@ class ConfigBacktest extends Component {
                         </FormGroup>
                       </Col>
                     </Row>
-                    {/* <Row>
-                      <Label sm="2">Vender Pelo Indicador</Label>
-                      <Col sm="1">
-                        <FormGroup style={{ paddingTop: 6 }}>
-                          <Switch
-                            value={this.state.sellForIndicator}
-                            onChange={this.handleSwitch}
-                            name="sellForIndicator"
+                    <Row>
+                      <Label sm="2">Investimento por ordem</Label>
+                      <Col sm="10">
+                        <FormGroup>
+                          <MaskedInput
+                            mask={[/\d/, /\d/, /\d/]}
+                            name="quantity"
+                            placeholder="valor investido por ordem"
+                            type="text"
+                            guide={false}
+                            value={this.state.quantity}
+                            onChange={this.handleChange}
+                            render={(ref, props) => (<Input innerRef={ref} {...props} />)}
                           />
                         </FormGroup>
                       </Col>
@@ -580,7 +587,7 @@ class ConfigBacktest extends Component {
                           />
                         </FormGroup>
                       </Col>
-                    </Row> */}
+                    </Row>
                   </Col>
                 </>
               )}
