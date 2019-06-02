@@ -22,7 +22,10 @@ class Page404 extends Component {
             <Row className="justify-content-center">
               <Col md="8">
                 <CardGroup>
-                  <Card className="cardAccount card p-4">
+                  <Card
+                    className="cardAccount card p-4"
+                    style={{ backgroundColor: "#131313" }}
+                  >
                     <CardBody>
                       <img
                         src="https://raw.githubusercontent.com/wolfbot-br/wolfbot-frontend/master/public/dist/img/account/404.png"
@@ -42,7 +45,7 @@ class Page404 extends Component {
                       <Row className="justify-content-center">
                         <img
                           src={logo}
-                          width="30px"
+                          width="50px"
                           height="30px"
                           style={{ display: "block", margin: "10px auto" }}
                         />

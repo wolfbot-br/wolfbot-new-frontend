@@ -3,9 +3,8 @@ import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import NotificationAlert from "react-notification-alert";
-
 import { login } from "./authActions";
-import { loginRequest } from "./AuthRequests";
+import { loginRequest, socketManage } from "./AuthRequests";
 import bgImagem from "../../assets/img/bg-login.jpg";
 import Input from "../../components/Input/Input";
 import functions from "../../utils/functions";
@@ -23,7 +22,6 @@ import {
   Container,
   Col
 } from "reactstrap";
-import Loading from "react-loading";
 
 class Login extends React.Component {
   constructor(props) {
@@ -96,7 +94,10 @@ class Login extends React.Component {
                 onSubmit={handleSubmit(value => this.onSubmit(value))}
                 className="form"
               >
-                <Card className="card-login card-default">
+                <Card
+                  className="card-login card-default"
+                  style={{ backgroundColor: "#131313" }}
+                >
                   <CardHeader>
                     <img
                       alt="..."
@@ -155,7 +156,6 @@ class Login extends React.Component {
                       <h6>
                         <a
                           className="link text-info info footer-link"
-                          href="#pablo"
                           onClick={handleSubmit(value =>
                             this.criarUmaConta(value)
                           )}
@@ -168,7 +168,6 @@ class Login extends React.Component {
                       <h6>
                         <a
                           className="link text-info footer-link"
-                          href="#pablo"
                           onClick={handleSubmit(value =>
                             this.esqueciSenha(value)
                           )}

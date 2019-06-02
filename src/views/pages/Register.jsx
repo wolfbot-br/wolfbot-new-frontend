@@ -124,14 +124,17 @@ class Register extends React.Component {
                 className="form"
               >
                 <Col className="mr-auto" md="9">
-                  <Card className="card-default">
+                  <Card
+                    className="card-default"
+                    style={{ backgroundColor: "#131313" }}
+                  >
                     <CardHeader>
                       <CardImg
                         alt="..."
                         src={require("../../assets/img/card-info.png")}
                       />
                       <CardTitle tag="h1" style={{ fontSize: "28px" }}>
-                        wolfbot
+                        WOLFBOT
                       </CardTitle>
                     </CardHeader>
                     <CardBody>

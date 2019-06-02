@@ -34,26 +34,6 @@ class Logs extends Component {
         Header: "Preço",
         accessor: "logPrice",
         headerClassName: "text-center"
-      },
-      {
-        Header: "Preço Anterior",
-        accessor: "previousPrice",
-        headerClassName: "text-center"
-      },
-      {
-        Header: "Informação 1",
-        accessor: "logInfoOne",
-        headerClassName: "text-center"
-      },
-      {
-        Header: "Informação 2",
-        accessor: "logInfoTwo",
-        headerClassName: "text-center"
-      },
-      {
-        Header: "Informação 3",
-        accessor: "logInfoThree",
-        headerClassName: "text-center"
       }
     ];
 
@@ -70,7 +50,7 @@ class Logs extends Component {
             showPaginationTop={false}
             showPaginationBottom={false}
             className="-striped -highlight"
-            noDataText="Nenhuma linha"
+            noDataText="Nenhum Log"
           />
         </CardBody>
       </Card>

@@ -55,10 +55,21 @@ const changePasswordLogin = async values => {
   }
 };
 
+const socketManage = async localStorageObject => {
+  const url = `${ambiente.URL.account}/managesocket`;
+  try {
+    const result = await axios.post(url, { localStorageObject });
+    return result.data;
+  } catch (e) {
+    return e.response.data;
+  }
+};
+
 export {
   loginRequest,
   validateToken,
   signupRequest,
   passwordRecoveryRequest,
-  changePasswordLogin
+  changePasswordLogin,
+  socketManage
 };

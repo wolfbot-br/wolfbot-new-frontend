@@ -44,7 +44,10 @@ class EmailSendActiveAccount extends React.Component {
             <Row className="justify-content-center">
               <Col md="8">
                 <CardGroup>
-                  <Card className="card-default card p-4">
+                  <Card
+                    className="card-default card p-4"
+                    style={{ backgroundColor: "#131313" }}
+                  >
                     <CardBody>
                       <img
                         src="https://i.ibb.co/s210zrF/email.png"
@@ -76,7 +79,7 @@ class EmailSendActiveAccount extends React.Component {
                       <Row className="justify-content-center">
                         <img
                           src={logo}
-                          width="30px"
+                          width="50px"
                           height="30px"
                           style={{ display: "block", margin: "10px auto" }}
                         />

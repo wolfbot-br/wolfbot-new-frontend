@@ -3,12 +3,14 @@ import { Row, Col } from "reactstrap";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import io from "socket.io-client";
+import { toastr } from "react-redux-toastr";
 
 import ResumoOperacoes from "./screens/ResumoOperacoes";
 import Totalizadores from "./screens/Totalizadores";
 import TablePosicoes from "./screens/TablePosicoes";
 import BotaoRobo from "./screens/BotaoRobo";
 import Logs from "./screens/Logs";
+import NotificationAlert from "react-notification-alert";
 
 import functions from "../../utils/functions";
 import config from "../../config";
@@ -25,12 +27,29 @@ class Dashboard extends Component {
     const USER_BOT = functions.loadLocalStorage("user_bot");
 
     if (USER_BOT) {
-      const socket = io(
-        `${config.URL.ioHost}?user=${USER_BOT.authenticatedUser.uid}`
-      );
+      const socket = io(config.URL.ioHost, {
+        query: {
+          user: USER_BOT.authenticatedUser.uid,
+          service: "FRONT-END CONNECTED"
+        }
+      });
 
       socket.on("updates", async receive => {
         atualizarDashboard(receive);
+        if (window.location.pathname === "/admin/dashboard") {
+          const options = {
+            place: "tr",
+            message: `Ação: ${receive.logs.logAction} - Moeda: ${
+              receive.logs.logMoeda
+            }`,
+            type: "info",
+            icon: "tim-icons icon-bell-55",
+            autoDismiss: 3,
+            closeButton: true
+          };
+          if (this.refs.notificationAlert)
+            this.refs.notificationAlert.notificationAlert(options);
+        }
       });
 
       await this.props.getDashboardData(USER_BOT.authenticatedUser.accessToken);
@@ -72,6 +91,9 @@ class Dashboard extends Component {
 
     return (
       <div className="content">
+        <div className="rna-container">
+          <NotificationAlert ref="notificationAlert" />
+        </div>
         <Row>
           <Col lg={12}>
             <Totalizadores totalizers={totalizers} />

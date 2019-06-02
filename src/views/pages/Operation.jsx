@@ -90,7 +90,10 @@ class Operation extends React.Component {
               <Row className="justify-content-center">
                 <Col md="8">
                   <CardGroup>
-                    <Card className="card-default card p-4">
+                    <Card
+                      className="card-default card p-4"
+                      style={{ backgroundColor: "#131313" }}
+                    >
                       <CardBody>
                         <img
                           src="https://raw.githubusercontent.com/wolfbot-br/wolfbot-frontend/master/public/dist/img/account/done.png"
@@ -121,7 +124,7 @@ class Operation extends React.Component {
                         <Row className="justify-content-center">
                           <img
                             src={logo}
-                            width="30px"
+                            width="50px"
                             height="30px"
                             style={{ display: "block", margin: "10px auto" }}
                           />
@@ -156,7 +159,10 @@ class Operation extends React.Component {
                     onSubmit={handleSubmit(value => this.onSubmit(value))}
                   >
                     <CardGroup>
-                      <Card className="card-default card p-4">
+                      <Card
+                        className="card-default card p-4"
+                        style={{ backgroundColor: "#131313" }}
+                      >
                         <CardBody>
                           <CardTitle style={{ textAlign: "center" }} tag="h2">
                             Defina a sua nova Senha
@@ -218,7 +224,7 @@ class Operation extends React.Component {
                           <Row className="justify-content-center">
                             <img
                               src={logo}
-                              width="30px"
+                              width="50px"
                               height="30px"
                               style={{ display: "block", margin: "10px auto" }}
                             />

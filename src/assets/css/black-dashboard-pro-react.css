@@ -49,7 +49,7 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "'Ubuntu', sans-serif", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
 *,
@@ -82,7 +82,7 @@ section {
 
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Ubuntu", sans-serif;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5;
@@ -4297,7 +4297,7 @@ button.close {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Ubuntu", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -4382,7 +4382,7 @@ button.close {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Ubuntu", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -12877,7 +12877,7 @@ input,
 optgroup,
 select,
 textarea {
-  font-family: "Poppins", sans-serif; }
+  font-family: "Ubuntu", sans-serif; }
 
 .card h1,
 .card h2,
@@ -13853,7 +13853,7 @@ table.tablesorter thead tr .headerSortDown {
       margin: 10px 10px;
       color: #ffffff;
       line-height: 20px;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+      font-family: "'Ubuntu', sans-serif", Helvetica, Arial, sans-serif; }
     .sidebar .logo .simple-text,
     .off-canvas-sidebar .logo .simple-text {
       text-transform: uppercase;
@@ -17095,7 +17095,7 @@ body.swal2-iosfix {
 
 .swal2-modal {
   background-color: #fff;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "'Ubuntu', sans-serif", Helvetica, Arial, sans-serif;
   border-radius: 5px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -17429,7 +17429,7 @@ body.swal2-iosfix {
   right: 16px; }
 
 .swal2-icon.swal2-warning {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "'Ubuntu', sans-serif", Helvetica, Arial, sans-serif;
   color: #ffb236;
   border-color: #ffb236;
   font-size: 60px;
@@ -17445,7 +17445,7 @@ body.swal2-iosfix {
   text-align: center; }
 
 .swal2-icon.swal2-question {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "'Ubuntu', sans-serif", Helvetica, Arial, sans-serif;
   color: #87adbd;
   border-color: #c9dae1;
   font-size: 60px;
