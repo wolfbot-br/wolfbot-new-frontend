@@ -20,6 +20,7 @@ class ResultadoTeste extends Component {
         return {
           dateTest: moment(item.dateTest).format('DD-MM-YYYY - HH:mm'),
           cost: `$ ${item.cost.toFixed(2)}`,
+          qtdOperations: item.ordersSell.length > 0 ? item.ordersSell.length : 0,
           currency: item.currency,
           profit: `$ ${item.profit.toFixed(2)}`,
           percentage: `% ${item.percentage.toFixed(2)}`,
@@ -37,6 +38,7 @@ class ResultadoTeste extends Component {
         return {
           dateTest: moment(item.dateTest).format('DD-MM-YYYY - HH:mm'),
           cost: `$ ${item.cost.toFixed(2)}`,
+          qtdOperations: item.ordersSell.length > 0 ? item.ordersSell.length : 0,
           currency: item.currency,
           profit: `$ ${item.profit.toFixed(2)}`,
           percentage: `% ${item.percentage.toFixed(2)}`,
@@ -54,6 +56,10 @@ class ResultadoTeste extends Component {
     }, {
       Header: 'Moeda',
       accessor: 'currency',
+      headerClassName: "text-center"
+    }, {
+      Header: 'Qtd. Operações',
+      accessor: 'qtdOperations',
       headerClassName: "text-center"
     }, {
       Header: 'Total Investido (USD)',

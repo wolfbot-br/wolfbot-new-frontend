@@ -26,7 +26,7 @@ const override = css`
     display: block;
     margin: 0 auto;
     border-color: red;
-    margin-bottom: 200px;
+    margin-bottom: 150px;
     margin-left: auto;
     margin-right: auto;
 `;
@@ -53,16 +53,16 @@ class ConfigBacktest extends Component {
       macdSignalPeriod: 9,
 
       stochState: false,
-      stochKperiod: 10,
-      stochKslowPeriod: 15,
-      stochDperiod: 8,
+      stochKperiod: 14,
+      stochKslowPeriod: 3,
+      stochDperiod: 3,
 
       cciState: false,
-      cciPeriod: 10,
+      cciPeriod: 20,
 
       bbandsState: false,
-      bbandsPeriod: 4,
-      bbandsStddevPeriod: 5,
+      bbandsPeriod: 20,
+      bbandsStddevPeriod: 2,
 
       alterState: false,
       onSubmited: false,
@@ -188,14 +188,14 @@ class ConfigBacktest extends Component {
         <CardHeader>
           <CardTitle tag="h4">Configuração de Estratégia</CardTitle>
           <p className="card-category">
-            Configuração de estratégia para teste.
+            Configuração de estratégia para teste(o cálculo é feito no período dos ultimos 40 dias).
           </p>
         </CardHeader>
         <Form className="form-horizontal" onSubmit={this.onSubmit}>
           <CardBody>
             {this.state.loading ? (
               <>
-                <Row className="justify-content-center" style={{ marginTop: '200px' }}>
+                <Row className="justify-content-center" style={{ marginTop: '150px' }}>
                   <Col md="12" style={{ textAlign: 'center' }}>
                     <h4>Aguarde, Carregando resultados...</h4>
                   </Col>
@@ -556,7 +556,7 @@ class ConfigBacktest extends Component {
                         </FormGroup>
                       </Col>
                     </Row>
-                    <Row>
+                    {/* <Row>
                       <Label sm="2">Vender Pelo Indicador</Label>
                       <Col sm="1">
                         <FormGroup style={{ paddingTop: 6 }}>
@@ -580,13 +580,18 @@ class ConfigBacktest extends Component {
                           />
                         </FormGroup>
                       </Col>
-                    </Row>
+                    </Row> */}
                   </Col>
                 </>
               )}
           </CardBody>
           <CardFooter>
-            <Button className="btn-fill" color="primary" type="submit">
+            <Button
+              className="btn-fill"
+              color="primary"
+              type="submit"
+              disabled={this.state.loading}
+            >
               Testar
             </Button>
           </CardFooter>
