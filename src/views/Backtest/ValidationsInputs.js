@@ -11,9 +11,12 @@ const validateInputs = (state) => {
   if (state.stop === '') {
     return false
   }
-  /* if (state.date === '') {
+  if (state.quantity === '') {
     return false
-  } */
+  }
+  if (state.date === '') {
+    return false
+  }
   if (state.emaState === true) {
     if (state.emaPeriod === '') {
       return false
