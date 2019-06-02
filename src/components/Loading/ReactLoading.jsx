@@ -4,6 +4,7 @@ import Loading from "react-loading";
 class ReactLoading extends Component {
   constructor(props) {
     super(props);
+    this.state = {}
   }
   render() {
     return (

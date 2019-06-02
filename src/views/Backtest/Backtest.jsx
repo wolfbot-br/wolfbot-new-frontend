@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
   Row,
   Col,
@@ -9,12 +9,14 @@ import {
   TabPane
 } from "reactstrap";
 
-import ConfigBacktest from './screens/ConfigBacktest'
+import ConfigBacktest from './screens/ConfigBacktest';
+import ResultadoTeste from './screens/ResultadoTeste';
 class Backtesting extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      horizontalTabs: "estrategia"
+      horizontalTabs: "estrategia",
+      backtest: '',
     };
   }
 
@@ -24,6 +26,10 @@ class Backtesting extends Component {
       [tabState]: tadName
     });
   };
+
+  getResult = (backtestResult) => {
+    this.setState({ backtest: backtestResult });
+  }
 
   render() {
     return (
@@ -65,10 +71,10 @@ class Backtesting extends Component {
               activeTab={this.state.horizontalTabs}
             >
               <TabPane tabId="estrategia">
-                <ConfigBacktest />
+                <ConfigBacktest updateResult={this.getResult.bind(this)} />
               </TabPane>
               <TabPane tabId="resultados">
-                teste 2
+                <ResultadoTeste updateResult={this.state.backtest} />
               </TabPane>
             </TabContent>
           </Col>

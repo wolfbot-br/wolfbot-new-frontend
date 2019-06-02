@@ -206,11 +206,13 @@ class FormEstrategia extends Component {
                           isDisabled: true
                         },
                         { value: "BTC", label: "BTC" },
-                        { value: "ETC", label: "ETC" },
                         { value: "ETH", label: "ETH" },
-                        { value: "LTC", label: "LTC" },
-                        { value: "ADA", label: "ADA " },
+                        { value: "ETC", label: "ETC" },
                         { value: "XRP", label: "XRP" },
+                        { value: "LTC", label: "LTC" },
+                        { value: "IOTA", label: "IOTA" },
+                        { value: "DASH", label: "DASH" },
+                        { value: "XMR", label: "XMR" },
                       ]}
                     />
                   </FormGroup>
