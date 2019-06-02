@@ -58,6 +58,16 @@ class Page404 extends Component {
                 </CardGroup>
               </Col>
             </Row>
+            <Row className="justify-content-center">
+              <Col md="8">
+                <CardGroup>
+                  <Card
+                    className="cardAccount card p-4"
+                    style={{ backgroundColor: "#131313" }}
+                  />
+                </CardGroup>
+              </Col>
+            </Row>
           </Container>
         </div>
       </div>

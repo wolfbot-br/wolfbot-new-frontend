@@ -31,7 +31,7 @@ const routes = [
     path: "/sobre",
     name: "Sobre",
     component: Sobre,
-    layout: "/home",
+    layout: "/auth",
     invisible: true
   },
   {

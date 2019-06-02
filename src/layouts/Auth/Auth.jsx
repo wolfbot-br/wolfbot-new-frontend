@@ -49,8 +49,8 @@ class Pages extends React.Component {
   getFullPageName = routes => {
     let pageName = this.getActiveRoute(routes);
     switch (pageName) {
-      case "Pricing":
-        return "pricing-page";
+      case "Sobre":
+        return "sobre-page";
       case "Login":
         return "login-page";
       case "Register":
