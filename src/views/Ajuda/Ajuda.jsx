@@ -46,7 +46,7 @@ class Ajuda extends Component {
                       this.changeActiveTab(e, "horizontalTabs", "1")
                     }
                   >
-                    Configurando com a Exchange e definindo a estratégia
+                    Configurando com a exchange e definindo a estratégia
                   </NavLink>
                 </NavItem>
                 <NavItem>

@@ -10,18 +10,14 @@ import bgImagem from "../../assets/img/bg-login.jpg";
 
 // reactstrap components
 import {
-  Button,
   Card,
   CardHeader,
   CardBody,
   CardFooter,
   CardImg,
   CardTitle,
-  InputGroupAddon,
-  InputGroupText,
   InputGroup,
   Container,
-  Input,
   Row,
   Col
 } from "reactstrap";
@@ -78,20 +74,19 @@ class Sobre extends React.Component {
                     <i className="tim-icons icon-settings-gear-63" />
                   </div> */}
                   <div className="description">
-                    <h3 className="info-title">Wolfbot</h3>
+                    <h3 className="info-title">SOBRE</h3>
                     <p className="description">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Repudiandae vel earum sapiente maiores ipsam? Error
-                      sapiente quasi tenetur, nemo accusamus, impedit hic
-                      aliquid labore itaque reiciendis totam cumque sed optio?
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Explicabo at molestiae voluptate eius quaerat perspiciatis
-                      impedit voluptates veritatis eaque, sint numquam deserunt
-                      recusandae aut doloribus vitae excepturi, maiores dolorem
-                      cupiditate!
+                      Wolfbot é uma plataforma online que automatiza suas
+                      operações de compra e venda de criptomoedas nas duas
+                      principais exchanges de existem no mercado, a Bittrex e a
+                      Bitfinex, dando total autonomia para que o usuário realize
+                      a sua configuração e definindo a sua melhor estratégia
+                      para operar, o Wolfbot trabalha 100% na núvem operando 24
+                      horas por dia para aproveitar todas as situações que
+                      favorecam o trade.
                     </p>
                   </div>
-                </div>
+                </div>{" "}
                 <div className="info-area info-horizontal" />
               </Col>
               <form
@@ -99,7 +94,10 @@ class Sobre extends React.Component {
                 className="form"
               >
                 <Col className="mr-auto" md="9">
-                  <Card className="card-default">
+                  <Card
+                    className="card-default"
+                    style={{ backgroundColor: "#131313" }}
+                  >
                     <CardHeader>
                       <CardImg
                         alt="..."
@@ -116,8 +114,7 @@ class Sobre extends React.Component {
                         </p>
                       </InputGroup>
                     </CardBody>
-                    <CardFooter>
-                    </CardFooter>
+                    <CardFooter />
                   </Card>
                 </Col>
               </form>

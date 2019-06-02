@@ -11,6 +11,8 @@ import {
   TabPane
 } from "reactstrap";
 
+import NotificationAlert from "react-notification-alert";
+
 import FormDadosPessoais from "./screens/DadosPessoais";
 import FormAlterarSenha from "./screens/AlterarSenha";
 import FormAtividades from "./screens/Atividades";
@@ -35,6 +37,9 @@ class User extends Component {
     return (
       <>
         <div className="content">
+          <div className="rna-container">
+            <NotificationAlert ref="notificationAlert" />
+          </div>
           <Row>
             <Col md="10">
               <Nav className="nav-pills-info" pills>

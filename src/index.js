@@ -12,6 +12,7 @@ import functions from "./utils/functions";
 import AuthLayout from "./layouts/Auth/Auth";
 import AdminLayout from "./layouts/Admin/Admin";
 import HomeLayout from "./layouts/Home/Home";
+import { socketManage } from "./views/pages/AuthRequests";
 
 import "./assets/css/nucleo-icons.css";
 import "./assets/scss/black-dashboard-pro-react.scss?v=1.0.0";

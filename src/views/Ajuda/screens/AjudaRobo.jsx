@@ -22,7 +22,7 @@ class AjudaRobo extends Component {
               <h5 className="title">Passo 1: Acionando e desligando o Bot</h5>
             </CardHeader>
             <CardBody>
-              <p className="card-category">
+              <p>
                 Alternando essa opção você pode a qualquer momento acionar o
                 robô para trabalhar ou sismplemenste desativá-lo
               </p>
@@ -33,15 +33,14 @@ class AjudaRobo extends Component {
                 style={{ display: "block", margin: "10px auto" }}
               />
               <CardHeader color="#FFFFFF">
-                <h5 className="title">Passo 2: Acionando Venda e Compra</h5>
+                <h5 className="title">Passo 2: Acionando venda e compra</h5>
               </CardHeader>
-              <p className="card-category">
+              <p>
                 Nessa tela é possivel observar que podemos acionar a venda, com
                 isso o robô estará trabalhando para vender ativos, marcando a
                 opção a opção para acionar compra o robô estará também comprando
                 ativos para com isso vender em uma melhor oportunidade, as duas
-                opção já são habilitadas por padrão quando iniciamos o bot
-                trade.
+                opções já são habilitadas por padrão quando iniciamos o bot.
               </p>
             </CardBody>
             <CardFooter />

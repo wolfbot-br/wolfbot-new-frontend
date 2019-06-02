@@ -91,7 +91,10 @@ class PasswordRecovery extends React.Component {
                     className="form"
                     onSubmit={handleSubmit(value => this.onSubmit(value))}
                   >
-                    <Card className="card-default card p-4">
+                    <Card
+                      className="card-default card p-4"
+                      style={{ backgroundColor: "#131313" }}
+                    >
                       <CardBody>
                         <CardTitle style={{ textAlign: "center" }} tag="h2">
                           Digite seu Email

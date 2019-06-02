@@ -181,7 +181,7 @@ class Home extends Component {
               <div className="info">
                 <h1 style={{ color: "#FFFFFF" }}>Cadastre-se Agora!</h1>
                 <p style={{ color: "#FFFFFF" }}>
-                  E automatize seu processo de trade!
+                  E automatize seu processo de trade
                 </p>
                 <a
                   href="/auth/register"

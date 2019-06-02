@@ -30,11 +30,6 @@ class Atividades extends Component {
         headerClassName: "text-center"
       },
       {
-        Header: "Localização",
-        accessor: "location",
-        headerClassName: "text-center"
-      },
-      {
         Header: "Sistema Operacional",
         accessor: "osPlatform",
         headerClassName: "text-center"

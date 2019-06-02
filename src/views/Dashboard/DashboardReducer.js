@@ -41,7 +41,9 @@ export default (state = INITIAL_STATE, action) => {
         };
         return { ...state, ...dataDashboard };
       } else {
-        return { ...state, logs: [...state.logs, action.payload.logs] };
+        const arrNew = [...state.logs];
+        arrNew.unshift(action.payload.logs);
+        return { ...state, logs: [...arrNew] };
       }
 
     case "GET_DASHBOARD":
