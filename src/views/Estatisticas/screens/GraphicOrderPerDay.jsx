@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardBody,
 } from 'reactstrap'
-import { getGraphicGradeAverageTraficMonth } from '../../Estatisticas/estatisticasAction';
+import { getOrderPerDay } from '../../Estatisticas/estatisticasAction';
 
 let chartOptions = {
   maintainAspectRatio: false,
@@ -69,58 +69,15 @@ class GraphicOrderPerDay extends Component {
   }
 
   async componentDidMount() {
-    const result = await getGraphicGradeAverageTraficMonth();
-    /*const entregueResult = result.data.map((item) => {
-      return item.entregue !== null ? item.entregue : 0
-    });
-    const naoEntregueResult = result.data.map((item) => {
-      return item.nEntregue !== null ? item.nEntregue : 0
-    });*/
+    const result = await getOrderPerDay();
     this.setState({
-      entregue: ['10', '8', '6', '15'],
-      naoEntregue: ['2', '3', '4', '5'],
+      entregue: result.data
     });
-  }
-
-  async componentDidUpdate(prevProps, prevState) {
-    if (prevProps.filters !== this.props.filters) {
-      const filters = {
-        year: this.props.filters.year.value,
-        company: this.props.filters.company.value
-      }
-      const result = await getGraphicGradeAverageTraficMonth(filters);
-      const entregueResult = []
-      const naoEntregueResult = []
-      if (result.data[0].mes > 1) {
-        for (let i = 0; i <= result.data[0].mes - 1; i += 1) {
-          entregueResult.push(0);
-          naoEntregueResult.push(0);
-        }
-      }
-      result.data.map((item) => {
-        if (item.entregue !== null) {
-          entregueResult[item.mes - 1] = item.entregue;
-        } else {
-          entregueResult[item.mes] = 0;
-        }
-        if (item.nEntregue !== null) {
-          naoEntregueResult[item.mes - 1] = item.nEntregue;
-        } else {
-          naoEntregueResult[item.mes] = 0;
-        }
-        return 0;
-      });
-      this.setState({
-        entregue: [entregueResult],
-        naoEntregue: naoEntregueResult,
-      });
-    }
   }
 
   render() {
     const data = canvas => {
       let ctx = canvas.getContext("2d");
-
       let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
 
       gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
@@ -128,27 +85,10 @@ class GraphicOrderPerDay extends Component {
       gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
 
       return {
-        labels: ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"],
+        labels: ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"],
         datasets: [
           {
-            label: 'Aberto',
-            fill: true,
-            backgroundColor: gradientStroke,
-            borderColor: "#1f8ef1",
-            borderWidth: 2,
-            borderDash: [],
-            borderDashOffset: 0.0,
-            pointBackgroundColor: "#1f8ef1",
-            pointBorderColor: "rgba(255,255,255,0)",
-            pointHoverBackgroundColor: "#1f8ef1",
-            pointBorderWidth: 20,
-            pointHoverRadius: 4,
-            pointHoverBorderWidth: 15,
-            pointRadius: 4,
-            data: this.state.naoEntregue
-          },
-          {
-            label: 'Fechado',
+            label: 'Total',
             fill: true,
             backgroundColor: gradientStroke,
             borderColor: "#2dce89",
@@ -156,7 +96,7 @@ class GraphicOrderPerDay extends Component {
             borderDash: [],
             borderDashOffset: 0.0,
             pointBackgroundColor: "#2dce89",
-            pointBorderColor: "rgba(255,255,255,0)",
+            pointBorderColor: "rgba(0, 242, 195, 0.5)",
             pointHoverBackgroundColor: "#2dce89",
             pointBorderWidth: 20,
             pointHoverRadius: 4,
@@ -170,7 +110,7 @@ class GraphicOrderPerDay extends Component {
     return (
       <Card className="card-chart" >
         <CardHeader tag="h4">
-          Quantidade de ordens executas por dia
+          Quantidade de ordens executadas por mês
         </CardHeader>
         <CardBody>
           <div className="chart-area">

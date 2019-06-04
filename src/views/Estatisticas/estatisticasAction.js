@@ -4,41 +4,42 @@ import functions from '../../utils/functions'
 
 const USER_BOT = functions.loadLocalStorage('user_bot')
 
-const getGraphicGradeOfDeliveries = async () => {
+const getTotalOrden = async () => {
   const token = USER_BOT.authenticatedUser.accessToken;
-  const url = `${ambiente.URL.api}/order/historic`;
+  const url = `${ambiente.URL.api}/statistic/getTotalOrden`;
   try {
-    const orderResult = await axios.get(url, { headers: { authorization: token } });
-    return orderResult;
+    const result = await axios.get(url, { headers: { authorization: token } });
+    return result;
   } catch (error) {
     return error.response;
   }
 }
 
-const getGraphicGradeAverageTraficMonth = async () => {
+const getOrderPerDay = async () => {
   const token = USER_BOT.authenticatedUser.accessToken;
-  const url = `${ambiente.URL.api}/order/historic`;
+  const url = `${ambiente.URL.api}/statistic/getOrderPerDay`;
   try {
-    const orderResult = await axios.get(url, { headers: { authorization: token } });
-    return orderResult;
+    const result = await axios.get(url, { headers: { authorization: token } });
+    
+    return result.data;
   } catch (error) {
     return error.response;
   }
 }
 
-const getGraphicGradeAverageTraficMonth2 = async () => {
+const getProfitPerDay = async () => {
   const token = USER_BOT.authenticatedUser.accessToken;
-  const url = `${ambiente.URL.api}/order/historic`;
+  const url = `${ambiente.URL.api}/statistic/getProfitPerDay`;
   try {
-    const orderResult = await axios.get(url, { headers: { authorization: token } });
-    return orderResult;
+    const result = await axios.get(url, { headers: { authorization: token } });
+    return result;
   } catch (error) {
     return error.response;
   }
 }
 
 export {
-    getGraphicGradeOfDeliveries,
-    getGraphicGradeAverageTraficMonth,
-    getGraphicGradeAverageTraficMonth2
+  getTotalOrden,
+  getOrderPerDay,
+  getProfitPerDay
 }
