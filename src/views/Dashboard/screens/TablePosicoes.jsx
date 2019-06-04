@@ -28,7 +28,7 @@ class TablePosicoes extends Component {
         headerClassName: "text-center"
       },
       {
-        Header: "Tempo Aberto",
+        Header: "Tempo Aberto (Dias)",
         accessor: "timeOpen",
         headerClassName: "text-center"
       }

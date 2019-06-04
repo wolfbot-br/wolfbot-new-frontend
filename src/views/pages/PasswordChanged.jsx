@@ -17,10 +17,17 @@ import {
 
 import logo from "../../assets/img/wolfbot-logo.png";
 
-class DeletedAccount extends React.Component {
+class PasswordChanged extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+  }
+
+  componentDidMount() {
+    document.body.classList.toggle("email-send-active-account-page");
+  }
+  componentWillUnmount() {
+    document.body.classList.toggle("email-send-active-account-page");
   }
 
   render() {
@@ -49,20 +56,17 @@ class DeletedAccount extends React.Component {
                         style={{ display: "block", margin: "10px auto" }}
                       />
                       <CardTitle style={{ textAlign: "center" }} tag="h2">
-                        Sua conta foi excluída com sucesso.
+                        Senha alterada com sucesso!
                       </CardTitle>
-                      <CardTitle style={{ textAlign: "center" }} tag="h4">
-                        A equipe Wolfbot agradece pela confiança em utilizar a
-                        plataforma para realizar suas operações. Até logo!
-                      </CardTitle>
+                      <CardTitle style={{ textAlign: "center" }} tag="h4" />
                     </CardBody>
                     <CardFooter className="pageCardFooter p-4">
                       <Row className="justify-content-center">
                         <p className="pageCardText text-muted">
-                          Criar uma conta?
-                          <Link to="/auth/register">
+                          Entrar em sua conta?
+                          <Link to="/auth/login">
                             <Button color="link" className="px-0">
-                              Cadastro
+                              Login
                             </Button>
                           </Link>
                         </p>
@@ -94,4 +98,4 @@ class DeletedAccount extends React.Component {
   }
 }
 
-export default DeletedAccount;
+export default PasswordChanged;

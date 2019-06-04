@@ -53,7 +53,10 @@ export default (state = INITIAL_STATE, action) => {
         operationsSummaryResult: action.payload.operationsSummaryResult,
         overallResult: action.payload.overallResult,
         totalizerResult: action.payload.totalizerResult,
-        totalAssets: action.payload.totalAssets,
+        totalAssets:
+          JSON.stringify(action.payload.totalAssets) !== "{}"
+            ? action.payload.totalAssets
+            : "0",
         dayResult: action.payload.dayResult,
         logs: action.payload.logs
       };
