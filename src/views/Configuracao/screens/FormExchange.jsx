@@ -72,7 +72,7 @@ class FormExchange extends Component {
     }
     await postConfiguracao(values);
     const test = await testConfiguracao();
-    if (test.status === 200) {
+    if (test.status === 200 && JSON.stringify(test.data.saldo) !== '{}') {
       const options = {
         place: "tr",
         message: "Exchange conectada!",
