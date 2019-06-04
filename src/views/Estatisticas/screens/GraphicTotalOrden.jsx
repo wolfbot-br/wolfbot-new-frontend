@@ -80,10 +80,10 @@ class GraphicTotalOrden extends React.Component {
     render() {
         const data = canvas => {
             return {
-                labels: ["Aberto / Finalizado"],
+                labels: ["Compra / Venda"],
                 datasets: [
                     {
-                        label: "Aberto",
+                        label: "Compra",
                         fill: true,
                         backgroundColor: "#1d8cf8",
                         hoverBackgroundColor: "#1d8cf8",
@@ -94,7 +94,7 @@ class GraphicTotalOrden extends React.Component {
                         data: [this.state.quantOpen]
                     },
                     {
-                        label: "Finalizado",
+                        label: "Venda",
                         fill: true,
                         backgroundColor: "#fd5d93",
                         hoverBackgroundColor: "#fd5d93",
