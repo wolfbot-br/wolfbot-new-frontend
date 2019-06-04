@@ -4,7 +4,7 @@ import { Bar } from "react-chartjs-2";
 import { Card, CardHeader, CardBody } from "reactstrap";
 
 import {
-    getGraphicGradeOfDeliveries,
+    getTotalOrden,
 } from '../../Estatisticas/estatisticasAction';
 
 
@@ -61,38 +61,20 @@ class GraphicTotalOrden extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            quantComBaixa: '',
-            quantSemBaixa: '',
+            quantOpen: '',
+            quantClose: '',
         };
     }
 
     async componentDidMount() {
-        const result = await getGraphicGradeOfDeliveries();
-        //const cBaixa = result.data[0].qtdEntrega
-        const cBaixa = 200
-        //const sBaixa = result.data[0].qtdNEntrega
-        const sBaixa = 500
+        const result = await getTotalOrden();
+        const open = result.data.Open
+        const close = result.data.Close
+
         this.setState({
-            quantComBaixa: cBaixa,
-            quantSemBaixa: sBaixa,
+            quantOpen: open,
+            quantClose: close,
         });
-    }
-
-    async componentDidUpdate(prevProps, prevState) {
-        if (prevProps.filters !== this.props.filters) {
-            const filters = {
-                year: this.props.filters.year.value,
-                company: this.props.filters.company.value
-            }
-            const result = await getGraphicGradeOfDeliveries(filters);
-            const cBaixa = result.data[0].qtdEntrega
-            const sBaixa = result.data[0].qtdNEntrega
-
-            this.setState({
-                quantComBaixa: cBaixa,
-                quantSemBaixa: sBaixa,
-            });
-        }
     }
 
     render() {
@@ -109,7 +91,7 @@ class GraphicTotalOrden extends React.Component {
                         borderWidth: 2,
                         borderDash: [],
                         borderDashOffset: 0.0,
-                        data: [this.state.quantComBaixa]
+                        data: [this.state.quantOpen]
                     },
                     {
                         label: "Finalizado",
@@ -120,7 +102,7 @@ class GraphicTotalOrden extends React.Component {
                         borderWidth: 2,
                         borderDash: [],
                         borderDashOffset: 0.0,
-                        data: [this.state.quantSemBaixa]
+                        data: [this.state.quantClose]
                     }
                 ]
             };
