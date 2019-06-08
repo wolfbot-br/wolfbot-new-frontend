@@ -70,6 +70,8 @@ class GraphicOrderPerDay extends Component {
 
   async componentDidMount() {
     const result = await getOrderPerDay();
+    console.log(result)
+
     this.setState({
       entregue: result.data
     });
