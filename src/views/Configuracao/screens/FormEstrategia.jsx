@@ -53,7 +53,6 @@ class FormEstrategia extends Component {
 
   async componentDidMount() {
     const configuracao = await getConfiguracao();
-    console.log(configuracao)
     const candle = configuracao.data.configuracao.candle_size;
     const target = configuracao.data.configuracao.target_currency;
     let arraytarget = [];
