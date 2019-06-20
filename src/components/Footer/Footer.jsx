@@ -18,7 +18,7 @@ class Footer extends React.Component {
               </a>
             </li>{" "}
             <li className="nav-item">
-              <a className="nav-link" href="/home/sobre">
+              <a className="nav-link" href="/auth/sobre">
                 Sobre
               </a>
             </li>{" "}

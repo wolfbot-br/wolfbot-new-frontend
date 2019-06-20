@@ -17,6 +17,7 @@ import PasswordRecovery from "./views/pages/PasswordRecovery";
 import EmailSendPasswordRecovery from "./views/pages/EmailSendPasswordRecovery";
 import Sobre from "./views/Sobre/Sobre";
 import Ajuda from "./views/Ajuda/Ajuda";
+import PasswordChanged from "./views/pages/PasswordChanged";
 
 const routes = [
   // Auth Routes
@@ -31,7 +32,7 @@ const routes = [
     path: "/sobre",
     name: "Sobre",
     component: Sobre,
-    layout: "/home",
+    layout: "/auth",
     invisible: true
   },
   {
@@ -94,6 +95,13 @@ const routes = [
     path: "/deletedaccount",
     name: "DeletedAccount",
     component: DeletedAccount,
+    layout: "/auth",
+    invisible: true
+  },
+  {
+    path: "/passwordchanged",
+    name: "PasswordChanged",
+    component: PasswordChanged,
     layout: "/auth",
     invisible: true
   },

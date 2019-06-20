@@ -119,6 +119,19 @@ class Sobre extends React.Component {
                 </Col>
               </form>
             </Row>
+            <Row>
+              <Col className="ml-auto" md="5">
+                <div className="info-area info-horizontal mt-5">
+                  {/* <div className="icon icon-warning">
+                    <i className="tim-icons icon-settings-gear-63" />
+                  </div> */}
+                  <div className="description">
+                    {/* <h3 className="info-title">WOLFBOT</h3> */}
+                  </div>
+                </div>{" "}
+                <div className="info-area info-horizontal" />
+              </Col>
+            </Row>
           </Container>
         </div>
       </>

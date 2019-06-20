@@ -73,7 +73,7 @@ class AuthNavbar extends React.Component {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="/home/sobre" className="nav-link">
+                <NavLink to="/auth/sobre" className="nav-link">
                   <i className="tim-icons icon-align-center" /> Sobre
                 </NavLink>
               </NavItem>
